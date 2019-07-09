@@ -16,7 +16,7 @@
 
 // -------------------------------------------------------------------------------
 
-import { storeThumbnails } from '../import_images';
+import { storeThumbnails } from '../../functions/import_images';
 
 const HomeCarousel = ( {store_data, prop_history} ) => {
   return(

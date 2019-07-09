@@ -15,7 +15,7 @@
   import GridListTile from '@material-ui/core/GridListTile'
 // [] my components
 // [] my images
-  import { storeThumbnails } from '../import_images'
+  import { storeThumbnails } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

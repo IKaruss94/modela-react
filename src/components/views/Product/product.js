@@ -16,7 +16,7 @@
   import PageLoading from '../Errors/pageLoading'
   import PageError from '../Errors/pageError'
   import { fetchSingleProduct } from '../../../redux_store/actions/getProduct'
-  import GetLable from '../processLable'
+  import GetLable from '../../functions/process_lable'
 
   import Product_Header from './product_header'
   import Product_Carusel from './product_imageCarousel'

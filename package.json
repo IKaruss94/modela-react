@@ -10,6 +10,8 @@
     "dev": "webpack-dev-server --hot --inline --mode development",
     "buildDev": "del build_dev && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
     "buildProd": "del build_public && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
+    "startDev": "node ./build_dev/bundle.js",
+    "startProd": "node ./build_public/bundle.js",
     "start": "node ./public/bundle.js",
     "buildDev_old": "del public && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
     "buildProd_old": "del public && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js"

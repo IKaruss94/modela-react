@@ -18,7 +18,7 @@
   import { fetchData } from '../../../redux_store/actions/getData'
   import DownloadCard from './downloadElement'
 // [] my images
-  import { DownloadImages } from '../import_images'
+  import { DownloadImages } from '../../functions/import_images'
   
 // -------------------------------------------------------------------------------
 

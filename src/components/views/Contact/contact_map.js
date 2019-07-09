@@ -22,7 +22,8 @@
  * https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
  */
 
-const mapAPIkey = 'AIzaSyCami9S3dRFJsCHDQJz2mD2LJfdISLQo8k';
+const mapAPIkey = ''; // [] insert map key here
+
 const ContactMap = () => {
     return (
         <LoadScript

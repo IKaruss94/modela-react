@@ -14,7 +14,7 @@
   import Carousel from 'react-bootstrap/Carousel'
 // [] my components
 // [] images
-  import { Service_ExampleImages } from '../import_images'
+  import { Service_ExampleImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

@@ -17,7 +17,7 @@
 // [] my components
     import StoreProduct from './store_product'
 // [] my images
-    import { storeThumbnails } from '../import_images'
+    import { storeThumbnails } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

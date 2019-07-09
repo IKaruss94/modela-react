@@ -14,7 +14,7 @@
     import Carousel from 'react-bootstrap/Carousel'
 // [] my components
 // [] my images
-    import { prodCarouselImages } from '../import_images'
+    import { prodCarouselImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 const ProductImageCarousel = ( {products} ) => {

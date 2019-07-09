@@ -19,7 +19,7 @@
   //import { fetchPageText } from '../../../redux_store/actions/getTexts'
   import ServiceCard from './service_card'
 // [] my images
-  import  { ServiceImages } from '../import_images'
+  import  { ServiceImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

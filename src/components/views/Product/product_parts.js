@@ -15,7 +15,7 @@
     import Col from 'react-bootstrap/Col'
 // [] my components
 // [] my images
-    import { prodLargeImages } from '../import_images'
+    import { prodLargeImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

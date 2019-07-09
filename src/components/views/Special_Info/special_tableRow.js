@@ -14,7 +14,7 @@
 // [] my components
   //import SpecialImages from './special_images'
 // [] my images
-  import { SpecialImages } from '../import_images'
+  import { SpecialImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

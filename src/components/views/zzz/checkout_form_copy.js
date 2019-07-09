@@ -13,7 +13,7 @@ import { CSSTransitionGroup } from 'react-transition-group'
 import { Row, Col, Form , Button } from 'react-bootstrap'
 // [] my components
 import CheckoutInput from '../Checkout/checkout_formGroup'
-import GetLable from '../processLable'
+import GetLable from '../../functions/process_lable'
 // [] my images
 
 // -------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
     import Select from 'react-select'
 // [] my components
     import CheckoutInput from './checkout_formGroup'
-    import GetLable from '../processLable'
+    import GetLable from '../../functions/process_lable'
 // [] my images
 
 // -------------------------------------------------------------------------------

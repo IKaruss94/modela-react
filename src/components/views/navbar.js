@@ -15,7 +15,7 @@
 // [] my components
 // [] my images
     import Logo from '../../../images/icons/icon-modela.png'
-    import  { LanguageFlags } from './import_images' 
+    import  { LanguageFlags } from '../functions/import_images' 
 
 // -------------------------------------------------------------------------------
 

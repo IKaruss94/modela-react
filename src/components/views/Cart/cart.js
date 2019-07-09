@@ -19,7 +19,7 @@
   import PageLoading from '../Errors/pageLoading'
   import PageError from '../Errors/pageError'
   import { fetchData } from '../../../redux_store/actions/getData'
-  import GetLable from '../processLable'
+  import GetLable from '../../functions/process_lable'
 
   import CartTableRow from './cart_tableRow'
 // [] my images

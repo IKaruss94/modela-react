@@ -15,7 +15,10 @@ module.exports = (env, argv) => {
     },
   
     output: {
-      path: path.join(__dirname, 'build_public'),
+      path: (argv.mode === 'production') ?
+        path.join(__dirname, 'build_public') :
+        path.join(__dirname, 'build_dev')
+      ,
       publicPath: '/',
       filename: 'bundle.js',
     },  

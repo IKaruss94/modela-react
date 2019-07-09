@@ -14,9 +14,9 @@
     import Lightbox from 'lightbox-react'
     import { LinkContainer } from "react-router-bootstrap"
 // [] my components
-    import GetLable from '../processLable'
+    import GetLable from '../../functions/process_lable'
 // [] my images
-    import { prodLargeImages } from '../import_images'
+    import { prodLargeImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 

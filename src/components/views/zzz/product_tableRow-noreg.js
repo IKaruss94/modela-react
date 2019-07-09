@@ -16,7 +16,7 @@
   import Select from 'react-select'
 // [] my components
 // [] my images
-  import { prodTableEra, prodTableUser } from '../import_images'
+  import { prodTableEra, prodTableUser } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 // TableRow is separete because this is the only way I could figure out the problem of
