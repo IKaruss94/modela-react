@@ -1,0 +1,36 @@
+
+
+/* [] BOOTSTRAP */
+  //    
+    .btn {
+      font-size: 1.6rem;
+    }
+    .form-control {    
+      font-size: 1.6rem;
+    }
+  //
+
+  // carusel contorls
+      .carousel-control-prev, .carousel-control-next {    
+          //font-family: "Material Icons";
+          //content: "\e154"; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
+          width: 10%;
+          color: #333;
+          transition: 300ms;
+      }
+      .carousel-control-prev:hover, .carousel-control-next:hover {    
+          //font-family: "Material Icons";
+          //content: "\e409"; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
+
+          transition: 300ms;
+          background-color: rgba(196, 196, 196, 1);
+      }
+  //
+/**/
+
+/* [] react-select] */
+  .react-select__menu {
+    margin-top: -10px;
+    z-index: 999 !important;
+  }
+/**/

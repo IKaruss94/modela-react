@@ -1,0 +1,33 @@
+{
+    "presets": ["@babel/env", "@babel/react"],    
+    "env": {
+      "production": {
+        "presets": ["minify"]
+      }
+    }
+    
+}
+
+
+/*
+    from package.json
+    
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+*/

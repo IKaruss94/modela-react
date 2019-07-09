@@ -1,0 +1,58 @@
+
+
+.my_contactCard {
+  margin-top: 20px;
+  
+  height: 400px;
+  width: 100%;
+
+  border-radius: 5px;
+}
+
+
+.my_CardText {
+  line-height: 2.25;
+}
+.my_CardText:after {
+  content: "\A";
+  white-space: pre;
+}
+.my_CardText.my_withIcon {
+  position: relative;
+  padding: 0px 0px 0px 45px;
+
+  i {
+    position: absolute;
+    left: 0px;
+    top: -8px;
+    transform: scale(1.2);
+  }
+}
+
+
+.my_contactIcons {
+  color: $body_color;
+  padding: 10px;
+  font-size: 2rem;
+}
+
+.my_contactMapCol {  
+  //height: 512px;
+  //width: 512px;
+  margin-top: 20px;
+
+  .my_contactMap {
+    border-radius: 5px;
+  }
+}
+
+.my_contactFacbook {
+  position: absolute;
+  bottom: 20px;
+
+  img {
+    $FBsize: 48px; 
+    width: $FBsize;
+    height: $FBsize;
+  }
+}

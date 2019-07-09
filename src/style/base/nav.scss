@@ -1,0 +1,82 @@
+
+
+.navbar 
+{
+  height: 65px;
+  padding: 0px;
+  background-color: $nav_color;
+  z-index: 900; //if above 1000, intefiers with 'lightbox' which has a z-index of 1000
+}
+
+
+
+.navbar-brand {
+  height: 65px;
+  padding: 13px;
+
+  #img_logo {    
+    height: 40px;
+  }
+  #img_logo:hover {    
+    background-color: #ffd81b;
+  }
+}
+
+
+.my_navbar_collapse {
+  background-color: $nav_color;
+}
+.my_navbar_secound {
+  display: block;
+  margin: 0px auto;
+  left: 40%;
+  border-top: 1px solid rgba(150, 150, 150, 0.5);
+}
+
+.my_navbar_elem, .my_navbar_drop
+{  
+  height: 65px;
+  padding: 16px 26px;
+  margin: 0px 16px;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+
+  transition: 100ms;
+}
+.my_navbar_elem:hover
+{
+  color: blue;
+}
+.my_navbar_elem.active
+{
+  color: $body_color;
+}
+
+.my_navbar_drop { padding: 10px 20px; }
+.my_navbar_dropElem {
+  font-size: 1.6rem;
+}
+
+// SELECT
+  .my_nav_select {      
+    display: inline-block;
+
+    width: 180px;
+    padding: 13px;    
+    
+    background: $nav_color;
+    text-align: center;
+  }
+//
+// cart
+  .my_navCart { 
+    display: inline-block;
+    margin: 2px auto;
+    padding: 13px;    
+   }
+  .my_cartCount {
+    font-size: 2rem;
+  }
+//

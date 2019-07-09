@@ -1,0 +1,212 @@
+
+
+$color-carouselCaption: rgba(200, 255, 200, 0.4);
+
+$text-color: #333;
+$tile-background-color: #bbf;
+
+$header-height: 400px; //384
+$header-bgColor: #ffffff;
+
+
+/* ----- HEADER -----*/
+  .my_prodHeader {
+    margin-top: 16px;
+    margin-left: 2px;
+    height: $header-height;
+    width: 100%;
+    
+    background-color: $body_color;
+    overflow: hidden;
+    padding:0px;
+  }
+
+  // product - header - image
+    .my_ProdImageBox {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+
+      background-color: $header-bgColor;
+      overflow: hidden;      
+    }
+// [] [.image_helper] && [my_image_needsHelp] are in index.scss
+    
+    .my_noProdImage {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+
+      background-color: $header-bgColor;
+      vertical-align: middle;
+      text-align: center;
+      overflow: hidden;
+    }
+  //
+
+  // product - header - text
+    .my_headerText {
+      display: inline-block;
+      width: 100%;
+      height: $header-height;
+
+      background-color: $header-bgColor;
+      //border-left: 1px solid black;
+
+      .my_headName {
+        width: 100%;
+        height: $header-height;
+        padding: 10px;
+      }
+      
+      .my_ProdName {
+        text-align: center;
+      }
+
+      .my_prod_headerButtons {
+        position: absolute;
+        bottom: 25px;
+        right: 20px;
+
+        .my_prodHead_btnStore, .my_prod_toTradeBtn {  
+          display: inline-block;
+          padding: 10px;
+          margin: 5px;
+        }
+      }
+
+      
+    }
+  //
+
+  // product - header - buttons
+    .my_prodChangeBtn {  
+      cursor: pointer;
+      display: inline-block;  
+      width: 100%;  
+      height: $header-height;
+
+      background-color: #e3e3e3;//f9f9f9;
+      border: none;
+      transition: 250ms;
+    }      
+    .my_prodChangeBtn:hover {     
+      transition: 250ms;   
+      background-color: #aaa;
+
+      .material-icons {
+        transform: scale(1.5);
+      }
+    }
+    
+    // [] buttons to go to next/prev store item
+    .previous::before {
+      font-family: 'Material Icons';
+      content: '\e5cb'; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
+      font-size: 2.4em;
+    }
+    .next::before {
+      font-family: 'Material Icons';
+      content: "\e5cc"; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
+      font-size: 2.4rem;
+    }
+
+    // button - if first / last product item
+      .btn_disabled { 
+        cursor: default;     
+        background-color: $header-bgColor;
+      }      
+      .btn_disabled:hover {  
+        background-color: $header-bgColor;  
+      }
+    //
+    .my_prodHeadCol {
+      padding: 0px;
+    }
+  //
+/**/
+
+/* ----- CAROUSEL ----- */   
+  .my_carousel_image.my_prod,
+  .my_carousel_noImage.my_prod {    
+    height: 100%;
+    width: auto;
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }    
+/**/
+
+/* ----- table ----- */
+    .my_ProductTable {
+      margin-top: 50px;
+
+      background-color: $tile-background-color;
+      padding: 5px;
+
+      thead{
+        background-color: #fff
+      }
+    }
+
+    // collumn min-width      
+      .my_prod_tablePrice { min-width: 80px }
+      .my_prod_tableCart { min-width: 150px }
+    //
+
+    .my_quntityInput {
+      width: 96px;
+      text-align: center;
+    }
+
+    .my_prod_notAvailable {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    // [] table cart buttons
+      //.my_prod_cartIn {}
+      //.my_prod_cartAdd {}
+    //
+
+    .my_prod_tableBtn {
+      height: 50px;
+      width: 50px;
+      border-radius: 150px;
+
+      margin: 0px 5px;
+      position: relative;
+
+      .material-icons {
+        height: 50%;
+        width: 50%;
+        
+        margin: 0;
+        position: absolute;
+        top: 26%;
+        left: 26%;
+      }
+    }
+
+    .my_prod_tableRegSelectTD {
+      position: relative;
+
+      .my_prod_regSelect {
+        width: 90%;
+      }
+    
+      .my_prod_tableRegInfo {
+        cursor: default;
+        border-radius: 50px;
+
+        position: absolute;
+        top: 32%;
+        right: 0%;      
+      }
+    }
+    #prodKitInfoTooltip {
+      font-size: 1.6rem;
+    }
+/**/

@@ -1,0 +1,30 @@
+
+
+.my_special_suround, .my_spec_explain {
+    margin-top: 25px;
+    padding: 25px;
+
+    background-color: beige;
+    border-radius: 5px;;
+}
+
+.my_special_table {
+    background-color: #f5f5dc;
+    font-size: 2rem;
+
+    .my_special_tr {
+    }.my_special_tr:hover{
+        background-color: #e5e5cc;       
+    }
+
+    .my_special_tr_gap {
+        height:5px;
+        background-color: #d5d5bc;
+    }
+
+    .my_special_tr_title{
+        font-weight: 650;
+
+        background-color: #cecea3;
+    }
+}

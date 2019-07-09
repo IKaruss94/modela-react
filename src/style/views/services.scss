@@ -1,0 +1,95 @@
+
+
+// --- main style for service card (including image)
+  .my_service_card {
+    margin-top: 20px;
+    overflow: hidden;
+    cursor: pointer;
+
+    .my_service_title {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .my_service_cardImage {  
+      height: 126px; //160px;
+      width: 224px;  //300px;
+    
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      
+      transition: 400ms;
+    }
+  }
+  .my_service_card:hover {
+      border: 1px solid gold;
+      background-color: lightblue;  
+
+      .my_service_cardImage
+      {
+        max-width: 50%;
+
+        transition: 400ms;
+        transform: scale(1.5);
+        right: 50px;
+      }
+
+      .my_service_cardBody {
+        max-width: 50%;  
+      }
+  }
+  .my_service_card:active {
+      border: 1px solid green;
+      background-color: cyan;  
+  }
+//
+
+// --- extra service info show/hide ANIMATION 
+// --- --- the practical part of show/hide is in [service_card.js]
+  .my_transi_service-appear {    
+    max-height: 0;
+    overflow: hidden;
+  }
+  .my_transi_service-appear.my_transi_service-appear-active {   
+    max-height: 1024px;
+    transition: max-height 400ms ease-in;
+  }
+/*
+  .my_transi_service-leave {
+    max-height: 1024px;
+  }  
+  .my_transi_service-leave.my_transi_service-leave-active {
+    max-height: 0;
+    transition: max-height 400ms ease-out;
+  }
+*/
+//
+
+// --- Carousel in exrta service info
+  $carousel_bg: #ddd;
+  $carousel_height: 275px;
+
+  .my_carousel.my_service {
+    padding:5px;
+    background-color: $carousel_bg;
+
+    .carousel-control-next, .carousel-control-prev {
+      background-color: rgba(96, 96, 96, .6);
+    }
+  }
+  .my_carousel_item.my_service {
+    height: 50+$carousel_height;
+
+    .my_carousel_image.my_service {
+      max-height: $carousel_height;      
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+
+    }
+  }
+  .my_carousel_caption.my_service {
+    background-color: $carousel_bg;
+  }
+//

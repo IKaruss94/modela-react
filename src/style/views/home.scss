@@ -1,0 +1,129 @@
+
+
+
+$img_background: #85bff4; //73bafc;
+$jumbo_height: 800px;
+
+.my_home_jumbo  {
+  position: relative;
+  height: $jumbo_height;
+  width: 100%; 
+  
+  //background-color: radial-gradient(lightgray, #73bafc);
+
+
+  .my_home_jumboImg {
+    position: absolute;
+    top: 0;
+
+    height: $jumbo_height*.9;
+    width: 100%; 
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    box-shadow: inset 0px 0px 30px 50px $img_background;
+
+  }
+
+  .my_home_colorGap {
+    position: absolute;
+    bottom: 0;
+
+    height: $jumbo_height*.1;
+    width: 100%; 
+    background-image: linear-gradient($img_background, $body_color);
+
+    //border-top: 1px solid darkslategray;
+  }
+
+  
+  .my_home_title {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+
+    .my_home_titleImg {
+      max-height: $jumbo_height*.23;
+      width: 80%;
+    }
+
+    .my_home_titleText {
+      font-size: 2rem;
+      font-weight: 1000;
+    }
+  }
+}
+
+// mobile view - title
+  .my_home_largeTitle {
+    margin: 20px auto 50px;
+  }
+
+  .my_home_largeTitle_image {
+    max-height: 300px;
+    width: 100%;
+
+    background-color: $nav_color;
+    border-radius: 25px;
+  }
+
+  .my_home_largeTitle_noImage {
+    font-size: 2rem;
+    font-weight: 1000;
+  }
+
+  .my_home_largeTitle_text {
+    font-size: 3rem;
+    font-weight: 1000;
+  }
+//
+
+
+.my_about {
+  margin: 20px 15px;
+  padding: 20px;
+  
+  background-color: #fff;//rgba(248, 246, 246, .7);
+
+  border-radius: 5px;
+}
+
+.my_home_buttons {  
+  margin: 50px 0px;
+
+  button {
+    margin: 10px;
+  }
+}
+
+.my_home_footer {
+  height: 150px;
+
+  margin: 20px 0px;
+}
+
+
+// carousel
+  $carousel_height: 360px;
+
+  .my_carousel.my_home {
+    padding:5px;
+    height: $carousel_height+40;
+    
+    border-radius: 1%;
+  }
+
+  .my_carousel_image.my_home, 
+  .my_carousel_noImage.my_home  {
+    max-height: $carousel_height; 
+    max-width: 100%;  
+    min-width: 80%;
+    display:block;
+    margin: 15px auto 5px;
+  }
+  
+  .my_carousel_caption.my_home {
+    background-color: #fff;
+  }
+//

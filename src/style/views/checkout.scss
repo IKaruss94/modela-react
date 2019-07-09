@@ -1,0 +1,48 @@
+
+
+.my_checkout_prodTable {
+    width: 100%;
+    margin: 20px 0px;
+    border: 2px solid #eee;
+    
+    background-color: rgb(63, 230, 166);
+}
+
+
+.my_checkout_formRow {
+    margin: 20px 0px;
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 5px;
+
+    background-color: skyblue;
+
+    .my_checkout_lable {
+        padding: 5px 10px;
+        //border: 1px solid cyan;
+        //border-radius: 5px;
+
+        font-size: 2rem;
+        font-weight: 600;
+
+        .my_checkout_errSign {
+            color: rgb(95, 11, 28);
+        }
+    }
+
+    .my_checkout_checkbox {
+        transform: scale(1.5);
+    }
+}
+
+
+.my_checkout_select {
+    font-size: 1.6rem;
+    height: calc(3.2rem + 2px) !important;
+    // [] becouse default [font-size] is set [62.5% AKA 1rem=10px] in [global.scss], so default styling for this abstructs text
+ }
+
+
+.my_checkout_formBtn {
+    margin: 20px 0px 200px;
+}

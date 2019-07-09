@@ -1,0 +1,30 @@
+
+/** [] Imported @ 
+ * src/views-bootstrap/Services/services.js
+ * 
+ * manualy updated 28/05/2019
+*/ 
+
+// [] fundemental components
+// [] structure and style components
+// [] my components
+// [] my images
+
+// -------------------------------------------------------------------------------
+
+
+  // [] my functions  
+  //
+
+
+
+  import PageLoading from '../Errors/pageLoading'
+  import PageError from '../Errors/pageError'
+
+  const { location,  } = this.props
+
+    if (prop_error) { return PageError(prop_error.message) }
+    if (prop_loading) { return PageLoading(location.pathname) }
+
+    
+  location: PropTypes.any, 

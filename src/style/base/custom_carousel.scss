@@ -1,0 +1,63 @@
+
+// 
+    .my_carousel {
+        margin-top: 20px;
+        width: 100%;
+        background-color: #fff; //$color-carouselCaption;
+        
+        overflow: hidden;
+    }
+  
+    .my_carousel_item {
+        height: 100%;
+        width: 100%;
+        
+        transition: 400ms;
+    }
+  
+    .my_carousel_image {    
+        //height: 256px;
+        max-width: 100%;
+        
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }  
+    .my_carousel_noImage {
+        //height: 256px;
+        width: 100%;
+
+        padding-top: 100px;
+        text-align: center;
+        font-size: 2em;
+    }
+//
+
+// caption
+    .my_carousel_caption {
+      position: relative;
+      left: auto;
+      right: auto;
+
+      margin-top: 20px;
+
+      color: #333;
+      background-color: #fff;
+    }
+//
+
+    
+// Carousel indecators
+    .carousel-indicators li {
+        background-color: #aaa;
+        width: 48px;
+        height: 12px;
+        border-radius: 30px;
+    }
+    .carousel-indicators li.active
+    {
+        background-color: #111;
+    }
+//
+
+// [] carusel contorls [.carousel-control-prev, .carousel-control-next] in [utilities/bootstrap_classes.scss]

@@ -1,0 +1,64 @@
+/*
+  This is for global defenitions only. 
+  Stuff not limited to one page\view.
+*/
+
+html {
+  min-height: 100%;
+  font-size: 62.5%; // [] sets relative font size to 10px AKA 1rem = 10px
+}
+
+body {
+  background-color: $body_color;
+  min-height: 100%;
+  padding-top: 6.5rem; // [] becouse navbar is fixed: top /bootstrap
+  margin-bottom: 100px; // [] becouse i like to have alittle bit at the bottom, to read the bottom most text easier 
+  font-size: 1.6rem; // [] setting relative font size to 16px
+}
+
+
+
+.my_noHover {  
+  pointer-events:none;
+}
+
+.my_customLink {
+  cursor: pointer;
+}
+
+
+  // lightbox 
+    .ril__caption {
+      position: relative;
+      top: 70%;
+      font-size: 3.2rem;
+      text-align: center;
+
+      .ril__captionContent {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        left: 50%;
+        margin-left: -50px;
+        top: 50%;
+        margin-top: -50px;
+      }
+
+    }
+    
+//
+
+// helps to verticaly center image
+
+  .my_image_needsHelp {
+    background-size: cover;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 100%; //512px
+  }
+
+  .image_helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }

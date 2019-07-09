@@ -1,0 +1,46 @@
+
+
+$DLcardPadding: 10px;
+
+.my_downloadCard {
+    width: 100%;
+    height: 256px;
+    margin-top: 24px;
+    padding: $DLcardPadding;
+}
+
+.my_dl_text {    
+    position: absolute;
+    left: $DLcardPadding;
+    width: 50%;
+}
+
+.my_dl_Btn { 
+    position: absolute;
+    bottom: $DLcardPadding;
+    width: 50%;
+
+    a {
+        width: 100%;
+
+        color: #eee;
+        text-decoration: none;
+    }
+}
+
+.my_dl_image {  
+    position: absolute;
+    right: $DLcardPadding;
+
+    width: auto;
+    max-width: 47%;
+    max-height: 100%;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    vertical-align: middle;  
+}
+.my_dl_noImage {    
+    position: absolute;
+    right: $DLcardPadding;
+}
