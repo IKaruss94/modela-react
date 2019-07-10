@@ -12,7 +12,6 @@
   import Button from 'react-bootstrap/Button'
   import Lightbox from 'lightbox-react'
 // [] my components
-  //import SpecialImages from './special_images'
 // [] my images
   import { SpecialImages } from '../../functions/import_images'
 

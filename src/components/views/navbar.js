@@ -152,31 +152,3 @@ Navigation.propTypes = {
     ChangeLanguge: PropTypes.func,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
-
-
-/*
-                      
-
-                        <LinkContainer to="/store">
-                            <Nav.Link>{}</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/services">
-                            <Nav.Link>Services</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/contact">
-                            <Nav.Link>Contact</Nav.Link>
-                        </LinkContainer>
-
-                        <NavDropdown title="Info" id="basic-nav-dropdown">
-                            <LinkContainer to="/downloads">
-                                <NavDropdown.Item>Downloads</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to="/special">
-                                <NavDropdown.Item>Special</NavDropdown.Item>
-                            </LinkContainer>  
-                            <LinkContainer to="/trade">
-                                <NavDropdown.Item>Trade info</NavDropdown.Item>
-                            </LinkContainer>                       
-                        </NavDropdown>
-
-*/

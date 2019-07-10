@@ -9,7 +9,7 @@
     import React, { useState } from 'react'
     import PropTypes from 'prop-types'
 // [] structure and style components
-    import { Row, Col, Button } from 'react-bootstrap'
+    import { Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
     import Img from 'react-image'
     import Lightbox from 'lightbox-react'
     import { LinkContainer } from "react-router-bootstrap"
@@ -42,17 +42,19 @@ const ChangeProductBtns = ( {type, num, props} ) => {
 };
 
 const DimensionReformat = ( DIM_VAL ) => {
+    // [] DIM_VAL = dimansion value
     let res = '';
     if( DIM_VAL === '' ) return res;
 
-    //console.log('dimensions', DIM_VAL );
     const break_arr = DIM_VAL.split('x');
     break_arr.map( val => {
         let temp = val.slice(0, -3).toString() + ',' + val.slice(-3).toString() + 'cm';
         res = res + ' X ' + temp;
     })
-    return res.slice(3);
-}
+
+    return res.slice(3); 
+    // [] [.slice(3)] is to remove initial [temp] value that was made before [DIM_VAL] was submited
+ }
 
 const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} ) => {    
     const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +92,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
             <Col className="my_prodHeadCol my_headerText" sm={4}>
                 <div className="my_headName">
                     
-                    <h1 className="my_ProdName">{ product.Name }</h1>
+                    <h1 className="my_ProdName">{ product.Name } [{ product.Type }]</h1>
                     {  
                     // [] product title is above
                     // [] product data is made here \/
@@ -111,25 +113,27 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                             <span className="my_prodDataTitle">Years: </span>{ product.Year } <br/>
                          */
                     }
-                    <div className="my_prod_headerButtons">
-                        <LinkContainer to="/store">
+                    <ButtonToolbar className="my_prod_headerButtons">
+                        <LinkContainer to="/store" activeClassName="">
                             <Button 
+                                type="button"
                                 className="my_prodHead_btnStore" 
                                 variant="primary"
                             >
                                 { GetLable( prop_lang, prop_lables, 'button', 'prod_backToStore') }
                             </Button>
-                        </LinkContainer>  
+                        </LinkContainer> 
                         
                         <LinkContainer to="/trade">
                             <Button 
+                                type="button"
                                 className="my_prod_toTradeBtn" 
                                 variant="primary"
                             >
                                 { GetLable( prop_lang, prop_lables, 'button', 'prod_priceInfo') }
                             </Button>
                         </LinkContainer> 
-                    </div>
+                    </ButtonToolbar>
                    
                     
                 </div>

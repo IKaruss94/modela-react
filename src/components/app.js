@@ -24,12 +24,8 @@ class App extends Component {
     super(props);    
     this.props.getStatic();
   }
+  
   /* /
-  UNSAFE_componentWillMount() {
-    this.props.getStatic();
-    //this.props.dispatch( fetchContact() );   
-  }/* /
-
   componentDidMount() {
     this.props.getStatic();
     //this.props.dispatch( fetchContact() );   
@@ -37,8 +33,9 @@ class App extends Component {
 
   render() {    
     //console.log('app props', this.props);
+    //console.log('app state : ', loading, error );
+    
     const { error, loading } = this.props;  
-    console.log('app state : ', loading, error );
     if (error) {
       return <div><h4>ERROR [App]: {error.message}</h4></div>;
     } 

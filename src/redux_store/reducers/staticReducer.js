@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const storeReducer = ( state = initialState, action) => {
-  console.log('--- ', action.type ,', load =', state.loading);
+  //console.log('--- ', action.type ,', load =', state.loading);
     switch(action.type) {
       // BEGIN
       case STATIC_FETCHING:

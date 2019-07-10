@@ -23,17 +23,17 @@ module.exports = (env, argv) => {
       filename: 'bundle.js',
     },  
   
+    target: 'node',
     node: {
       fs: 'empty',
-      tls: 'empty'/*,        
-      net: 'empty'*/,
+      tls: 'empty',        
+      net: 'empty',
   
       // Need this when working with express, otherwise the build fails
       __dirname: false,   // if you don't put this is, __dirname
       __filename: false,  // and __filename return blank or /
     },
   
-    target: 'node',
     externals: [nodeExternals()], // Need this to avoid error when working with Express
   
     module: {

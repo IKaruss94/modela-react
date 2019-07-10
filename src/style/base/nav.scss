@@ -27,9 +27,12 @@
   background-color: $nav_color;
 }
 .my_navbar_secound {
+  position: absolute;
+  right: 100px;
+
   display: block;
   margin: 0px auto;
-  left: 40%;
+  
   border-top: 1px solid rgba(150, 150, 150, 0.5);
 }
 
@@ -45,21 +48,20 @@
 
   transition: 100ms;
 }
-.my_navbar_elem:hover
-{
-  color: blue;
-}
-.my_navbar_elem.active
-{
-  color: $body_color;
+.my_navbar_elem:hover, .my_navbar_drop:hover {
+  background-color: #ffd81b;
 }
 
-.my_navbar_drop { padding: 10px 20px; }
+.my_navbar_drop { padding: 11px 0px; }
 .my_navbar_dropElem {
   font-size: 1.6rem;
+  padding: 10px;
+}
+.my_navbar_dropElem:hover {
+  background-color: lightgray;
 }
 
-// SELECT
+// language SELECT
   .my_nav_select {      
     display: inline-block;
 
