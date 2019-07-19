@@ -2,7 +2,7 @@
 
 
 const initialState = {
-    lang: 'eng'
+    lang: 'ENG'
 };
 
 const languageReducer = ( state = initialState, action) => {

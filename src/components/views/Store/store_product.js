@@ -29,13 +29,13 @@ const styles = () => ({
 const StoreProduct = ({ match, product }) => {
   return(
       <GridListTile cols={1}>        
-          <Link to={ match.url +"/"+ product.Prod_number } className="my_storeImageLink" >
+          <Link to={ match.url +"/"+ product.NUM_id } className="my_storeImageLink" >
             <Img
               src={[
-                storeThumbnails[ product.Img_thumbnail ]
+                storeThumbnails[ product.IMG_thumbnail ]
               ]}
               unloader={
-                <div className="my_noStoreImage center"># {product.Prod_number}</div>
+                <div className="my_noStoreImage center"># {product.NUM_id}</div>
               }
             />
           </Link>

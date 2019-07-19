@@ -20,7 +20,7 @@
 const ServiceCard = ( {pass_title, pass_text, pass_image, pass_lang} ) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const shortText = pass_title[pass_lang.toUpperCase()].split('---');
+  const shortText = pass_title[pass_lang].split('---');
 
   return(
     <div className="my_services">

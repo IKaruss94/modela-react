@@ -28,9 +28,9 @@ const CheckoutFormGroups = ( {
             {
                 // [] change lable if requierments are not met, as defined in checking.js -> checkoutSchema    
                 !formik_errors[data.Name] ? (
-                    <span className="">{ data[prop_lang.toUpperCase()] }</span> 
+                    <span className="">{ data[prop_lang] }</span> 
                 ) : (
-                    <span className="my_checkout_error">{ data[prop_lang.toUpperCase()] } <i className="my_checkout_errSign" title={formik_errors[data.Name]}>*</i></span>
+                    <span className="my_checkout_error">{ data[prop_lang] } <i className="my_checkout_errSign" title={formik_errors[data.Name]}>*</i></span>
                 )
             }
             </Form.Label>

@@ -17,7 +17,7 @@
 
 // -------------------------------------------------------------------------------
 
-const CartTableRow = ( { cartItem, actionRemove } ) => {
+const CartTableRow = ( { tableType, cartItem, actionRemove } ) => {
 
 
   let itemNumber = null;
@@ -38,36 +38,41 @@ const CartTableRow = ( { cartItem, actionRemove } ) => {
         </LinkContainer>
         <td className="align-middle">{ cartItem.quantity }</td>
 
-        <td className="align-middle">
+        <td className="align-middle" title={ cartItem.quantity +' * '+  cartItem.priec_eu }>
           <Currency
             quantity={ cartItem.quantity * cartItem.priec_eu}
             currency="EUR"
           />
         </td>
-        <td className="align-middle">
+        <td className="align-middle" title={ cartItem.quantity +' * '+  cartItem.preice_export }>
           <Currency
             quantity={ cartItem.quantity * cartItem.preice_export}
             currency="EUR"
           />
         </td>
 
-
-        <td className="align-middle">
-          <Button 
-            key={ cartItem.id } 
-            className="my_btnRemove"
-            variant="danger" 
-            onClick= { () => actionRemove(cartItem.id) }
-          >
-            <i className="material-icons">close</i>
-          </Button>
-        </td>
+        {
+          tableType === 'cart' ? (
+            <td className="align-middle">
+              <Button 
+                key={ cartItem.id } 
+                className="my_btnRemove"
+                variant="danger" 
+                onClick= { () => actionRemove(cartItem.id) }
+              >
+                <i className="material-icons">close</i>
+              </Button>
+            </td>
+          ) : null
+        }
+        
 
       </tr>
     );    
 }
 
 CartTableRow.propTypes = {  
+  tableType: PropTypes.any,
   cartItem: PropTypes.any,
   actionRemove: PropTypes.func
 }

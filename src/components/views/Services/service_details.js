@@ -32,7 +32,7 @@ const ServiceDetails = ({ text, lang }) => {
     <Card className="my_serviceCardText">       
       <Card.Body>
         <div>
-          { ReactHtmlParser( text[lang.toUpperCase()] ) }
+          { ReactHtmlParser( text[lang] ) }
         </div>
 
         <div>           

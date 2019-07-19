@@ -5,9 +5,11 @@
 */ 
 
 // [] fundemental components
-    import React, { Component } from 'react'
+    import React, { Component } from "react"
+    import { compose } from 'redux'
     import { connect } from 'react-redux'
     import PropTypes from 'prop-types'
+    import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
     import { Nav, Navbar, NavDropdown } from "react-bootstrap"
     import { LinkContainer } from "react-router-bootstrap"
@@ -25,7 +27,7 @@ class Navigation extends Component {
         super(props);
 
         this.state = {
-            selectedOption: null,//{ value: 'eng', label: <span><img src={ LanguageFlags['eng-tiny.png'] } /> English</span> },
+            selectedOption: null,//{ value: 'ENG', label: <span><img src={ LanguageFlags['eng-tiny.png'] } /> English</span> },
         };
     }  
 
@@ -33,21 +35,21 @@ class Navigation extends Component {
         //console.log('navbar props:', this.props);
         //console.log('Language : '+ this.props.prop_lang );
 
-        const { selectedOption, prop_cart, prop_lang, prop_texts } = this.props; 
+        const { selectedOption, prop_cart, prop_lang, prop_navbar } = this.props; 
 
         /** [] language select  */
             // [] language options
                 const langOptions = [
-                    { value: 'eng', label: <span><img src={ LanguageFlags['eng-tiny.png'] } /> English</span> },
-                    { value: 'rus', label: <span><img src={ LanguageFlags['rus-tiny.png'] } /> Русский</span> },
-                    { value: 'lat', label: <span><img src={ LanguageFlags['lat-tiny.png'] } /> Latviešu</span> },
+                    { value: 'ENG', label: <span><img src={ LanguageFlags['eng-tiny.png'] } /> English</span> },
+                    { value: 'RUS', label: <span><img src={ LanguageFlags['rus-tiny.png'] } /> Русский</span> },
+                    { value: 'LAT', label: <span><img src={ LanguageFlags['lat-tiny.png'] } /> Latviešu</span> },
                 ]; 
             // [] setting [lang_number], to define [defau;tValue] in [Select]
                 let lang_number = 0;
                 switch(prop_lang) {
-                    case 'rus': lang_number = 1; break;
-                    case 'lat': lang_number = 2; break;
-                    default: lang_number = 0; break; // eng
+                    case 'RUS': lang_number = 1; break;
+                    case 'LAT': lang_number = 2; break;
+                    default: lang_number = 0; break; // ENG
                 }
         /** */
 
@@ -64,22 +66,22 @@ class Navigation extends Component {
                 <Navbar.Collapse id="basic-navbar-nav" className="my_navbar_collapse">
                     <Nav className="mr-auto">
                         {
-                            prop_texts && prop_texts.map( elem => {
+                            prop_navbar && prop_navbar.map( (elem, index) => {
                                 if( elem.Parent === '0'){
                                     return(
-                                        <LinkContainer key={elem.ID_data} to={"/"+elem.Name}>
-                                            <Nav.Link className="my_navbar_elem">{ elem[prop_lang.toUpperCase()] }</Nav.Link>
+                                        <LinkContainer key={ index } to={"/"+elem.Name}>
+                                            <Nav.Link className="my_navbar_elem">{ elem[prop_lang] }</Nav.Link>
                                         </LinkContainer>
                                     ) // +prop_lang
                                 } else if( elem.Parent === '1'){
                                     return(
-                                        <NavDropdown className="my_navbar_drop" key={elem.ID_data} title={ elem[prop_lang.toUpperCase()] } id="basic-nav-dropdown">
+                                        <NavDropdown className="my_navbar_drop" key={ index } title={ elem[prop_lang] } id="basic-nav-dropdown">
                                         {
-                                             prop_texts.map( innerElem => {
+                                             prop_navbar.map( (innerElem, index) => {
                                                  if( innerElem.Parent === elem.Name )
                                                     return(
-                                                        <LinkContainer key={innerElem.ID_data} to={"/"+innerElem.Name}>
-                                                            <Nav.Link className="my_navbar_dropElem">{ innerElem[prop_lang.toUpperCase()] }</Nav.Link>
+                                                        <LinkContainer key={ index } to={"/"+innerElem.Name}>
+                                                            <Nav.Link className="my_navbar_dropElem">{ innerElem[prop_lang] }</Nav.Link>
                                                         </LinkContainer>
                                                     )
                                             })
@@ -127,10 +129,10 @@ class Navigation extends Component {
 
 
 const mapStateToProps = (state) => ({
-    prop_cart: state.rootCart.redu_cartItems,
+    prop_navbar: state.rootFirestore.ordered.navbar,
+
     prop_lang: state.rootLang.lang,
-    prop_texts: state.rootStatic.navbar_data,
-    //prop_lang_val: state.rootLang.value,
+    prop_cart: state.rootCart.redu_cartItems,
 })
 const mapDispatchToProps = (dispatch) => {
   return{
@@ -145,10 +147,15 @@ const mapDispatchToProps = (dispatch) => {
 Navigation.propTypes = {        
     selectedOption: PropTypes.any,
 
-    prop_cart: PropTypes.any,
+    prop_navbar: PropTypes.any,
     prop_lang: PropTypes.any,
-    prop_texts: PropTypes.any,
+    prop_cart: PropTypes.any,
 
     ChangeLanguge: PropTypes.func,
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
+export default  compose(
+    connect( mapStateToProps, mapDispatchToProps ),
+    firestoreConnect([
+      { collection: 'navbar', orderBy: ['order_value'] }
+    ])
+  )(Navigation)

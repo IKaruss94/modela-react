@@ -7,15 +7,15 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
+  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
+  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { Container, Col, Row } from 'react-bootstrap'
 // [] my components
   import PageLoading from '../Errors/pageLoading'
-  import PageError from '../Errors/pageError'
-  import { fetchData } from '../../../redux_store/actions/getData'
   import DownloadCard from './downloadElement'
 // [] my images
   import { DownloadImages } from '../../functions/import_images'
@@ -32,81 +32,73 @@ class Downloads extends Component {
   }
 
   componentDidMount(){    
-    this.props.GetData('downloads');     
+    //this.props.GetData('downloads');     
   }
 
   render(){
     //console.log('download props', this.props);
     //
-      const { location, prop_error, prop_loading, prop_data, prop_lang } = this.props; 
-    //
-      if (prop_error) { return PageError(prop_error.message) }
-      if (prop_loading) { return PageLoading(location.pathname) }
-    //
-    return (
-      <Container id="download_div">
-        <Helmet><title>Downloads</title></Helmet>
-        { 
-          prop_data && prop_data.map((elem, index) => {  
-            if( index % 2 ) {
-              return(                  
-                <Row key={index}> 
-                  <Col lg>
-                    <DownloadCard key={ prop_data[index -1].ID_data } download={ prop_data[index -1] } image={DownloadImages} prop_lang={prop_lang} />
-                  </Col>
-                  <Col lg>
-                    <DownloadCard key={ prop_data[index].ID_data } download={ prop_data[index] } image={DownloadImages} prop_lang={prop_lang} />
-                  </Col> 
-                </Row>
-              )
-            }
-            else if( index === (prop_data.length)-1 )
-            {
-              return(                  
-                <Row key={index}> 
-                  <Col lg>
-                    <DownloadCard key={ prop_data[index].ID_data } download={ prop_data[index] } image={DownloadImages} prop_lang={prop_lang} />
-                  </Col> 
-                  <Col lg></Col> 
-                </Row>
-              )
-            }
+    const { location, prop_lang, prop_downloads } = this.props; 
 
-              
-            
-                    
-                 
-          })
-        }
-      </Container>
-    )  
+    // []
+      if ( prop_downloads === undefined ) { 
+        return PageLoading(location.pathname) 
+      }
+      else {
+        return (
+          <Container id="download_div">
+            <Helmet><title>Downloads</title></Helmet>
+            { 
+              prop_downloads && prop_downloads.map((elem, index) => {  
+                if( index % 2 ) {
+                  return(                  
+                    <Row key={index}> 
+                      <Col lg>
+                        <DownloadCard key={ prop_downloads[index -1].ID_data } download={ prop_downloads[index -1] } image={DownloadImages} prop_lang={prop_lang} />
+                      </Col>
+                      <Col lg>
+                        <DownloadCard key={ prop_downloads[index].ID_data } download={ prop_downloads[index] } image={DownloadImages} prop_lang={prop_lang} />
+                      </Col> 
+                    </Row>
+                  )
+                }
+                else if( index === (prop_downloads.length)-1 )
+                {
+                  return(                  
+                    <Row key={index}> 
+                      <Col lg>
+                        <DownloadCard key={ prop_downloads[index].ID_data } download={ prop_downloads[index] } image={DownloadImages} prop_lang={prop_lang} />
+                      </Col> 
+                      <Col lg></Col> 
+                    </Row>
+                  )
+                }
+              })
+            }
+          </Container>
+        )  
+      } // [] end of [else]
+    //
   }
 } 
 
 const mapStateToProps = (state) => {
-  return {    
+  console.log(state);
+  return {        
+    prop_downloads: state.rootFirestore.ordered.downloads,
     prop_lang: state.rootLang.lang,
-
-    prop_data: state.rootData.data.downloads,
-    prop_loading: state.rootData.loading,
-    prop_error: state.rootData.error,
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return{
-    GetData: (page_name) => { dispatch( fetchData(page_name) ) },
   }
 }
 Downloads.propTypes = {
   location: PropTypes.any,
   prop_lang: PropTypes.any,
-
-  prop_error: PropTypes.any,
-  prop_loading: PropTypes.any,
-  prop_data: PropTypes.any,
-
-  GetData: PropTypes.func,
+  prop_downloads: PropTypes.any,
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Downloads)
+export default compose(
+  connect( mapStateToProps ),
+  firestoreConnect([
+    { collection: 'downloads' }
+  ])
+)(Downloads)

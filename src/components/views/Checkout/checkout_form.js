@@ -33,32 +33,86 @@ const CheckoutForm = ( {
     
 //#######################################################################################################
 
-    const [isOpen, setIsOpen] = useState(false);    
-    const [selectedOption, setSelectedOption] = useState(null);
+    //[] state variables
+        //[] is [separate delivery destination] form open
+        const [isOpen, setIsOpen] = useState(false);    
+        //[] which is the chosen option for [Select] / [select payment]
+        const [selectedOption, setSelectedOption] = useState(null);
+    //    
+    //[] some variables
+        let deliveryCheckboxLable = []; 
 
-    // [] some variables
-        let deliveryLable = [];     
         let paymentLable = [];  
-    //
-        // [] prepare [payment Select] options
         let paymentOptions = [];
-        
+
+        let orderClient = [];
+        let orderDelivery = [];
+        let orderPayment = [];
+    //
+    //[] sorting out the lables        
         pass_prop_data && pass_prop_data.map( elem => {
-            if( elem.FormGroup === 'payment' && elem.Type === 'option' ) {      
-                if( elem.Name === 'choose_payment' ) {
-                    paymentOptions.push({ 
-                        label: elem[prop_lang.toUpperCase()], 
-                        value: 'choose_payment', 
-                        disabled: 'yes' 
-                    })
-                } else {     
-                    paymentOptions.push({ 
-                        label: elem[prop_lang.toUpperCase()], 
-                        value: elem.Name 
-                    })
-                }  
+            switch (elem.FormGroup){
+                //[] make array of data fields for client
+                case 'client': {
+                    orderClient.push( elem );
+                    break;                 
+                }
+
+                //[] make array of data fields for delivery
+                case 'delivery': {
+                    orderDelivery.push( elem );
+                    break;                 
+                }
+
+                // [] set label for [delivery checkbox]
+                case '0' : {
+                    deliveryCheckboxLable = elem;                                
+                    break;
+                }
+
+                //[] set label for [payment select]
+                case 'payment' : {
+                    if( elem.Type === 'select' ) {
+                        paymentLable = elem;
+                    } else {
+                        orderPayment.push( elem );
+                    }
+                    break;
+                }
+                //[]
+                default : {
+                    console.log('unused label : ', elem);                                
+                    break;
+                }
             }
         })
+    //
+    //[] sorting client & delivery fields
+        orderClient.sort( function(a, b){
+            return a.Order_id - b.Order_id
+        });        
+        orderDelivery.sort( function(a, b){
+            return a.Order_id - b.Order_id
+        });        
+        orderPayment.sort( function(a, b){
+            return a.Order_id - b.Order_id
+        });
+    //
+    //[] defining [payment select] options, as needed for [Select] package
+        orderPayment.map( elem => {      
+            if( elem.Name === 'choose_payment' ) {
+                paymentOptions.push({ 
+                    label: elem[prop_lang], 
+                    value: 'choose_payment', 
+                    disabled: 'yes'
+                })
+            } else {     
+                paymentOptions.push({ 
+                    label: elem[prop_lang], 
+                    value: elem.Name 
+                })
+            }
+        });         
     //
 
 //#######################################################################################################
@@ -94,45 +148,25 @@ const CheckoutForm = ( {
             <Row id="checkoutClient" className="my_checkout_formRow">
                 <Col> 
                 {                    
-                    pass_prop_data && pass_prop_data.map( elem => {
-                        switch (elem.FormGroup){
-                            // [] display client data inputs
-                            case 'client': {
-                                if( elem.Name !== 'firstName' && elem.Name !== 'lastName' )
-                                    return(<CheckoutInput
-                                        key={ elem.ID_data } 
-                                        data={ elem } 
-                                        formik_values={ formik_values }
-                                        formik_handleChange={ formik_handleChange }
-                                        formik_errors={ formik_errors }
-                                        prop_lang = { prop_lang }
-                                    />)                           
-                                break;
-                            }
-                            // [] set label for [del_check]
-                            case '0' : {
-                                deliveryLable = elem;                                
-                                break;
-                            }
-                            // set label for [payment_select]
-                            case 'payment' : {
-                                if( elem.Type === 'select' ) 
-                                    paymentLable = elem; 
-                                break;
-                            }
-                            default : {
-                                //console.log('unused label : ', elem);                                
-                                break;
-                            }
-                        }
-                    })
+                    orderClient && orderClient.map( elem => {
+                        return( 
+                            <CheckoutInput
+                                key={ elem.id } 
+                                data={ elem } 
+                                formik_values={ formik_values }
+                                formik_handleChange={ formik_handleChange }
+                                formik_errors={ formik_errors }
+                                prop_lang = { prop_lang }
+                            /> 
+                        ) 
+                    })                    
                 }
                 </Col>
             </Row>
 
             <Row id="checkoutShowDelivery" className="my_checkout_formRow">
                 <Col>
-                    <span className="my_checkout_lable">{ deliveryLable[prop_lang.toUpperCase()] }</span>
+                    <span className="my_checkout_lable">{ deliveryCheckboxLable[prop_lang] }</span>
                     <Field 
                         type='checkbox'
                         name='del_check'
@@ -153,18 +187,19 @@ const CheckoutForm = ( {
                 >                 
                     <Row id="checkoutDelivery" className="my_checkout_formRow">
                         <Col>
-                        {                 
-                            pass_prop_data && pass_prop_data.map( elem => {
-                                if( elem.FormGroup === 'delivery' )
-                                    return (<CheckoutInput 
-                                        key={ elem.ID_data } 
-                                        data={ elem }
+                        {                           
+                            orderDelivery && orderDelivery.map( elem => {
+                                return( 
+                                    <CheckoutInput
+                                        key={ elem.id } 
+                                        data={ elem } 
                                         formik_values={ formik_values }
                                         formik_handleChange={ formik_handleChange }
                                         formik_errors={ formik_errors }
                                         prop_lang = { prop_lang }
-                                    />)
-                            })
+                                    /> 
+                                ) 
+                            })  
                         }
                         </Col>
                     </Row>
@@ -179,10 +214,10 @@ const CheckoutForm = ( {
                         {    
                             // [] change label if requierments are not met, as defined in checking.js -> checkoutSchema       
                             !formik_errors[paymentLable.Name] ? (
-                                <span className="my_checkout_lable">{ paymentLable[prop_lang.toUpperCase()] }</span> 
+                                <span className="my_checkout_lable">{ paymentLable[prop_lang] }</span> 
                             ) : (
                                 <span className="my_checkout_error my_checkout_lable">
-                                    { paymentLable[prop_lang.toUpperCase()] } 
+                                    { paymentLable[prop_lang] } 
                                     <i className="my_checkout_errSign" title={formik_errors[paymentLable.Name]}>*</i>
                                 </span>
                             )

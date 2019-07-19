@@ -1,4 +1,5 @@
 # modela-react
 Remaking "modela.lv" using ReactJS.
 
-Connection to MySQL database & order submition, is handeled in separate express server.
+Modefide to use Firebase & Firestore.
+Some files aren't included, for security reasons. 

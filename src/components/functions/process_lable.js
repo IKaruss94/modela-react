@@ -7,29 +7,34 @@
 */ 
 
 // [] fundemental components
+  import React from 'react'
   import PropTypes from 'prop-types'
-// [] structure and style components
-// [] my components
 // [] my images
+  import LoadingGIF from '../../../images/icons/modela_loading.gif'
 
 // -------------------------------------------------------------------------------
 
 
 
-const Processlable = ( prop_lang, prop_lables, func_type, func_name ) => {
+const ProcessLable = ( prop_lang, prop_lables, func_type, func_name ) => {
 
-  let temp = prop_lables.find( (obj) => {
-    if( obj.Type === func_type && obj.Name === func_name ) 
-      return obj
+  const res = prop_lables.find( (elem) => {
+    if( elem.Type === func_type && elem.Name === func_name ) { return elem; } 
   })
   
-  return temp[ prop_lang.toUpperCase() ]
+  if( res !== undefined ) {
+    //console.log('lables => ', res[prop_lang] ); 
+    return res[prop_lang];
+  } else {
+    return( <img src={LoadingGIF} style={{ width: '16px', height: '16px' }} /> )
+  }
+
 } 
 
-Processlable.propTypes = {  
+ProcessLable.propTypes = {  
   prop_lang: PropTypes.any,
   prop_lables: PropTypes.any,
   func_type: PropTypes.any,
   func_name: PropTypes.any,
 }
-export default Processlable
+export default ProcessLable

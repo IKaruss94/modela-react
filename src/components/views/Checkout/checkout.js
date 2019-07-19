@@ -7,54 +7,53 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
+  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
+  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   //import ReactHtmlParser from 'react-html-parser'
   import { Helmet } from 'react-helmet'
-  import { Container, Button } from 'react-bootstrap'
+  import { Container, Row, Col, Button } from 'react-bootstrap'
   import { Formik } from 'formik'
   import * as yup from 'yup'
   import Swal from 'sweetalert2'
 // [] my components
-  import { fetchData } from '../../../redux_store/actions/getData'
-  import CartTable from './checkout_cart'
+  import PageLoading from '../Errors/pageLoading'
+  import GetLable from '../../functions/process_lable'
+  import SUBMIT_DATA from '../../order_submission/manage_submission'
+  import CartTable from '../Cart/cart_table'
   import Checkoutform from './checkout_form'
-  //import PrepDataToSubmit from '../../submit_data/manage_submittion'  
-  import { PostFormToServer } from '../../../redux_store/actions/postForm'
 // [] my images
 
 // -------------------------------------------------------------------------------
 
 class Checkout extends Component {  
 
-  componentDidMount(){    
-    this.props.GetData('checkout');    
-  }
-
   render(){ 
     //console.log('checkout props', this.props);  
     // [] setting props
       const { 
         history, 
+        location, 
+        prop_lang,        
         prop_cart, 
-        prop_data, 
+        prop_data,         
+        prop_lables,
         ClearCart,
-        prop_lang, 
-        prop_lables 
       } = this.props;
+
+    //[] making an array of payment names for use in emails     
+      let paymentNames = [];   
+      prop_data && prop_data.map( elem => {
+        if( elem.FormGroup === 'payment' && elem.Type === 'option' ) {
+          paymentNames.push({ Name:elem.Name, LongName:elem.ENG });                
+        }
+      })
+    //
     
     // [] form requierment schema
-      let checkoutSchema = yup.object().shape({
-        /*
-        firstName: yup
-          .string()
-          .required('Required'),
-        lastName: yup
-          .string()
-          .required('Required'),
-        */
-       
+      let checkoutSchema = yup.object().shape({   
         fullName: yup
           .string()
           .required('Required'),
@@ -78,7 +77,7 @@ class Checkout extends Component {
           .number('Phone NUMBER')
           .required('Required'),
           
-        del_name: yup
+        del_fullName: yup
           .string(),
         del_address: yup
           .string(),
@@ -99,18 +98,16 @@ class Checkout extends Component {
       });
     // [] form initial value, defines form as controlled
       let checkoutInitVal = {
-        //fullName: '',
-        //lastName: '',
-        fullName: '',
-        email: '',
-        address: '',
-        city: '',
-        zip: '',
+        fullName: 'quin jones',
+        email: 'dave@quin.dog',
+        address: 'place st 123',
+        city: 'townsville',
+        zip: '34641',
         state: '',
-        country: '',
-        phone: '',
+        country: 'US of Smash',
+        phone: '12345678',
         del_check: false,
-        del_name: '',
+        del_fullName: '',
         del_address: '',
         del_city: '',
         del_zip: '',
@@ -119,167 +116,156 @@ class Checkout extends Component {
         del_phone: '',
         payment_method: '',
       }
+      /**
+       *    fullName: '',
+        email: '',
+        address: '',
+        city: '',
+        zip: '',
+        state: '',
+        country: '',
+        phone: '',
+        del_check: false,
+        del_fullName: '',
+        del_address: '',
+        del_city: '',
+        del_zip: '',
+        del_state: '',
+        del_country: '',
+        del_phone: '',
+        payment_method: '',
+       */
+
       
     // [] choosing what to render
-      return (
-        <Container> 
-          <Helmet><title>Checkout</title></Helmet>
-
-
-
-          <CartTable cart_data={prop_cart} /> 
-
-          <Button 
-            variant="primary" 
-            size="lg" 
-            block 
-            onClick={ () => { console.log('I want to go back to cart') } }
-          >back to cart [static_text]</Button>
-
-
-
-          <Formik
-            initialValues = { checkoutInitVal }
-            validationSchema = { checkoutSchema }
-            validateOnChange
-            onSubmit = { ( formData ) => {
-            // [] SUBMITTING ---------------------------------------------------
+    
+      if ( prop_data === undefined || prop_lables === undefined ) { 
+        return PageLoading(location.pathname) 
+      }
+      else {
+        return (
+          <Container> 
+            <Helmet><title>Checkout</title></Helmet>
             
-              //console.log( 'CHECKOUT test', formData, prop_cart ); 
-              // [] function to actualy submit
+            <Row >
+                <Col className="my_checkout_cart">
+                  <CartTable tableType = 'checkout' />
+                </Col>
+            </Row>  
 
-              Swal.fire({
-                type: 'info',
-                title: 'Submitting your order', 
-                showConfirmButton: false, 
-                allowOutsideClick: false,
-              });
-              Swal.showLoading();
+            <Button 
+              variant="primary" 
+              size="lg" 
+              block 
+              onClick={ () => { history.push( '/cart' ) } }
+            >
+              { GetLable( prop_lang, prop_lables, 'button', 'btn_backToCart') }
+            </Button>
 
+
+
+            <Formik
+              initialValues = { checkoutInitVal }
+              validationSchema = { checkoutSchema }
+              validateOnChange
+              onSubmit = { ( formData ) => {
+              // [] SUBMITTING ---------------------------------------------------
               
-              PostFormToServer( formData, prop_cart ).then( (res) => {
+                //console.log( 'CHECKOUT test', formData, prop_cart ); 
+                // [] function to actualy submit
+
+                Swal.fire({
+                  type: 'info',
+                  title: 'Submitting your order', 
+                  showConfirmButton: false, 
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+
                 
-                if( res === 'OK' ) {
-                  Swal.fire({
-                    type: 'success',
-                    title: 'Order submitted!',
-                    confirmButtonText: 'OK',
-                    timer: 5000,
-                  })
-                  .then(      
-                    ClearCart(),                
-                    history.push( '/' )
-                  );
-                } else {
-                  Swal.fire({
-                    type: 'error',
-                    title: 'An error has occured.', 
-                    text: res,
-                    confirmButtonText: 'OK', 
-                  });
-                }    
-                              
-              });
+                SUBMIT_DATA( formData, prop_cart, paymentNames ).then( (res) => {
+                //PostFormToServer( formData, prop_cart ).then( (res) => {
+                  
+                  if( res === 'OK' ) {
+                    Swal.fire({
+                      type: 'success',
+                      title: 'Order submitted!',
+                      confirmButtonText: 'OK',
+                      timer: 5000,
+                    })
+                    .then(      
+                      ClearCart(),                
+                      history.push( '/' )
+                    );
+                  } else {
+                    Swal.fire({
+                      type: 'error',
+                      title: 'An error has occured.', 
+                      text: res,
+                      confirmButtonText: 'OK', 
+                    });
+                  }    
+                                
+                });
+                
               
-            
-            // [] !SUBMITTING -----------------------------------------------------------------
-            }}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              setFieldValue,
-              values,
-              errors,
-            }) => (
-              <Checkoutform 
-                pass_prop_data        = { prop_data }
-                prop_lang             = { prop_lang }
-                prop_lables           = { prop_lables }
-                formik_handleSubmit   = { handleSubmit } 
-                formik_handleChange   = { handleChange }
-                formik_setFieldValue  = { setFieldValue }
-                formik_values         = { values }
-                formik_errors         = { errors }
-              />
-            )}
-          </Formik>
-            
-        </Container>
-      )       
+              // [] !SUBMITTING -----------------------------------------------------------------
+              }}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                setFieldValue,
+                values,
+                errors,
+              }) => (
+                <Checkoutform 
+                  pass_prop_data        = { prop_data }
+                  prop_lang             = { prop_lang }
+                  prop_lables           = { prop_lables }
+                  formik_handleSubmit   = { handleSubmit } 
+                  formik_handleChange   = { handleChange }
+                  formik_setFieldValue  = { setFieldValue }
+                  formik_values         = { values }
+                  formik_errors         = { errors }
+                />
+              )}
+            </Formik>
+              
+          </Container>
+        )       
+      } // [] end of [else]
     //
-  }
+  } // [] end of [render]
 }
 
 const mapStateToProps = (state) => ({
   prop_lang: state.rootLang.lang,
-  prop_lables: state.rootStatic.lable_data,
-
   prop_cart: state.rootCart.redu_cartItems,  
-  prop_data: state.rootData.data.checkout,
+
+  prop_lables: state.rootFirestore.ordered.lables,
+  prop_data: state.rootFirestore.ordered.checkout,
 })
 const mapDispatchToProps = (dispatch) => {
   return{
-    GetData: (page_id) => { dispatch( fetchData(page_id) ) },
     ClearCart: () => { dispatch({ type:'RESET_CART' }) }
   }
 }
 Checkout.propTypes = { 
   history: PropTypes.any,
+  location: PropTypes.any,
   prop_lang: PropTypes.any,
-  prop_lables: PropTypes.any,
-
   prop_cart: PropTypes.any,
+
+  prop_lables: PropTypes.any,
   prop_data: PropTypes.any,
 
-  GetData: PropTypes.func,
   ClearCart: PropTypes.func,
-
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
-
-/**
- * 
-            {({
-              handleSubmit,
-              handleChange,
-              values,
-              //touched,
-              errors,
-            }) => (
-              <Checkoutform 
-                pass_prop_data        = { prop_data }
-                formik_handleSubmit   = { handleSubmit } 
-                formik_values         = { values }
-                formik_handleChange   = { handleChange }
-                formik_errors         = { errors }
-                prop_lang             = { prop_lang }
-                prop_lables           = { prop_lables }
-              />
-            )}
-          </Formik>
-
-          
-
-
- let checkoutInitVal = {
-  fullName: 'dave davidson',
-  email: 'ivars.knets@gmail.com',
-  address: 'dave street 123',
-  city: 'citysvill',
-  zip: '123',
-  state: 'daveState',
-  country: 'US of Smash',
-  phone: '12345678',
-  del_check: false,
-  del_name: '',
-  del_address: '',
-  del_city: '',
-  del_zip: '',
-  del_state: '',
-  del_country: '',
-  del_phone: '',
-  payment_method: '',
-}
-
-/*/
+export default  compose(
+  connect( mapStateToProps, mapDispatchToProps ),
+  firestoreConnect([
+    { collection: 'checkout' },
+    { collection: 'lables' }
+  ])
+)(Checkout)

@@ -36,17 +36,17 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
     return(
       <div>
         {               
-            pass_categories && pass_categories.map(category => {           
-               //console.log('cat ID',category.ID_prodCat);              
+            pass_categories && pass_categories.map(elem_cat => {           
+               //console.log('cat ID',elem_cat.ID_prodCat);              
               return(                    
-                  <Collapsible key={category.ID_cat} trigger={ category[prop_lang.toUpperCase()] } open>        
+                  <Collapsible key={elem_cat.id} trigger={ elem_cat[prop_lang] } open>        
                   <div className="">
-                    <GridList cellHeight={160} className={category.gridList} cols={6} spacing={10}>
+                    <GridList cellHeight={160} className={elem_cat.gridList} cols={6} spacing={10}>
                     {
-                      pass_products && pass_products.map(product => {  
-                        if( product.Category === category.ID_cat )           
+                      pass_products && pass_products.map(elem_prod => {  
+                        if( elem_prod.Category === elem_cat.id && elem_prod.Visable ) //[] if product is in category and VISABLE         
                           return(
-                            <StoreProduct key={product.ID_prod} product={product} match={match} />
+                            <StoreProduct key={elem_prod.ID_prod} product={elem_prod} match={match} />
                           )
                       })
 

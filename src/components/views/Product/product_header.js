@@ -74,17 +74,17 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                 <span className="image_helper"></span>
                 <Img className="my_ProdImage my_image_needsHelp img-rounded img-responsive"
                     src={[
-                        prodLargeImages[product.ID+".jpg"] 
+                        prodLargeImages[product.NUM_id+".jpg"] 
                     ]}
                     unloader={
-                        <div className="my_noProdImage">No image for #{product.ID}</div>
+                        <div className="my_noProdImage">No image for #{product.NUM_id}</div>
                     }
                 />
             </Col>
             
             {isOpen && (         
                 <Lightbox
-                    mainSrc={ prodLargeImages[product.ID+".jpg"]  }
+                    mainSrc={ prodLargeImages[product.NUM_id+".jpg"]  }
                     onCloseRequest={() => setIsOpen(false) }
                 />
             )}
@@ -98,17 +98,51 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                     // [] product data is made here \/
                         prop_lables && prop_lables.map ( (elem, index) => {
                             if( elem.Type === 'prod_header') {
-                                return(
-                                    <span key={index} className="my_prodDataTitle">
-                                        <strong>{ elem[prop_lang.toUpperCase()] }: </strong>
-                                        { elem.Name === 'Dimensions' ? ( DimensionReformat(product[elem.Name]) ) : (  product[elem.Name] ) }
-                                        <br/>
-                                    </span>
-                                )
+                                console.log('header values: ', elem.Name);
+                                switch (elem.Name) {
+                                    case 'Dimensions': {  
+                                        return( 
+                                            <span key={index} className="my_prodDataTitle">
+                                                <strong>{ elem[prop_lang] }: </strong>
+                                                    { DimensionReformat(product[elem.Name]) }
+                                                <br/>
+                                            </span> 
+                                        )
+                                    }
+                                    case 'Years': {
+                                       if( product.Years !== '0' ) {
+                                            return(
+                                                <span key={index} className="my_prodDataTitle">
+                                                    <strong>{ elem[prop_lang] }: </strong>
+                                                        { product[elem.Name] }
+                                                    <br/>
+                                                </span>
+                                            )
+                                        }
+                                        break;
+                                    }
+                                    default: {
+                                        return(
+                                            <span key={index} className="my_prodDataTitle">
+                                                <strong>{ elem[prop_lang] }: </strong>
+                                                    { product[elem.Name] }
+                                                <br/>
+                                            </span>
+                                        )
+                                    }
+                                }
                             }
                         })
                         /**
-                            <span className="my_prodDataTitle">{ elem[prop_lang.toUpperCase()] }: { product.Producer }<br/></span>
+                         *  return(
+                                            <span key={index} className="my_prodDataTitle">
+                                                <strong>{ elem[prop_lang] }: </strong>
+                                                { elem.Name === 'Dimensions' ? ( DimensionReformat(product[elem.Name]) ) : (  product[elem.Name] ) }
+                                                <br/>
+                                            </span>
+                                        )
+                         * 
+                            <span className="my_prodDataTitle">{ elem[prop_lang] }: { product.Producer }<br/></span>
                             <span className="my_prodDataTitle">Dimensions: </span>{ DimensionReformat(product.Dimensions) } <br/>
                             <span className="my_prodDataTitle">Years: </span>{ product.Year } <br/>
                          */
@@ -130,7 +164,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                                 className="my_prod_toTradeBtn" 
                                 variant="primary"
                             >
-                                { GetLable( prop_lang, prop_lables, 'button', 'prod_priceInfo') }
+                            { GetLable( prop_lang, prop_lables, 'button', 'prod_priceInfo') }
                             </Button>
                         </LinkContainer> 
                     </ButtonToolbar>

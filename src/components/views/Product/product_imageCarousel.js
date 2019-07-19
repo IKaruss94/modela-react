@@ -30,30 +30,30 @@ const ProductImageCarousel = ( {products} ) => {
         <Carousel className="my_carousel my_prod my_prodCarousel">
             {
                 products && products.map( (product, index) => {
-                    arr_imageNames.push( product.ID+"-"+product.Number+".gif" );
+                    arr_imageNames.push( product.NUM_id+"-"+product.NUM_variant+".gif" );
 
-                    if( product.Number != '00' && 
-                        product.Number < '90' && 
-                        prodCarouselImages[product.ID+"-"+product.Number+".gif"] !== '' 
+                    if( product.NUM_variant != '00' && 
+                        product.NUM_variant < '90' && 
+                        prodCarouselImages[product.NUM_id+"-"+product.NUM_variant+".gif"] !== '' 
                     ){
                         return(                            
                             <Carousel.Item 
                                 className="my_carousel_item my_prod" 
-                                key={product.Number}
+                                key={product.NUM_variant}
                                 onClick={ () => { setIsOpen(true); setImageIndex(index); setProdNames( arr_imageNames ); } }
                             >
                                 <Img className="my_carousel_image my_prod img-rounded img-responsive"
                                     src={[
-                                        prodCarouselImages[product.ID+"-"+product.Number+".gif"] 
+                                        prodCarouselImages[product.NUM_id+"-"+product.NUM_variant+".gif"] 
                                     ]}
                                     unloader={
-                                        <div className="my_carousel_noImage my_prod">No image for #{product.ID+"-"+product.Number}</div>
+                                        <div className="my_carousel_noImage my_prod">No image for #{product.NUM_id+"-"+product.NUM_variant}</div>
                                     }
                                 />
                         
 
                                 <Carousel.Caption className="my_carousel_caption my_prod">
-                                    <h4>{product.ID}-{product.Number} - {product.Name}</h4>
+                                    <h4>{product.NUM_id}-{product.NUM_variant} - {product.Name}</h4>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         )
@@ -88,12 +88,3 @@ ProductImageCarousel.propTypes = {
     products: PropTypes.any
 };  
 export default (ProductImageCarousel);
-
-/*
-    
-    <img
-        className="my_ProdCarouselImage d-block w-100"
-        src={ prodCarouselImages[product.ID+"-"+product.Number+".gif"] }
-        alt={ product.ID+"-"+product.Number }
-    />
- */

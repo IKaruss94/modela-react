@@ -39,10 +39,12 @@ const TDimage = ( imageGroup, img, name ) => {
   );
 }
 const TDprice = ( price ) => {
+  let num_price = parseFloat(price, 10);
+   
   return(         
     <td className="my_prod_tablePrice align-middle">
       <Currency
-        quantity={price}
+        quantity={num_price}
         currency="EUR"
       />
     </td>
@@ -79,19 +81,19 @@ const ProductTableRow = ({
   /** [] in-cart checks */
     // [] check [if item already in cart], used in a function later @ [.my_prod_tableCart]
       let checkInCart = (elem) => {
-        return elem.id === prod.ID_prod
+        return elem.id === prod.id
       }     
   /** */
 
 
-  if( prod.Available === 1) {
+  if( prod.Available ) {
     return(
-      <tr key={prod.Number}>
-        { prod.Number !== '99' ? ( TDimage( prodTableEra, 'era_'+prod.Era+'.gif', prod.Era) ):(null) }
-        { prod.Number !== '99' ? ( TDimage( prodTableUser, prod.Img_emblem, prod.User) ):(null) }
+      <tr key={prod.NUM_variant}>
+        { prod.NUM_variant !== '99' ? ( TDimage( prodTableEra, 'era_'+prod.Era+'.gif', prod.Era) ):(null) }
+        { prod.NUM_variant !== '99' ? ( TDimage( prodTableUser, prod.IMG_emblem, prod.User) ):(null) }
         {
         // [] MODEL KIT row
-          prod.Number === '99' ? (   
+          prod.NUM_variant === '99' ? (   
             <td className="my_prod_tableRegSelectTD align-middle" colSpan={3}>    
               <Select
                 menuPortalTarget={document.querySelector('body')}
@@ -119,7 +121,7 @@ const ProductTableRow = ({
           )          
         }
         
-        <td className="align-middle">{prod.ID}-{prod.Number}</td>
+        <td className="align-middle">{prod.NUM_id}-{prod.NUM_variant}</td>
         <td className="align-middle">{prod.Name}</td>
 
         { TDprice(prod.Price_vat_eu) }
@@ -129,7 +131,7 @@ const ProductTableRow = ({
           <Form>
             <Form.Control 
               className="my_quntityInput"                 
-              key={ prod.Number } 
+              key={ prod.NUM_variant } 
               type="number" 
               min="1" 
               max="100" 
@@ -150,7 +152,7 @@ const ProductTableRow = ({
                 className="my_prod_tableBtn" 
                 variant="danger" 
                 title="Remove from cart"
-                onClick={ () => { actionRemoveFromCart(prod.ID_prod) } }
+                onClick={ () => { actionRemoveFromCart(prod.id) } }
               >
                 <i className="material-icons">close</i>
               </Button>
@@ -158,14 +160,14 @@ const ProductTableRow = ({
           ) : (
             <div className="my_prod_cartAdd">
               <Button 
-                key={ prod.Number } 
+                key={ prod.NUM_variant } 
                 variant="primary" 
                 onClick={ 
                   () => actionAddToCart({ 
-                    id: prod.ID_prod, 
+                    id: prod.id, 
                     name: prod.Name, 
-                    number: prod.ID+'-'+prod.Number, 
-                    reg_num: prod.Number==='99' ? (chosenRegNums):(prod.Regist_num),
+                    number: prod.NUM_id+'-'+prod.NUM_variant, 
+                    reg_num: prod.NUM_variant==='99' ? (chosenRegNums):(prod.Regist_num),
                     quantity: quantity,
                     priec_eu: prod.Price_vat_eu,
                     preice_export: prod.Price_export_eu
@@ -183,12 +185,12 @@ const ProductTableRow = ({
 
   else {
     return (
-      <tr key={prod.Number}>        
+      <tr key={prod.NUM_variant}>        
         { TDimage( prodTableEra, 'era_'+prod.Era+'.gif', prod.Era) }
-        { TDimage( prodTableUser, prod.Img_emblem, prod.User) }
+        { TDimage( prodTableUser, prod.IMG_emblem, prod.User) }
 
         <td className="align-middle">{ prod.Regist_num }</td>
-        <td className="align-middle">{ prod.ID }-{ prod.Number }</td>
+        <td className="align-middle">{ prod.NUM_id }-{ prod.NUM_variant }</td>
         <td className="align-middle">{ prod.Name }</td>
 
         { TDprice(prod.Price_vat_eu) }
@@ -214,4 +216,4 @@ export default (ProductTableRow);
 
 
 
-//onClick={ () => addToCart( prod.ID_prod, prod.ID+'-'+prod.Number, quantity ) } 
+//onClick={ () => addToCart( prod.id, prod.NUM_id+'-'+prod.NUM_variant, quantity ) } 

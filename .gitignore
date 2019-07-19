@@ -8,16 +8,23 @@
 # testing
 /coverage
 /build_dev
-/build_public
 
 # production
 /build
 /build_public
 /public
 
+#firebase
+/dist
+/functions
+.firebaserc
+firebase.json
+
 #my misc stuff
 /ZZZzzzZZZzzzZZZzzzZZZzzzZZZzzz
-/src/component/zzz
+/src/components/order_submission
+/config
+/populate-firestore
 _errorCodes.txt
 _NOTES.txt
 _TODOS.txt
