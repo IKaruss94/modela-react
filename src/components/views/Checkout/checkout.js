@@ -21,10 +21,9 @@
 // [] my components
   import PageLoading from '../Errors/pageLoading'
   import GetLable from '../../functions/process_lable'
-  import SUBMIT_DATA from '../../order_submission/manage_submission'
+  //import SUBMIT_DATA from '../../order_submission/manage_submission'
   import CartTable from '../Cart/cart_table'
-  import Checkoutform from './checkout_form'
-// [] my images
+  import CheckoutForm from './checkout_form'
 
 // -------------------------------------------------------------------------------
 
@@ -40,7 +39,7 @@ class Checkout extends Component {
         prop_cart, 
         prop_data,         
         prop_lables,
-        ClearCart,
+        //ClearCart, !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       } = this.props;
 
     //[] making an array of payment names for use in emails     
@@ -98,26 +97,7 @@ class Checkout extends Component {
       });
     // [] form initial value, defines form as controlled
       let checkoutInitVal = {
-        fullName: 'quin jones',
-        email: 'dave@quin.dog',
-        address: 'place st 123',
-        city: 'townsville',
-        zip: '34641',
-        state: '',
-        country: 'US of Smash',
-        phone: '12345678',
-        del_check: false,
-        del_fullName: '',
-        del_address: '',
-        del_city: '',
-        del_zip: '',
-        del_state: '',
-        del_country: '',
-        del_phone: '',
-        payment_method: '',
-      }
-      /**
-       *    fullName: '',
+        fullName: '',
         email: '',
         address: '',
         city: '',
@@ -133,8 +113,8 @@ class Checkout extends Component {
         del_state: '',
         del_country: '',
         del_phone: '',
-        payment_method: '',
-       */
+        payment_method: ''
+      }
 
       
     // [] choosing what to render
@@ -175,13 +155,22 @@ class Checkout extends Component {
                 // [] function to actualy submit
 
                 Swal.fire({
+                  type: 'success',
+                  title: 'Order [would be] submitted.',
+                  confirmButtonText: 'OK',
+                  timer: 5000,
+                })
+                console.log('submitted - form data: ', formData);
+                console.log('submitted - cart data: ', prop_cart);
+
+                /*
+                Swal.fire({
                   type: 'info',
                   title: 'Submitting your order', 
                   showConfirmButton: false, 
                   allowOutsideClick: false,
                 });
                 Swal.showLoading();
-
                 
                 SUBMIT_DATA( formData, prop_cart, paymentNames ).then( (res) => {
                 //PostFormToServer( formData, prop_cart ).then( (res) => {
@@ -207,7 +196,7 @@ class Checkout extends Component {
                   }    
                                 
                 });
-                
+                */
               
               // [] !SUBMITTING -----------------------------------------------------------------
               }}
@@ -219,7 +208,7 @@ class Checkout extends Component {
                 values,
                 errors,
               }) => (
-                <Checkoutform 
+                <CheckoutForm 
                   pass_prop_data        = { prop_data }
                   prop_lang             = { prop_lang }
                   prop_lables           = { prop_lables }

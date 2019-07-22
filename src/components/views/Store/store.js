@@ -18,14 +18,13 @@
   import PageLoading from '../Errors/pageLoading'
   import StoreProductCat from './store_ProductCategories'
   import Product from '../Product/product'
-// [] my images
 
 // ------------------------------------------------------------------------------- 
 
 class Store extends Component {   
   
   render(){      
-    //console.log('store props', this.props);
+    console.log('store props', this.props);
     const { match, prop_storeProd, prop_categories, prop_lang } = this.props; 
 
     // []

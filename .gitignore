@@ -17,6 +17,7 @@
 #firebase
 /dist
 /functions
+/.firebase
 .firebaserc
 firebase.json
 

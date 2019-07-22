@@ -20,7 +20,7 @@
 
 // -------------------------------------------------------------------------------
 
-const ChangeProductBtns = ( {type, num, props} ) => {
+const ChangeProductBtns = ( {type, num} ) => {
     switch( num ) {
         case '00000':
             return (
@@ -32,7 +32,6 @@ const ChangeProductBtns = ( {type, num, props} ) => {
                     <button 
                         className={"my_prodChangeBtn "+type} 
                         variant="primary" 
-                        onClick={ () => props.getProduct(num) }
                     >
                         
                     </button>
@@ -98,7 +97,6 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                     // [] product data is made here \/
                         prop_lables && prop_lables.map ( (elem, index) => {
                             if( elem.Type === 'prod_header') {
-                                console.log('header values: ', elem.Name);
                                 switch (elem.Name) {
                                     case 'Dimensions': {  
                                         return( 

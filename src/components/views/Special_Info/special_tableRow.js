@@ -36,7 +36,7 @@ const SpecialTableRow = ( { pass_data } ) => {
         </tr>
       )
     default: 
-      if(pass_data.Images !== '') {
+      if(pass_data.Images) {
         return (
           <tr className="my_special_tr">          
             <td>{ pass_data.Number }</td>
