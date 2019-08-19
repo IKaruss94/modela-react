@@ -1,0 +1,109 @@
+
+
+.my_admin_container {
+  margin-top: 10px;
+}
+
+/** PRODUCTS */
+
+  li.my_admin_prodElem {
+    height: auto !important;
+  }
+
+  .my_admin_prodContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .my_admin_prodElem { 
+    cursor: pointer;
+    margin: 6px;
+    width: 160px;
+    line-height: 90px;
+
+    background-color: white;
+    object-fit: contain;
+    border: 4px solid #eee;
+    border-radius: 3%; 
+
+    font-weight: bold;
+    font-size: 3.2rem;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {        
+      border: 4px solid black;
+    }
+    &:active {        
+      border: 4px solid lime;
+    }
+  }
+
+  .my_admin_btn {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 5px auto;
+    padding: 1rem;
+  }
+
+  
+  /* [] for the rest of [.Collapsible] styles see [utilities/modefid_package_stylings.scss] */
+  .my_adminProd_collapsible 
+  {  
+    background-color: hsl(27, 76%, 67%);
+
+    .Collapsible__trigger, .Collapsible__trigger.is-open{ 
+      background-color: teal;
+    }
+  }
+
+  .my_adminProd_modalTitle {
+    font-weight: bold;
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+
+  .my_admin_prodBaseTable {
+    width: 100%;
+  }
+  .my_adminProd_tableTitle {
+    background-color: burlywood;
+  }
+  .my_admin_prodCheckbox {
+    transform: scale(1.75);
+  }
+
+/***/
+
+
+/* LABLES */
+  .my_adminLable_table {
+    background-color: #eee;
+
+    thead {
+      background-color: gray;
+      font-weight: bold;
+    }
+  }
+
+  .my_adminLable_modalForm {
+    display: block;
+    margin: 20px 100px;
+    
+    label {
+      font-weight: bold;
+
+      &::after{ content: ' :' }
+    }
+  }
+/**/
+
+
+
+  .my_adminText_tableRow {
+    height: 36px;
+    td { text-overflow: ellipsis; }
+  }

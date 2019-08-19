@@ -111,12 +111,17 @@ class Navigation extends Component {
                         
                         <LinkContainer to="/cart">
                             <Nav.Link className="my_navCart">
-                                <i className="material-icons">shopping_cart</i>
-                                {       
-                                    prop_cart.length !== 0 ? (
-                                        <span className="my_cartCount">{ prop_cart.length }</span>
-                                    ) : ( null ) 
-                                }                                
+                                <div className="my_cartInside">
+                                    
+                                    <span className="my_cartIcon">
+                                        <i className="material-icons">shopping_cart</i>
+                                    </span>
+                                    {       
+                                        prop_cart.length !== 0 ? (
+                                            <span className="my_cartCount">{ prop_cart.length }</span>
+                                        ) : ( null ) 
+                                    }              
+                                </div>                  
                             </Nav.Link>
                         </LinkContainer>
                     </Nav>

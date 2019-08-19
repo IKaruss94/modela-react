@@ -34,3 +34,48 @@
     z-index: 999 !important;
   }
 /**/
+
+
+
+
+/* Collapsable */
+  .Collapsible 
+  {  
+    margin-top: 30px;
+    margin: 16px;
+    
+    .Collapsible__trigger{ 
+      cursor: pointer;
+
+      display: block;
+      padding: 10px;
+      position: relative;
+
+      border: 1px solid #333;
+
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    .Collapsible__trigger:after {
+        font-family: "Material Icons";
+        content: "\e5c7"; // \e5c5 for the filped one
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: block;
+        transition: transform 300ms; 
+      }
+
+      .Collapsible__trigger.is-open:after {
+        transform: rotateZ(180deg); 
+      }
+    
+
+    .Collapsible__contentInner
+    {
+      padding: 20px;
+    }
+  }
+/**/

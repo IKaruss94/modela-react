@@ -40,7 +40,7 @@ class SpecialInfo extends Component {
             { prop_lang === 'ENG' ? (<div className="my_spec_explain">This page is avilable in RUSSIAN ONLY</div>):(null) }
             { prop_lang === 'LAT' ? (<div className="my_spec_explain">Šī lapa ir pieejama TIKAI KRIEVU VALODĀ</div>):(null) }
             
-            <div className="my_special_suround">
+            <div className="my_special_suround" lang="ru">
               <Table responsive hover variant="light" className="my_special_table">
                 <tbody>
                   {

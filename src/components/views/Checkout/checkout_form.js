@@ -130,7 +130,7 @@ const CheckoutForm = ( {
 
     const SelectComponent = () => (
         <Select
-            menuPortalTarget={document.querySelector('body')}
+            menuPortalTarget={document.querySelector('body')} // so it would display over everything else / without scrollbar
             className = "basic-single"
             classNamePrefix = "react-select"
             name = 'payment_method'
@@ -166,7 +166,7 @@ const CheckoutForm = ( {
 
             <Row id="checkoutShowDelivery" className="my_checkout_formRow">
                 <Col>
-                    <span className="my_checkout_lable">{ deliveryCheckboxLable[prop_lang] }</span>
+                    <lable htmlFor="del_check" className="my_checkout_lable">{ deliveryCheckboxLable[prop_lang] }</lable>
                     <Field 
                         type='checkbox'
                         name='del_check'
@@ -214,12 +214,12 @@ const CheckoutForm = ( {
                         {    
                             // [] change label if requierments are not met, as defined in checking.js -> checkoutSchema       
                             !formik_errors[paymentLable.Name] ? (
-                                <span className="my_checkout_lable">{ paymentLable[prop_lang] }</span> 
+                                <lable htmlFor="payment_method" className="my_checkout_lable">{ paymentLable[prop_lang] }</lable> 
                             ) : (
-                                <span className="my_checkout_error my_checkout_lable">
+                                <lable htmlFor="payment_method" className="my_checkout_error my_checkout_lable">
                                     { paymentLable[prop_lang] } 
                                     <i className="my_checkout_errSign" title={formik_errors[paymentLable.Name]}>*</i>
-                                </span>
+                                </lable>
                             )
                         }
 

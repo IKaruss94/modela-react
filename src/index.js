@@ -58,7 +58,7 @@ reduxStore.subscribe( () => {
 ReactDom.render(
   <Provider store={reduxStore}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <Helmet><link rel="main icon" href={ Favicon } /></Helmet>
+      <Helmet><link rel="icon" href={ Favicon } /></Helmet>
       <App /> 
     </ReactReduxFirebaseProvider>
   </Provider>,

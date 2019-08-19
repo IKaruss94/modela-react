@@ -10,6 +10,7 @@
 // [] structure and style components
 // [] my components
 // [] my images
+  import LoadingGif from '../../../../images/icons/modela_loading.gif'
 
 // -------------------------------------------------------------------------------
 
@@ -17,10 +18,8 @@ function PageLoading(location) {
         
     console.log('--- loading :', location);
     return (
-        <div className="my_pageLoading container center">
-            <h3>
-                Loading [<code>{ location }</code>] . . .
-            </h3>
+        <div className="my_pageLoading container my_centered">
+            <img src={LoadingGif} alt="loading" height="100" width="100" />
         </div>
     );
 }

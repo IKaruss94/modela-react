@@ -52,7 +52,7 @@ class Checkout extends Component {
     //
     
     // [] form requierment schema
-      let checkoutSchema = yup.object().shape({   
+      const checkoutSchema = yup.object().shape({   
         fullName: yup
           .string()
           .required('Required'),
@@ -96,7 +96,7 @@ class Checkout extends Component {
           .required('Required'),
       });
     // [] form initial value, defines form as controlled
-      let checkoutInitVal = {
+      const checkoutInitVal = {
         fullName: '',
         email: '',
         address: '',

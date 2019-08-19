@@ -1,12 +1,11 @@
 
-import { Helmet } from 'react-helmet'
+
 
 const HTMLlangCodes = [
   { 'ENG': 'en' },
   { 'LAT': 'lv' },
   { 'RUS': 'ru' },
-]
-
+];
 
 const initialState = {
     lang: 'ENG'

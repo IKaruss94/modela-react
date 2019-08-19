@@ -9,24 +9,13 @@
   import React from 'react'
   import PropTypes from 'prop-types'
 // [] structure and style components
-  import { withStyles } from '@material-ui/core/styles'
-  import GridList from '@material-ui/core/GridList'
   import Collapsible from 'react-collapsible'
-// [] my components
-  import StoreProduct from './store_product'
+  import { Link } from 'react-router-dom'
+  import Img from 'react-image'
 // [] my images
+  import { storeThumbnails } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
-
-const styles = (theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  }
-});
 
 const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang }) => {
     return(
@@ -35,19 +24,34 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
             pass_categories && pass_categories.map( elem_cat => {           
                //console.log('cat ID',elem_cat.ID_prodCat);              
               return(                    
-                  <Collapsible key={elem_cat.ID_cat} trigger={ elem_cat[prop_lang] } open>  
+                  <Collapsible 
+                    key={elem_cat.ID_cat} 
+                    className="my_store_collapsible"
+                    trigger={ elem_cat[prop_lang] } 
+                    open
+                  >  
                   
-                    <GridList cellHeight={160} cols={6} spacing={10}>
+                    <div className="my_store_collapsedContetn">
                     {
                       pass_products && pass_products.map(elem_prod => {  
                         if( elem_prod.Category === elem_cat.ID_cat && elem_prod.Visable ) //[] if product is in category and VISABLE         
-                          return(
-                            <StoreProduct key={elem_prod.ID_prod} product={elem_prod} match={match} />
+                          
+                        return(                            
+                            <Link to={ match.url +"/"+ elem_prod.NUM_id } className="my_storeImageLink" >
+                              <Img
+                                src={[
+                                  storeThumbnails[ elem_prod.IMG_thumbnail ]
+                                ]}
+                                unloader={
+                                  <div className="my_noStoreImage center"># {elem_prod.NUM_id}</div>
+                                }
+                              />
+                            </Link>
                           )
-                      })
 
+                      })
                     }
-                    </GridList>
+                    </div>
 
                 </Collapsible>
               )
@@ -65,4 +69,4 @@ StoreProdCategories.propTypes = {
   pass_products: PropTypes.any,
   pass_categories: PropTypes.any
 };
-export default withStyles(styles)(StoreProdCategories);
+export default StoreProdCategories;

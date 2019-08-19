@@ -15,11 +15,11 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { Helmet } from 'react-helmet'
 import Container from 'react-bootstrap/Container'
 // [] my components
-import PageLoading from '../Errors/pageLoading'
+import PageLoading from '../../Errors/pageLoading'
 
 // -------------------------------------------------------------------------------
 
-class AdminOrders extends Component {
+class AdminLogin extends Component {
 
 render(){
   //console.log('trade props', this.props);
@@ -34,8 +34,8 @@ render(){
     else {
       return (
         <Container className="my_admin_container"> 
-          <Helmet><title>ORDERS</title></Helmet>
-          ORDERS
+          <Helmet><title>LOGIN</title></Helmet>
+          LOGIN
         </Container>
       )
     } // [] end of [else]
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => ({
 prop_lang: state.rootLang.lang,  
 prop_texts: state.rootFirestore.ordered.longTexts,
 });
-AdminOrders.propTypes = {
+AdminLogin.propTypes = {
 location: PropTypes.any, 
 prop_lang: PropTypes.any,
 prop_texts: PropTypes.any,
@@ -58,4 +58,4 @@ connect( mapStateToProps ),
 firestoreConnect([
   { collection: 'longTexts' }
 ])
-)(AdminOrders)
+)(AdminLogin)
