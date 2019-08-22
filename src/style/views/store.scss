@@ -2,8 +2,7 @@
 
 $tile-background-color: #fff;
 
-#store
-{
+#store {
   background-color: $body_color;
   height: 100%;
 }
@@ -16,20 +15,21 @@ $tile-background-color: #fff;
   align-items: center;
 }
 
-.my_storeImageLink 
-{
+.my_storeImageLink {   
+  margin: 6px;
+  height: 160px;
+  width: 210px;
+  object-fit: contain;
+  border: 4px solid #eee;
+  border-radius: 2px; 
+  background-color: $tile-background-color;   
 
-  .my_noStoreImage
-  {    
-    margin: 6px;
-    height: 160px;
-    width: 210px;
-    object-fit: contain;
-    border: 4px solid #eee;
-    border-radius: 2px; 
-    background-color: $tile-background-color;   
-    color: $text-color;
+  transition-duration: 256ms;
+  &:hover { border: 4px solid black; }
+  &:active { border: 4px solid lime; }
 
+  .my_noStoreImage {  
+    color: $text-color;  
     line-height: 145px;
     font-weight: bold;
     font-size: 2.4rem;
@@ -37,8 +37,11 @@ $tile-background-color: #fff;
     text-decoration: none;
   }
 
-  img
-  {    
+  img { 
+    object-fit: contain;
+    height: 150px;
+    width: 200px;
+    /*   
     margin: 6px;
     object-fit: contain;
     border: 4px solid #eee;
@@ -47,23 +50,15 @@ $tile-background-color: #fff;
 
     height: 160px;
     width: 210px;
+    */
   }
 
-  :hover
-  {        
-      border: 4px solid black;
-  }
-  :active
-  {        
-      border: 4px solid lime;
-  }
 }
 
 
 
 /* [] for the rest of [.Collapsible] styles see [utilities/modefid_package_stylings.scss] */
-.my_store_collapsible 
-{  
+.my_store_collapsible {  
   background-color: $body_color;
 
   .Collapsible__trigger{ 

@@ -43,7 +43,7 @@ const ChangeProductBtns = ( {type, num} ) => {
 const DimensionReformat = ( DIM_VAL ) => {
     // [] DIM_VAL = dimansion value
     let res = '';
-    if( DIM_VAL === '' ) return res;
+    if( DIM_VAL == false ) return res;
 
     const break_arr = DIM_VAL.split('x');
     break_arr.map( val => {
@@ -55,7 +55,7 @@ const DimensionReformat = ( DIM_VAL ) => {
     // [] [.slice(3)] is to remove initial [temp] value that was made before [DIM_VAL] was submited
  }
 
-const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} ) => {    
+const ProductHeader = ( {product, prod_PervNext, props, prop_lang, firestore_lables} ) => {    
     const [isOpen, setIsOpen] = useState(false);
     //const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -95,7 +95,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                     {  
                     // [] product title is above
                     // [] product data is made here \/
-                        prop_lables && prop_lables.map ( (elem, index) => {
+                        firestore_lables && firestore_lables.map ( (elem, index) => {
                             if( elem.Type === 'prod_header') {
                                 switch (elem.Name) {
                                     case 'Dimensions': {  
@@ -152,7 +152,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                                 className="my_prodHead_btnStore" 
                                 variant="primary"
                             >
-                                { GetLable( prop_lang, prop_lables, 'button', 'prod_backToStore') }
+                                { GetLable( prop_lang, firestore_lables, 'button', 'prod_backToStore') }
                             </Button>
                         </LinkContainer> 
                         
@@ -162,7 +162,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, prop_lables} 
                                 className="my_prod_toTradeBtn" 
                                 variant="primary"
                             >
-                            { GetLable( prop_lang, prop_lables, 'button', 'prod_priceInfo') }
+                            { GetLable( prop_lang, firestore_lables, 'button', 'prod_priceInfo') }
                             </Button>
                         </LinkContainer> 
                     </ButtonToolbar>
@@ -186,7 +186,7 @@ ChangeProductBtns.propTypes = {
 };
 ProductHeader.propTypes = {  
     prop_lang: PropTypes.any, 
-    prop_lables: PropTypes.any, 
+    firestore_lables: PropTypes.any, 
     
     product: PropTypes.any, 
     prod_PervNext: PropTypes.array, 

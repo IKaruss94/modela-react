@@ -14,9 +14,9 @@
 
 // -------------------------------------------------------------------------------
 
-function PageLoading(location) {
+function PageLoading() {
         
-    console.log('--- loading :', location);
+    //console.log('--- loading :', location);
     return (
         <div className="my_pageLoading container my_centered">
             <img src={LoadingGif} alt="loading" height="100" width="100" />

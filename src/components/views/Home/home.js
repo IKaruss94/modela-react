@@ -9,6 +9,7 @@
   import React, { Component } from 'react'
   import { compose } from 'redux'
   import { connect } from 'react-redux'
+  import withSizes from 'react-sizes'
   import PropTypes from 'prop-types'
   import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
@@ -28,32 +29,35 @@
 
 class Home extends Component {
   render(){    
-    const { location, prop_lang, prop_texts, prop_uniqueProds } = this.props; 
+    //console.log('home props', this.props);
+    const { location, prop_lang, prop_isMobile, firestore_longTexts, firestore_uniqueProds } = this.props; 
 
     //
-      let home_about = '';
-      let home_title = '';    
-      prop_texts && prop_texts.map (about => {
-        if( about.Name === 'about-3') home_about = ReactHtmlParser( about[prop_lang] );
-        if( about.Name === 'main-title') home_title = ReactHtmlParser( about[prop_lang] );
-      });
 
     
     // []
-      if ( prop_texts === undefined || prop_uniqueProds === undefined ) { 
+      if ( firestore_longTexts === undefined || firestore_uniqueProds === undefined ) { 
         return PageLoading(location.pathname) 
       }
       else {
+        
+        let home_about = '';
+        let home_title = '';    
+        firestore_longTexts && firestore_longTexts.map (about => {
+          if( about.Name === 'about-3') home_about = ReactHtmlParser( about[prop_lang] );
+          if( about.Name === 'main-title') home_title = ReactHtmlParser( about[prop_lang] );
+        });
+
         return (
           <div>
-            <HomeTitle bg_img={Train} logo_img={BigLogo} title={ home_title } />        
+            <HomeTitle isMobile={ prop_isMobile } bg_img={Train} logo_img={BigLogo} title={ home_title } />        
             
             <Container>  
-              <Helmet><title>Modela</title></Helmet>
+              <Helmet><title>Modela</title></Helmet>              
 
               <Row> 
                 <Col className="my_home_carousel" md={12} lg={8}>
-                  <HomeCarousel store_data={prop_uniqueProds} prop_history={this.props.history} />
+                  <HomeCarousel isMobile={ prop_isMobile } store_data={firestore_uniqueProds} prop_history={this.props.history} />
                 </Col>   
                 <Col className="my_home_contact" md={6} lg={4}>
                   <ContactCard className="my_contactCard" /> 
@@ -75,23 +79,26 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  prop_texts: state.rootFirestore.ordered.longTexts,
-  prop_uniqueProds: state.rootFirestore.ordered.uniqueProds,
-
   prop_lang: state.rootLang.lang,
+  firestore_longTexts: state.rootFirestore.ordered.longTexts,
+  firestore_uniqueProds: state.rootFirestore.ordered.uniqueProds,
+})
+const mapSizesToProps = ({ width }) => ({
+  prop_isMobile: width < 974+18,
 })
 Home.propTypes = {  
   history: PropTypes.any,
   location: PropTypes.any,
 
+  prop_isMobile: PropTypes.any,
   prop_lang: PropTypes.any,
-  prop_texts: PropTypes.any,
+  firestore_longTexts: PropTypes.any,
   prop_contact: PropTypes.any, 
-  prop_uniqueProds: PropTypes.any,
-
+  firestore_uniqueProds: PropTypes.any,
 }
 export default compose(
   connect( mapStateToProps ),
+  withSizes( mapSizesToProps ),
   firestoreConnect([
     { collection: 'longTexts' },
     { collection: 'uniqueProds' }

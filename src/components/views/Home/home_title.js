@@ -10,7 +10,7 @@
   import PropTypes from 'prop-types'
 // [] structure and style components
   import Img from 'react-image'
-  import withSizes from 'react-sizes'
+  //import withSizes from 'react-sizes'
   import Container from 'react-bootstrap/Container'
   import Jumbotron from 'react-bootstrap/Jumbotron'
 // [] my components
@@ -19,7 +19,7 @@
 // -------------------------------------------------------------------------------
 
 const HomeTitle = ( {isMobile, bg_img, logo_img, title} ) => {
-
+  
   const homeStyle = {
     backgroundImage: `url(${bg_img}), radial-gradient(lightgray, #73bafc)`
   };
@@ -59,14 +59,14 @@ const HomeTitle = ( {isMobile, bg_img, logo_img, title} ) => {
     }
   
 }
-
+/*
 const mapSizesToProps = ({ width }) => ({
   isMobile: width < 974+18,
-})
+})*/
 
 HomeTitle.propTypes = {
   bg_img: PropTypes.any,
   logo_img: PropTypes.any,
 };
 
-export default withSizes(mapSizesToProps)(HomeTitle);
+export default (HomeTitle);

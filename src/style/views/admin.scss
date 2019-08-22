@@ -4,6 +4,41 @@
   margin-top: 10px;
 }
 
+.myAdmin_sidenav_elem {
+  color: blue;
+  display: inline;
+
+  &:after {
+    content:"\a";
+    white-space: pre;
+  }
+}
+
+/** DASHBOARD */
+  .myAdmin_dash_card {
+    display: inline-block;
+    padding: 5px;
+    margin: 15px;
+
+    background-color: #eee;
+    border: 1px solid black;
+    border-radius: 10px;    
+  }
+
+  .myAdmin_dash_order {
+    cursor: default;
+    display: block;
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    transition: 256ms;
+
+    &:hover { background-color: #bbb; }
+  }
+
+
 /** PRODUCTS */
 
   li.my_admin_prodElem {
@@ -103,7 +138,22 @@
 
 
 
+/* TEXTS */
   .my_adminText_tableRow {
     height: 36px;
-    td { text-overflow: ellipsis; }
   }
+  .myAdmin_text_display { 
+    cursor: pointer;
+    max-width: 256px;
+    max-height: 100px;
+    padding: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: #aaa;
+    }
+  }
+/**/

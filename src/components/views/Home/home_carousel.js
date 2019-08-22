@@ -18,9 +18,9 @@
 
 import { storeThumbnails } from '../../functions/import_images';
 
-const HomeCarousel = ( {store_data, prop_history} ) => {
+const HomeCarousel = ( {isMobile, store_data, prop_history} ) => {
   return(
-    <Carousel className="my_carousel my_home">
+    <Carousel className={ isMobile ? ("my_carousel my_home my_mobile") : ("my_carousel my_home") } >
     {
       store_data && store_data.map( (elem) => {
         if( elem.Visable ) {
@@ -50,6 +50,7 @@ const HomeCarousel = ( {store_data, prop_history} ) => {
 }
 
 HomeCarousel.propTypes = {
+  isMobile: PropTypes.any,
   store_data: PropTypes.any,
   prop_history: PropTypes.any,  
 };

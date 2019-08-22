@@ -8,6 +8,7 @@ $jumbo_height: 800px;
   position: relative;
   height: $jumbo_height;
   width: 100%; 
+  background-color: $img_background;
   
   //background-color: radial-gradient(lightgray, #73bafc);
 
@@ -24,6 +25,12 @@ $jumbo_height: 800px;
     background-position: center;
     box-shadow: inset 0px 0px 30px 50px $img_background;
 
+    animation: largeTrainFadein 2s;
+  }
+
+  @keyframes largeTrainFadein {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
   .my_home_colorGap {
@@ -65,7 +72,7 @@ $jumbo_height: 800px;
     width: 100%;
 
     background-color: $nav_color;
-    border-radius: 25px;
+    border-radius: 20px;
   }
 
   .my_home_largeTitle_noImage {
@@ -125,5 +132,15 @@ $jumbo_height: 800px;
   
   .my_carousel_caption.my_home {
     background-color: #fff;
+  }
+
+  
+  .my_carousel.my_home.my_mobile { 
+    height: 256px; 
+
+    .my_carousel_image.my_home, 
+    .my_carousel_noImage.my_home  {
+      max-height: 256px; 
+    }
   }
 //

@@ -16,9 +16,9 @@
 
 
 
-const ProcessLable = ( prop_lang, prop_lables, func_type, func_name ) => {
+const ProcessLable = ( prop_lang, firestore_lables, func_type, func_name ) => {
 
-  const res = prop_lables.find( (elem) => {
+  const res = firestore_lables.find( (elem) => {
     if( elem.Type === func_type && elem.Name === func_name ) { return elem; } 
   })
   
@@ -33,7 +33,7 @@ const ProcessLable = ( prop_lang, prop_lables, func_type, func_name ) => {
 
 ProcessLable.propTypes = {  
   prop_lang: PropTypes.any,
-  prop_lables: PropTypes.any,
+  firestore_lables: PropTypes.any,
   func_type: PropTypes.any,
   func_name: PropTypes.any,
 }

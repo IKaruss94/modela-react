@@ -7,12 +7,12 @@
 // [] fundemental components
   import React, { Component } from "react"
   //import { connect } from 'react-redux'
-  //import PropTypes from 'prop-types'
   import { BrowserRouter, Route, Switch } from "react-router-dom"
+  //import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
 // [] my components
   import { Cart, Checkout, Contact, Downloads, Home, PageNotFound, Product, Services, Special, Store, Trade } from './views';
-  import { Lables, Login, Products, Orders, Texts } from './views/_admin'
+  import { Dashboard, Lables, Login, Products, Orders, Texts } from './views/_admin'
   import Navigation from './nav'
 
 // -------------------------------------------------------------------------------
@@ -44,6 +44,7 @@ class App extends Component {
               <Route exact path='/trade' component={Trade} />
 
               <Route exact path='/_admin/login' component={Login} />
+              <Route exact path='/_admin/dashboard' component={Dashboard} />
               <Route exact path='/_admin/lables' component={Lables} />
               <Route exact path='/_admin/products' component={Products} />
               <Route exact path='/_admin/orders' component={Orders} />
@@ -58,4 +59,13 @@ class App extends Component {
   } // end of - render
 }
 
+/*
+  export default compose(
+    firestoreConnect([
+      { collection: 'products' },
+      { collection: 'uniqueProds' },
+      { collection: 'lables' }
+    ])
+  )(App)
+*/
 export default (App)

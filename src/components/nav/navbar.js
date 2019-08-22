@@ -76,7 +76,12 @@ class Navigation extends Component {
                                     ) // +prop_lang
                                 } else if( elem.Parent === '1'){
                                     return(
-                                        <NavDropdown className="my_navbar_drop" key={ index } title={ elem[prop_lang] } id="basic-nav-dropdown">
+                                        <NavDropdown 
+                                            id="basic-nav-dropdown"
+                                            className="my_navbar_drop" 
+                                            key={ index } 
+                                            title={ elem[prop_lang] } 
+                                        >
                                         {
                                              prop_navbar.map( (innerElem, index) => {
                                                  if( innerElem.Parent === elem.Name )
@@ -96,6 +101,7 @@ class Navigation extends Component {
 
                     <Nav className="mr-auto my_navbar_secound">
                         <Select
+                            menuPortalTarget={document.querySelector('body')}
                             className = "basic-single my_nav_select"
                             classNamePrefix = "react-select"
                             isSearchable = { false }

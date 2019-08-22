@@ -50,12 +50,17 @@
       display: block;
       padding: 10px;
       position: relative;
+      background-color: $nav_color;
 
       border: 1px solid #333;
 
       text-decoration: none;
       font-weight: bold;
       font-size: 2rem;
+
+      transition-duration: 360ms;
+
+      &:hover { background-color: #efc90bb4 }
     }
 
     .Collapsible__trigger:after {
@@ -65,7 +70,7 @@
         right: 10px;
         top: 10px;
         display: block;
-        transition: transform 300ms; 
+        transition: transform 360ms; 
       }
 
       .Collapsible__trigger.is-open:after {

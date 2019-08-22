@@ -13,13 +13,42 @@
   import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
-  import { Container, Button, Table  } from 'react-bootstrap'
+  import { Container, Table  } from 'react-bootstrap'
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
+  import TextModal from './text_modal'
 
 // -------------------------------------------------------------------------------
 
+const TDtext = ({ textData, handleClick }) => {
+  return( 
+    <td 
+      className="myAdmin_text_display"
+      onClick={ handleClick }
+    >
+      {textData}
+    </td>
+  )
+}
+
 class AdminTexts extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      modalLang: 'ENG',
+      modalData: null,
+      modalShow: false,
+    }
+    this.handleTableCellClick.bind(this);
+  }
+
+  handleTableCellClick(textElem, lang) {
+    this.setState({ modalData: textElem, modalShow: true, modalLang: lang });
+  }
+
+  handleTextSubmit(props) {
+    console.log('submit', props);
+  }
 
   render(){
     //console.log('trade props', this.props);
@@ -39,7 +68,6 @@ class AdminTexts extends Component {
                   <td>ENG</td>
                   <td>LAT</td>
                   <td>RUS</td>
-                  <td>btn</td>
                 </tr>
               </thead>
               <tbody>
@@ -47,22 +75,25 @@ class AdminTexts extends Component {
                 this.props.firestore_texts && this.props.firestore_texts.map( elem => {
                   return(
                     <tr key={elem.id} className="my_adminText_tableRow">
-                      <td>{elem.ENG}</td>
-                      <td>{elem.LAT}</td>
-                      <td>{elem.RUS}</td>
-                      <td>
-                        <Button 
-                          key={ elem.id } 
-                          variant="primary" 
-                        >EDIT</Button>
-                      </td>
-                    </tr>
+                      <TDtext textData={elem.ENG} handleClick={ ()=>{ this.handleTableCellClick(elem, 'ENG') } } />
+                      <TDtext textData={elem.LAT} handleClick={ ()=>{ this.handleTableCellClick(elem, 'LAT') } } />
+                      <TDtext textData={elem.RUS} handleClick={ ()=>{ this.handleTableCellClick(elem, 'RUS') } } />
+                   
+                   </tr>
                   )                  
                 })
               }
               </tbody>
             </Table>
 
+            <TextModal 
+              show={ this.state.modalShow } 
+              onHide={ () => this.setState({ modalShow: false }) } 
+
+              text_data = { this.state.modalData }
+              text_lang = { this.state.modalLang }
+              handleSubmit = { this.handleTextSubmit }
+            />
 
           </Container>
         )
@@ -74,9 +105,14 @@ class AdminTexts extends Component {
 const mapStateToProps = (state) => ({
   firestore_texts: state.rootFirestore.ordered.longTexts,
 });
+
 AdminTexts.propTypes = {
   firestore_texts: PropTypes.any,
 };
+TDtext.propTypes={
+  textData: PropTypes.string,
+  handleClick: PropTypes.func,
+}
 
 export default compose(
   connect( mapStateToProps ),

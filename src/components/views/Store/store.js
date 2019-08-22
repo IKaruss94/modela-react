@@ -11,7 +11,7 @@
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
   import { Route } from 'react-router-dom'
-  import { firestoreConnect } from 'react-redux-firebase'
+  import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
 // [] my components
@@ -24,11 +24,11 @@
 class Store extends Component {   
   
   render(){      
-    console.log('store props', this.props);
-    const { match, prop_storeProd, prop_categories, prop_lang } = this.props; 
+    //console.log('store props', this.props);
+    const { match, firestore_uniqueProds, prop_categories, prop_lang } = this.props; 
 
     // []
-      if ( prop_storeProd === undefined || prop_categories === undefined ) { 
+      if ( !isLoaded(firestore_uniqueProds) || !isLoaded(prop_categories) ) { 
         return PageLoading(location.pathname) 
       }
       else {
@@ -36,7 +36,7 @@ class Store extends Component {
           <div id="store" className="large-container">  
             <Helmet><title>Store</title></Helmet>
             
-            <StoreProductCat pass_products={prop_storeProd} pass_categories={prop_categories} match={match} prop_lang={prop_lang} />
+            <StoreProductCat pass_products={firestore_uniqueProds} pass_categories={prop_categories} match={match} prop_lang={prop_lang} />
 
             <Route path={ match.url +'/:prod_id' } component={Product} />
           </div>
@@ -48,7 +48,7 @@ class Store extends Component {
 
 const mapStateToProps = (state) => ({
   prop_lang: state.rootLang.lang,
-  prop_storeProd: state.rootFirestore.ordered.uniqueProds,
+  firestore_uniqueProds: state.rootFirestore.ordered.uniqueProds,
   prop_categories: state.rootFirestore.ordered.production_categories,
 })
 Store.propTypes = {  
@@ -56,7 +56,7 @@ Store.propTypes = {
   location: PropTypes.any,
 
   prop_lang: PropTypes.any,
-  prop_storeProd: PropTypes.any,
+  firestore_uniqueProds: PropTypes.any,
   prop_categories: PropTypes.any
 };
 

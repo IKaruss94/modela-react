@@ -43,7 +43,7 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                                   storeThumbnails[ elem_prod.IMG_thumbnail ]
                                 ]}
                                 unloader={
-                                  <div className="my_noStoreImage center"># {elem_prod.NUM_id}</div>
+                                  <div className="my_noStoreImage"># {elem_prod.NUM_id}</div>
                                 }
                               />
                             </Link>

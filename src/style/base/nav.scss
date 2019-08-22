@@ -2,11 +2,10 @@
 
 .navbar 
 {
-  height: 65px;
   padding: 0px;
   background-color: $nav_color;
   overflow: hidden;
-  z-index: 900; //if above 1000, intefiers with 'lightbox' which has a z-index of 1000
+  z-index: 800; //if above 1000, intefiers with 'lightbox' which has a z-index of 1000
 }
 
 
@@ -28,28 +27,33 @@
   background-color: $nav_color;
 }
 .my_navbar_secound {
-  display: block;  
+  display: inline;  
+  padding: 0 32px 0 10%;
 
-  position: absolute;
+  /*
   right: 100px;
-  
+  float: right;
   border-top: 1px solid rgba(150, 150, 150, 0.5);
+  */
 }
 
 .my_navbar_elem, .my_navbar_drop
 {  
   height: 65px;
-  padding: 16px 26px;
+  padding: 16px;
   margin: 0px 16px;
 
   text-align: center;
   font-weight: bold;
   font-size: 2rem;
 
-  transition: 100ms;
-}
-.my_navbar_elem:hover, .my_navbar_drop:hover {
-  background-color: #ffd81b;
+  z-index: 999;
+
+  transition: 256ms;
+
+  &:hover{
+    background-color: #ffd81b;
+  }
 }
 
 .my_navbar_drop { padding: 11px 0px; }

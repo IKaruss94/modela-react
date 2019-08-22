@@ -63,7 +63,7 @@ const ProductImageCarousel = ( {products} ) => {
 
             {isOpen && (         
                 <Lightbox  
-                    imageCaption={ prodNames[ imageIndex ] }
+                    imageCaption={ prodNames[ imageIndex ].split('.gif')[0] }
 
                     mainSrc={ prodCarouselImages[ prodNames[ imageIndex ] ] }
                     nextSrc={ prodCarouselImages[ prodNames[ (imageIndex + 1) % prodNames.length ] ] }
