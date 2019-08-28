@@ -11,16 +11,17 @@
   import { connect } from 'react-redux'
   import withSizes from 'react-sizes'
   import PropTypes from 'prop-types'
-  import { firestoreConnect } from 'react-redux-firebase'
+  import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { Container, Row, Col } from 'react-bootstrap'
   import ReactHtmlParser from 'react-html-parser'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
+  import PageLoading from '../../Errors/pageLoading'
+  import LongText from '../../../json/long_text.json'
+  import ContactCard from '../../multipage_components/contact_card'  
   import HomeCarousel from './home_carousel'
   import HomeTitle from './home_title'
-  import ContactCard from '../Contact/contact_card'
 // [] my images
   import Train from '../../../../images/home/gt_transparent.png' //gold-train.jpg';  gt_transparent gt_gray_skyblue
   import BigLogo from '../../../../images/home/modela-logo.gif'
@@ -30,20 +31,18 @@
 class Home extends Component {
   render(){    
     //console.log('home props', this.props);
-    const { location, prop_lang, prop_isMobile, firestore_longTexts, firestore_uniqueProds } = this.props; 
+    const { prop_lang, prop_isMobile, firestore_uniqueProds } = this.props; 
 
     //
 
     
     // []
-      if ( firestore_longTexts === undefined || firestore_uniqueProds === undefined ) { 
-        return PageLoading(location.pathname) 
-      }
+      if ( !isLoaded(firestore_uniqueProds)  ) { return PageLoading() }
       else {
         
         let home_about = '';
         let home_title = '';    
-        firestore_longTexts && firestore_longTexts.map (about => {
+        LongText && LongText.map (about => {
           if( about.Name === 'about-3') home_about = ReactHtmlParser( about[prop_lang] );
           if( about.Name === 'main-title') home_title = ReactHtmlParser( about[prop_lang] );
         });
@@ -80,7 +79,6 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   prop_lang: state.rootLang.lang,
-  firestore_longTexts: state.rootFirestore.ordered.longTexts,
   firestore_uniqueProds: state.rootFirestore.ordered.uniqueProds,
 })
 const mapSizesToProps = ({ width }) => ({
@@ -92,7 +90,6 @@ Home.propTypes = {
 
   prop_isMobile: PropTypes.any,
   prop_lang: PropTypes.any,
-  firestore_longTexts: PropTypes.any,
   prop_contact: PropTypes.any, 
   firestore_uniqueProds: PropTypes.any,
 }
@@ -100,7 +97,6 @@ export default compose(
   connect( mapStateToProps ),
   withSizes( mapSizesToProps ),
   firestoreConnect([
-    { collection: 'longTexts' },
     { collection: 'uniqueProds' }
   ])
 )(Home)

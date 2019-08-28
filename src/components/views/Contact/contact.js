@@ -11,7 +11,7 @@
   import { Helmet } from 'react-helmet'
   import { Container, Col, Row, Button } from 'react-bootstrap'
 // [] my components'
-  import ContactCard from './contact_card'
+  import ContactCard from '../../multipage_components/contact_card'
   import ContactMap from './contact_map'
 // [] my images
 

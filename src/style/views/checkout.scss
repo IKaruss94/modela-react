@@ -17,7 +17,7 @@
 
     background-color: skyblue;
 
-    .my_checkout_lable {
+    .my_checkout_label {
         padding: 5px 10px;
         //border: 1px solid cyan;
         //border-radius: 5px;
@@ -46,3 +46,21 @@
 .my_checkout_formBtn {
     margin: 20px 0px 200px;
 }
+
+
+
+/** CLIENT */
+    .myCheckout_clientField {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+
+        .myCheckout_clientLable {
+            font-size: 2rem;
+        }
+        .myCheckout_clientInput {
+            padding: 5px;
+            border: none;
+        }
+    }
+/***/

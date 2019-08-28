@@ -7,19 +7,19 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
-  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
-  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { Container, Row, Button } from 'react-bootstrap'
   import ReactHtmlParser from 'react-html-parser'
   import { LinkContainer } from 'react-router-bootstrap'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
-  import GetLable from '../../functions/process_lable'
-  import CartTable from './cart_table'
+  import PageLoading from '../../Errors/pageLoading'
+  import LableText from '../../../json/lables'
+  import LongText from '../../../json/long_text'
+  import GetLabel from '../../functions/process_label'
+  import CartTable from '../../multipage_components/cart_table'
 
 // -------------------------------------------------------------------------------
 
@@ -29,34 +29,24 @@ class Cart extends Component {
     //console.log('cart props', this.props);  
 
     // [] setting props
-      const { 
-        history,
-        location,
-
-        prop_lang, 
-        prop_lables,
-        prop_texts, 
-
-        ClearCart, 
-      } = this.props;
+      const { history, prop_lang, prop_cart, ClearCart } = this.props;
              
     //[] rendering
-      if ( prop_texts === undefined || prop_lables === undefined ) { 
-        return PageLoading(location.pathname) 
+      if ( LongText === undefined || LableText === undefined ) { 
+        return PageLoading() 
       }
       else {
+        const cartDetails = LongText.find( elem => {
+          return elem.ForPage === 'cart'
+        });
+
+
         return (
           <Container> 
             <Helmet><title>Cart</title></Helmet>
 
             <Row className="my_cartText">
-            { 
-              // [] needed, becouse if value in [ReactHtmlParser] is [undefined] it fires an error
-              prop_texts !== undefined ? ( 
-                ReactHtmlParser( prop_texts[0][prop_lang] ) 
-              ) : ( null ) //console.log('no prop_texts')
-              
-            }
+              { ReactHtmlParser( cartDetails[prop_lang] ) }
             </Row>
 
               <Row id="cartTable">
@@ -64,9 +54,21 @@ class Cart extends Component {
               </Row>   
 
               <Row className="my_cartProceed">
-                <LinkContainer to="/checkout">
-                  <Button variant="primary" size="lg" block>{ GetLable( prop_lang, prop_lables, 'button', 'to_checkout') }</Button>
-                </LinkContainer>    
+              {
+                prop_cart.length > 0 ? (
+                  <LinkContainer to="/checkout">
+                    <Button variant="primary" size="lg" block>
+                      { GetLabel( prop_lang, 'button', 'to_checkout_ok') }
+                    </Button>
+                  </LinkContainer>  
+                ):(                  
+                  <LinkContainer to="/store">
+                    <Button variant="primary" size="lg" block>
+                      { GetLabel( prop_lang, 'button', 'to_checkout_no') }
+                    </Button>
+                  </LinkContainer>  
+                )
+              }  
                 <Button 
                   variant="secondary" 
                   size="lg" 
@@ -77,7 +79,7 @@ class Cart extends Component {
                     history.push( '/' )
                   } }
                 >
-                  { GetLable( prop_lang, prop_lables, 'button', 'clear_cart') }
+                  { GetLabel( prop_lang, 'button', 'clear_cart') }
                 </Button>
               </Row>   
               
@@ -90,9 +92,7 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => ({
   prop_lang: state.rootLang.lang,
-
-  prop_texts: state.rootFirestore.ordered.longTexts,
-  prop_lables: state.rootFirestore.ordered.lables,
+  prop_cart: state.rootCart.redu_cartItems, 
 })
 const mapDispatchToProps = (dispatch) => {
   return{
@@ -100,19 +100,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 Cart.propTypes = {    
-  history: PropTypes.any, 
-  location: PropTypes.any, 
+  history: PropTypes.any,  
   prop_lang: PropTypes.any,
-
-  prop_lables: PropTypes.any,
-  prop_texts: PropTypes.any,
-
+  prop_cart: PropTypes.any,
   ClearCart: PropTypes.func,
 }
-export default compose(
-  connect( mapStateToProps, mapDispatchToProps ),
-  firestoreConnect([
-    { collection: 'longTexts' },
-    { collection: 'lables' }
-  ])
-)(Cart)
+export default connect( mapStateToProps, mapDispatchToProps )(Cart)

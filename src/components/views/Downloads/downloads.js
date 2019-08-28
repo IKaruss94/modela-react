@@ -15,7 +15,7 @@
   import { Helmet } from 'react-helmet'
   import { Container, Col, Row } from 'react-bootstrap'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
+  import PageLoading from '../../Errors/pageLoading'
   import DownloadCard from './downloadElement'
 // [] my images
   import { DownloadImages } from '../../functions/import_images'

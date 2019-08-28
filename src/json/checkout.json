@@ -1,0 +1,135 @@
+
+[
+    {
+        "Order_id": "0",
+        "FormGroup":"client",
+        "Name":"fullName",
+        "Type":"text",
+        "IsRequiered":"1",
+        "Placeholder":"",
+        "ENG":"Full name",
+        "RUS":"Полное имя",
+        "LAT":"Pilns vārds"
+    },
+    {
+        "Order_id": "1",
+        "FormGroup":"client",
+        "Name":"email","Type":"email","IsRequiered":"1","Placeholder":"","ENG":"E-mail","RUS":"Е-почта","LAT":"E-pasts"
+    },
+    {
+        "Order_id": "2",
+        "FormGroup":"client",
+        "Name":"phone","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"Phone number","RUS":"Номер телефона","LAT":"Telefona numurs"
+    },
+    {
+        "Order_id": "3",
+        "FormGroup":"client",
+        "Name":"address","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"Address","RUS":"Адрес","LAT":"Adrese"
+    },
+    {
+        "Order_id": "4",
+        "FormGroup":"client",
+        "Name":"zip","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"ZIP-code","RUS":"ZIP-код","LAT":"ZIP-kods"
+    },
+    {
+        "Order_id": "5",
+        "FormGroup":"client",
+        "Name":"city","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"City","RUS":"Город","LAT":"Pilsēta"
+    },
+    {
+        "Order_id": "6",
+        "FormGroup":"client",
+        "Name":"state","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"State","RUS":"Область","LAT":"Reģions"
+    },
+    {
+        "Order_id": "7",
+        "FormGroup":"client",
+        "Name":"country","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"Country","RUS":"Страна","LAT":"Valsts"
+    },
+    {
+        "Order_id": "-1",
+        "FormGroup":"client","Name":"firstName","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"First name","RUS":"Имя","LAT":"Vārds"
+    },
+    {
+        "Order_id": "-1",
+        "FormGroup":"client","Name":"lastName","Type":"text","IsRequiered":"1","Placeholder":"","ENG":"Last name","RUS":"Фамилия","LAT":"Uzvārds"
+    },
+
+
+
+    {
+        "FormGroup":"0",
+        "Name":"del_checkbox",
+        "Type":"checkbox",
+        "IsRequiered":"0",
+        "Placeholder":"",
+        "ENG":"Send package to different address -",
+        "RUS":"Отправить заказ на другой адрес -",
+        "LAT":"Nosūtīt pasūtījumu uz citu adresi -"
+    },    
+    {
+        "Order_id": "0",
+        "FormGroup":"delivery","Name":"del_name","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"Full name","RUS":"Полное имя","LAT":"Pilns Vārds"
+    },
+    {
+        "Order_id": "1",
+        "FormGroup":"delivery","Name":"del_phone","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"Phone number","RUS":"Номер телефона","LAT":"Telefona numurs"
+    },
+    {
+        "Order_id": "2",
+        "FormGroup":"delivery","Name":"del_address","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"Address","RUS":"Адрес","LAT":"Adrese"
+    },
+    {
+        "Order_id": "3",
+        "FormGroup":"delivery","Name":"del_zip","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"ZIP-code","RUS":"ZIP-код","LAT":"ZIP-kods"
+    },
+    {
+        "Order_id": "4",
+        "FormGroup":"delivery","Name":"del_city","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"City","RUS":"Город","LAT":"Pilsēta"
+    },
+    {
+        "Order_id": "5",
+        "FormGroup":"delivery","Name":"del_state","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"State","RUS":"Область","LAT":"Reģions"
+    },
+    {
+        "Order_id": "6",
+        "FormGroup":"delivery","Name":"del_country","Type":"text","IsRequiered":"0","Placeholder":"","ENG":"Country","RUS":"Страна","LAT":"Valsts"
+    },
+
+
+
+    {
+        "FormGroup":"payment",
+        "Name":"payment_method",
+        "Type":"select",
+        "IsRequiered":"1",
+        "Placeholder":"",
+        "ENG":"Payment method",
+        "RUS":"Метод плотежа",
+        "LAT":"Maksāšanas veids"
+    },
+    {
+        "Order_id": "0",
+        "FormGroup":"payment","Name":"choose_payment","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"Choose payment method ...","RUS":"Выберете метод плотежа ...","LAT":"Izvēlēties maksāšanas veidu ..."
+    },
+    {
+        "Order_id": "1",
+        "FormGroup":"payment","Name":"bank","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"Bank draft","RUS":"Через банк","LAT":"Caur banku"
+    },
+    {
+        "Order_id": "2",
+        "FormGroup":"payment","Name":"paypal","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"PayPal","RUS":"PayPal","LAT":"PayPal"
+    },
+    {
+        "Order_id": "3",
+        "FormGroup":"payment","Name":"kontakt","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"\"Kontakt\" payment (RU, UA, ..)","RUS":"Через \"Контакт\" (RU, UA, ..)","LAT":"Caur \"Kontakt\" (RU, UA, ..)"
+    },
+    {
+        "Order_id": "4",
+        "FormGroup":"payment","Name":"unistream","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"Unistream\" payment (RU, UA, ..)","RUS":"Через \"Унистрим\" (RU, UA, ..)","LAT":"Caur \"Unistream\" (RU, UA, ..)"
+    },
+    {
+        "Order_id": "5",
+        "FormGroup":"payment","Name":"cash","Type":"option","IsRequiered":"0","Placeholder":"","ENG":"Cash on delivery (LV)","RUS":"Наличными при доставке (LV)","LAT":"Skaidrā naudā pie saņemšanas (LV)"
+    }
+]

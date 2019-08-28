@@ -1,0 +1,75 @@
+[
+    {        
+        "Type": "title",
+        "Name": "Casting",
+        "Images": "casts.png",
+        "ENG": "Casting---Silicone rubber mould making and polyurethane resin casting",
+        "LAT": "Liešana---Silikona kaučuka formu izgatavošana un detaļu liešana",
+        "RUS": "Литьё---Изготовление форм и литьё деталей из полиуретана"
+    },
+    {        
+        "Name": "Casting",
+        "Type": "text", 
+        "Images": "cast.png; clear-casts.png; moulds.png; parts.png; pole-man.png; soap-mould.png",
+        "ENG": "<p> Silicone rubber mould making and polyurethane resin casting <br><br> <strong>Mould material</strong> <br> Polikondensation type silicon rubber - <strong>MM928</strong> <br> Poliadding type silicone rubber - <strong>Silastic S</strong> <br><br> <strong>Polyurethane casting resin</strong> <br> Main model and other parts - <strong>RENCAST FC52</strong> <br> Clear castings - <strong>Synthen 1708</strong> <br> Rubber type part casting <br> </p>",
+        "LAT": "<p> Silikona kaučuka formu izgatavošana un detaļu liešana <br><br> <strong>Formu materiāls</strong> <br> Polikondensācijas tipa silikona kaučuks - <strong>MM928</strong> <br> Polipievienošanas tipa silikona kaučuks - <strong>Silastic S</strong> <br><br> <strong>Poliuretāna sveķi</strong> <br> Modeļu un vispārēja pielietojuma detaļas - <strong>RENCAST FC52</strong> <br> Lējumi no caurspīdīgiem sveķiem - <strong>Synthen 1708</strong> <br> Gumijas veida detaļu lējumi <br> </p>",
+        "RUS": "<p> Изготовление форм и литье деталей из полиуретана <br><br> <strong>Материал для форм</strong> <br> Силиконовый каучук поликонденсационного типа - <strong>MM928</strong> <br> Силиконовый каучук типа полиприсоединения - <strong>Silastic S</strong> <br><br> <strong>Смола полиуретановая</strong> <br> Детали повсеместного значения - <strong>RENCAST FC52</strong> <br> Литье прозрачных деталей - <strong>Synthen 1708</strong> <br> Литье резиноподобных деталей <br> </p>"
+    },
+
+
+
+    {
+        "Type": "title",
+        "Name": "Decal",
+        "Images": "decal.png",
+        "ENG": "Decal---Waterslide decal design and custom printing",
+        "LAT": "Uzlīmes---Modeļu noformējuma uzlīmju izstrāde un izgatavošana",
+        "RUS": "Наклейки---Разработка и изгтовление наклеек оформления (декалей)"
+    },
+    {        
+        "Type": "text",
+        "Name": "Decal",
+        "Images": "CME3-upgrade-print.gif; decals.png",
+        "ENG": "<p> <strong>Waterslide decal design and custom printing</strong> <br><br> We design and prepare for printing decals for scale models and other products. Decal print is available from A4 (A5) sheet. Printing technique - ECO-SOLVENT printer (including white, silver, metalic color) or UV LED printer (including white color). Information for design- drawings, photos, computer files (COREL DRAW X5) <br><br> <strong>Price for A4 page - 15,00 ... 18,00 €</strong> </p>",
+        "LAT": "<p> <strong>Modeļu noformējuma uzlīmju izstrāde un izgatavošana</strong> <br><br> Mēs izstrādājam un sagatavojam drukāšanai uzlīmes, kas paredzētas modeļu un citu izstrādājumu noformēšanai. Uzlīmes tiek drukātas skaitā sākot ar vienu A4 (A5) lapu. Drukas tehnika - EKO- SOLVENT printera druka (ieskaitot baltu, sudraba krāsu) vai UV LED printera druka (ieskaitot baltu krāsu). Iesniedzamais materiāls - zimējumi, fotogrāfijas, datorfaili (COREL DRAW X5) <br><br> <strong>Cena par A4 lapa - 15,00 ... 18,00 €</strong> </p>",
+        "RUS": "<p> <strong>Waterslide decal design and custom printing</strong> <br><br> Мы разрабатываем и подготавливаем к печати наклейки (декали) для моделей и других изделий. Минимальный обьем заказа - один лист А4 (А5). Способ печати - принтер с водостойкими чернилами ECO SOLVENT (включая белый, серебро, металик цвета) или принтер типа UV LED (включая белый цвет). Информация для разработки - рисунки, фотографии, комьютерные файлы (COREL DRAW X5) <br><br> <strong>Цена лист А4 - 15,00 ... 18,00 €</strong> </p>"
+    },
+
+
+
+    {
+        "Type": "title",
+        "Name": "Design",
+        "Images": "design.png",
+        "ENG": "Design---Scale model design and custom production",
+        "LAT": "Izstrāde---Mēroga modeļu izstrāde un mazsēriju izgatavošana",
+        "RUS": "Разработка---Разработка и малосерийное производство моделей"
+    },
+    {
+        "Type": "text",
+        "Name": "Design",
+        "Images": "design.png; gold-train.png; tem-tmh.png; tmh-gift.png",
+        "ENG": "<p> We design railway scale models - wagons, locomotives, driving units etc. for limited edition production using polyurethane resin casting technique and other low run production techniques. We design and build presentation display models too. </p>",
+        "LAT": "<p> Mēs izstrādājam un izgatavojam galvenokārt dzelzsceļa vagonu un lokomotīvju modeļus un to piedziņas ierīces. Modeļi paredzēti izgatavošanai ar poliuretāna sveķu liešanas metodi un citām mazseŗiju ražošanas metodēm. Mēs izstrādājam un izgatavojam arī liela mēroga prezentācijas modeļus. </p>",
+        "RUS": "<p> Мы разрабатываем и изготавливаем главным образом модели железнодорожных вагонов и локомотивов. Модели предназначается для изготовления малосерийными технологиями - литьем полиуретаной смолы и другими. Мы разрабатываем и изготовляем также модели увеличенного масштаба для нужд презентаций и выставок. </p>"
+    },
+
+
+
+    {        
+        "Type": "title" ,
+        "Name": "Etching",
+        "Images": "etching.png",
+        "ENG": "Etching---Photoetched part design and custom production",
+        "LAT": "Kodinājumi---Fotokodināto detaļu komplektu izstrāde un izgatavošana",
+        "RUS": "Травлёнка---Разработка и изготовление деталей методом фототравления"
+    },
+    {        
+        "Type": "text",
+        "Name": "Etching",
+        "Images": "87405.png; Dumpcar.jpg; etched-locomotive.png",
+        "ENG": "<p> <strong>Photoetched part design and custom production</strong> <br><br> We design and prepare for production model parts made by photoetching process. <br> Available materials - brass 0.3 mm thickness or bronze thickness 0.2 mm, max dimensions 300x420 mm. Information for design - drawings, computer file (COREL DRAW X5) <br><br> <strong>Price</strong> <br> Films -> А4 - 15,00€; А3 - 25,00 € <br> Etching -> A4 - 12.00 ... 15.00 € </p>",
+        "LAT": "<p> <strong>Fotokodināto detaļu komplektu izstrāde un izgatavošana</strong> <br><br> Mēs izstrādājam un sagatavojam ražošanai detaļas izgatavošanai ar fotokodināšanas metodi. <br> Piejamie materiāli - misiņs 0.3 mm vai bronza 0.2 mm biezumā. Maksimālie izmēri - 300x 420 mm. Informācija izstrādāšanai - zīmejumi, datorfaili (COREL DRAW X5) <br><br> <strong>Cena:</strong> <br> Filmas -> А4 - 15,00€; А3 - 25,00 € <br> Izgatavošana -> A4 - 12.00 ... 15.00 € </p>",
+        "RUS": "<p> <strong>Разработка и изготовление деталей методом фототравления</strong> <br><br> Мы разрабатываем и подготавливаем к производству детали для тзготовления методом фототравления. <br> Доступные материалы - латунь толщиной 0,3 мм или бронза толщиной 0,2 мм. Максимальные размеры 300х420 мм. Информация для разработки - рисунки, чертежи, компьютерные файлы (COREL DRAW X5) <br><br> <strong>Цена</strong> <br> Пленки -> А4 - 15,00€; А3 - 25,00 € <br> Травление -> A4 - 12.00 ... 15.00 € <br> Для самостоятельной подготовки информационного файла можно пользоваться ниже указанной справочной информацией <q><a href='Основы фототравления.pdf'>ОСНОВЫ ФОТОТРАВЛЕНИЯ</a></q> (.pdf file) </p>"
+    }
+]

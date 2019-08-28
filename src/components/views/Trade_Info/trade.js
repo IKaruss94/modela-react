@@ -7,17 +7,16 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
-  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
-  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import ReactHtmlParser from 'react-html-parser'
   import Card from 'react-bootstrap/Card'
   import Container from 'react-bootstrap/Container'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
+  import PageLoading from '../../Errors/pageLoading'
+  import LongText from '../../../json/long_text.json'
 
 // -------------------------------------------------------------------------------
 
@@ -27,18 +26,16 @@ class TradeInfo extends Component {
     //console.log('trade props', this.props);
 
     // setting props
-      const { location, prop_texts, prop_lang } = this.props; 
+      const { prop_lang } = this.props; 
 
     // []    
-      if ( prop_texts === undefined ) { 
-        return PageLoading(location.pathname) 
-      }
+      if ( LongText === undefined ) { return PageLoading() }
       else {
         return (
           <Container id="tradeInfo"> 
             <Helmet><title>Trade info</title></Helmet>
           {
-            prop_texts && prop_texts.map( elem => {            
+            LongText && LongText.map( elem => {            
               if( elem[prop_lang] !== '' && ( elem.Name === 'Price' || elem.Name === 'Trade Rules' ) )
                 return(   
                   <Card key={elem.ID_data} className="my_tradeInfo"> 
@@ -59,18 +56,11 @@ class TradeInfo extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  prop_lang: state.rootLang.lang,  
-  prop_texts: state.rootFirestore.ordered.longTexts,
+  prop_lang: state.rootLang.lang,
 });
 TradeInfo.propTypes = {
   location: PropTypes.any, 
   prop_lang: PropTypes.any,
-  prop_texts: PropTypes.any,
 };
 
-export default compose(
-  connect( mapStateToProps ),
-  firestoreConnect([
-    { collection: 'longTexts' }
-  ])
-)(TradeInfo)
+export default connect( mapStateToProps )(TradeInfo)

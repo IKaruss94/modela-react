@@ -1,0 +1,68 @@
+
+
+[
+    {
+        ENG "Railways markings. [GIF]"
+        Filename "Railway codes-2012.gif"
+        Image "railways-markings.png"
+        LAT "Dzelzceļa marķējumi. [GIF]"
+        RUS "Железнодорожные разметки. [GIF]" 
+    },
+    {
+        ENG "Catalogue 2011 [PDF]"
+        Filename "KATALOGS2011.pdf"
+        Image "catalogue.png"
+        LAT "Katalogs 2011 [PDF]"
+        RUS "Каталог 2011 [PDF]" 
+    },
+    {
+        ENG "USSR type railway letters. [TTF]"
+        (string)
+        Filename "MPSFONTS.ttf"
+        Image "ussr-letters.png"
+        LAT "PSRS tipa dzelzceļa burti. [TTF]"
+        RUS "Железнодорожные буквы типа СССР. [TTF]" 
+    },
+    {
+        ENG "USSR type railway letters. [CDR]"
+        Filename "fonti.cdr"
+        Image "ussr-letters.png"
+        LAT "PSRS tipa dzelzceļa burti. [CDR]"
+        RUS "Железнодорожные буквы типа СССР. [CDR]" 
+    },
+    {
+        ENG "USSR type railway signs. [CDR]"
+        Filename "railway_signs.cdr"
+        Image "ussr-rail-signs.png"
+        LAT "PSRS tipa dzelzceļa zīmes. [CDR]"
+        RUS "Железнодорожные знаки типа СССР. [CDR]" 
+    },
+    {
+        ENG "USSR and former USSR country railway company logos. [CDR]"
+        Filename "logos.cdr"
+        Image "ussr-logos.png"
+        LAT "PSRS un bijušās PSRS valsts dzelzceļa uzņēmuma logotipi. [CDR]"
+        RUS "Логотипы железнодорожных компаний СССР и бывшего СССР. [CDR]" 
+    },
+    {
+        ENG "USSR type railway letters (new type of numbers). [CDR]"
+        Filename "ussr_new_type_numbers_fonts.cdr"
+        Image "ussr-new-num.png"
+        LAT "PSRS tipa dzelzceļa burti (jaunā tipa numuri). [CDR]"
+        RUS "Железнодорожные буквы типа СССР (номера новова типа). [CDR]" 
+    },
+    {
+        ENG "USSR passenger coach sign. [CDR]"
+        Filename "passenger_coach_sign.cdr"
+        Image "ussr-coach-emblem.png"
+        LAT "PSRS pasažieru vilciena zīmogs. [CDR]"
+        RUS "Знак пассажирского вагона СССР. [CDR]" 
+    },
+    {
+        ENG "Item #87305 & #87306 kit instruction. [PDF]"
+        Filename "305-6_INSTRUKCIJA.pdf"
+        Image "87305-6 kit.png"
+        LAT "#87305 un #87306 slikšanas instrukcija. [PDF]"
+        RUS "Инструкция для зборки #87305 и #87306. [PDF]" 
+    },
+]

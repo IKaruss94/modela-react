@@ -2,6 +2,9 @@
 
 /* [] BOOTSTRAP */
   //    
+    .container{
+      margin-top: 15px;
+    }
     .btn {
       font-size: 1.6rem;
     }
@@ -36,13 +39,10 @@
 /**/
 
 
-
-
 /* Collapsable */
   .Collapsible 
   {  
-    margin-top: 30px;
-    margin: 16px;
+    margin: 30px 20px;
     
     .Collapsible__trigger{ 
       cursor: pointer;

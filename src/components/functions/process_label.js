@@ -8,7 +8,9 @@
 
 // [] fundemental components
   import React from 'react'
-  import PropTypes from 'prop-types'
+  import PropTypes from 'prop-types'  
+// [] my components
+  import LableText from '../../json/lables.json'
 // [] my images
   import LoadingGIF from '../../../images/icons/modela_loading.gif'
 
@@ -16,17 +18,23 @@
 
 
 
-const ProcessLable = ( prop_lang, firestore_lables, func_type, func_name ) => {
-
-  const res = firestore_lables.find( (elem) => {
+const ProcessLable = ( prop_lang, func_type, func_name ) => {
+  
+  const res = LableText.find( (elem) => {
     if( elem.Type === func_type && elem.Name === func_name ) { return elem; } 
   })
-  
+  //console.log( prop_lang, func_type, func_name, ' === ', res);
+
   if( res !== undefined ) {
     //console.log('lables => ', res[prop_lang] ); 
     return res[prop_lang];
   } else {
-    return( <img src={LoadingGIF} style={{ width: '16px', height: '16px' }} /> )
+    return( 
+      <img 
+        src={LoadingGIF} 
+        style={{ width: '16px', height: '16px' }} 
+      /> 
+    )
   }
 
 } 

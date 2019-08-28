@@ -11,9 +11,11 @@
   //import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
 // [] my components
-  import { Cart, Checkout, Contact, Downloads, Home, PageNotFound, Product, Services, Special, Store, Trade } from './views';
-  import { Dashboard, Lables, Login, Products, Orders, Texts } from './views/_admin'
+  import PageNotFound from './Errors/pageNotFound'  
   import Navigation from './nav'
+  import { Cart, Checkout, Contact, Downloads, Home, Product, Services, Special, Store, Trade } from './views';
+  import { Dashboard, Lables, Login, Products, Orders, Texts } from './views/_admin'
+
 
 // -------------------------------------------------------------------------------
 

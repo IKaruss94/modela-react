@@ -14,7 +14,7 @@
     import Lightbox from 'lightbox-react'
     import { LinkContainer } from "react-router-bootstrap"
 // [] my components
-    import GetLable from '../../functions/process_lable'
+    import GetLabel from '../../functions/process_label'
 // [] my images
     import { prodLargeImages } from '../../functions/import_images'
 
@@ -55,7 +55,7 @@ const DimensionReformat = ( DIM_VAL ) => {
     // [] [.slice(3)] is to remove initial [temp] value that was made before [DIM_VAL] was submited
  }
 
-const ProductHeader = ( {product, prod_PervNext, props, prop_lang, firestore_lables} ) => {    
+const ProductHeader = ( {product, prod_PervNext, props, prop_lang} ) => {    
     const [isOpen, setIsOpen] = useState(false);
     //const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -92,59 +92,31 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, firestore_lab
                 <div className="my_headName">
                     
                     <h1 className="my_ProdName">{ product.Name } [{ product.Type }]</h1>
-                    {  
-                    // [] product title is above
-                    // [] product data is made here \/
-                        firestore_lables && firestore_lables.map ( (elem, index) => {
-                            if( elem.Type === 'prod_header') {
-                                switch (elem.Name) {
-                                    case 'Dimensions': {  
-                                        return( 
-                                            <span key={index} className="my_prodDataTitle">
-                                                <strong>{ elem[prop_lang] }: </strong>
-                                                    { DimensionReformat(product[elem.Name]) }
-                                                <br/>
-                                            </span> 
-                                        )
-                                    }
-                                    case 'Years': {
-                                       if( product.Years !== '0' ) {
-                                            return(
-                                                <span key={index} className="my_prodDataTitle">
-                                                    <strong>{ elem[prop_lang] }: </strong>
-                                                        { product[elem.Name] }
-                                                    <br/>
-                                                </span>
-                                            )
-                                        }
-                                        break;
-                                    }
-                                    default: {
-                                        return(
-                                            <span key={index} className="my_prodDataTitle">
-                                                <strong>{ elem[prop_lang] }: </strong>
-                                                    { product[elem.Name] }
-                                                <br/>
-                                            </span>
-                                        )
-                                    }
-                                }
-                            }
-                        })
-                        /**
-                         *  return(
-                                            <span key={index} className="my_prodDataTitle">
-                                                <strong>{ elem[prop_lang] }: </strong>
-                                                { elem.Name === 'Dimensions' ? ( DimensionReformat(product[elem.Name]) ) : (  product[elem.Name] ) }
-                                                <br/>
-                                            </span>
-                                        )
-                         * 
-                            <span className="my_prodDataTitle">{ elem[prop_lang] }: { product.Producer }<br/></span>
-                            <span className="my_prodDataTitle">Dimensions: </span>{ DimensionReformat(product.Dimensions) } <br/>
-                            <span className="my_prodDataTitle">Years: </span>{ product.Year } <br/>
-                         */
+                    
+                    {
+                        product.Dimensions !== '' ? ( 
+                            <span key='Dimensions' className="my_prodDataTitle">
+                                <strong>{ GetLabel( prop_lang, 'prod_header', 'Dimensions') }: </strong>
+                                    { DimensionReformat(product.Dimensions ) }
+                                <br/>
+                            </span> 
+                        ):(null)
                     }
+                    {
+                        product.Years !== '0' ? (                            
+                            <span key='Years' className="my_prodDataTitle">
+                                <strong>{ GetLabel( prop_lang, 'prod_header', 'Years') }: </strong>
+                                    { product.Years }
+                                <br/>
+                            </span>
+                        ):(null)
+                    }
+                    <span key='Producer' className="my_prodDataTitle">
+                        <strong>{ GetLabel( prop_lang, 'prod_header', 'Producer') }: </strong>
+                            { DimensionReformat(product.Producer ) }
+                        <br/>
+                    </span>
+                    
                     <ButtonToolbar className="my_prod_headerButtons">
                         <LinkContainer to="/store" activeClassName="">
                             <Button 
@@ -152,7 +124,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, firestore_lab
                                 className="my_prodHead_btnStore" 
                                 variant="primary"
                             >
-                                { GetLable( prop_lang, firestore_lables, 'button', 'prod_backToStore') }
+                                { GetLabel( prop_lang, 'button', 'prod_backToStore') }
                             </Button>
                         </LinkContainer> 
                         
@@ -162,7 +134,7 @@ const ProductHeader = ( {product, prod_PervNext, props, prop_lang, firestore_lab
                                 className="my_prod_toTradeBtn" 
                                 variant="primary"
                             >
-                            { GetLable( prop_lang, firestore_lables, 'button', 'prod_priceInfo') }
+                            { GetLabel( prop_lang, 'button', 'prod_priceInfo') }
                             </Button>
                         </LinkContainer> 
                     </ButtonToolbar>
@@ -186,7 +158,6 @@ ChangeProductBtns.propTypes = {
 };
 ProductHeader.propTypes = {  
     prop_lang: PropTypes.any, 
-    firestore_lables: PropTypes.any, 
     
     product: PropTypes.any, 
     prod_PervNext: PropTypes.array, 

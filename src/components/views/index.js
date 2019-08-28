@@ -2,7 +2,6 @@
 
  
 
-import PageNotFound from './Errors/pageNotFound';
 import Home from './Home/home';
 import Cart from './Cart/cart';
 import Checkout from './Checkout/checkout';
@@ -14,4 +13,4 @@ import Special from './Special_Info/special';
 import Store from './Store/store';
 import Trade from './Trade_Info/trade';
 
-export { Cart, Checkout, Contact, Downloads, Home, PageNotFound, Product, Services, Special, Store, Trade }
+export { Cart, Checkout, Contact, Downloads, Home, Product, Services, Special, Store, Trade }

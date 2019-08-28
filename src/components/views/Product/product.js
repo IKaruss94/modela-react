@@ -15,8 +15,8 @@
   import { Container, Row, Table } from 'react-bootstrap'
   import { Helmet } from 'react-helmet'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
-  import GetLable from '../../functions/process_lable'
+  import PageLoading from '../../Errors/pageLoading'
+  import GetLabel from '../../functions/process_label'
 
   import Product_Header from './product_header'
   import Product_Carusel from './product_imageCarousel'
@@ -33,7 +33,7 @@ class Product extends Component {
     // [] setting props / destruturing
       const { 
         prop_lang, prop_cart, 
-        firestore_products, firestore_uniqueProds, firestore_lables, 
+        firestore_products, firestore_uniqueProds, 
         actionAddToCart, RemoveFromCart 
       } = this.props; 
      
@@ -41,8 +41,7 @@ class Product extends Component {
     //[] if firestore data is not loaded
       if( 
         !isLoaded( firestore_products ) || 
-        !isLoaded( firestore_uniqueProds ) || 
-        !isLoaded( firestore_lables ) 
+        !isLoaded( firestore_uniqueProds )
       ) { return <PageLoading /> }
     //[] else it is loaded
       else {   
@@ -98,7 +97,6 @@ class Product extends Component {
                 prod_PervNext = { prod_PervNext }
                 props = { this.props }
                 prop_lang = { prop_lang }
-                firestore_lables = { firestore_lables }
               />  
             </Row>   
 
@@ -116,7 +114,7 @@ class Product extends Component {
                       tableColOrder.map( (elem, index) => {
                         return (                            
                           <th key={ index } className="align-middle">
-                            { GetLable( prop_lang, firestore_lables, 'table', elem.toString() ) }
+                            { GetLabel( prop_lang, 'table', elem.toString() ) }
                           </th>
                         ) 
                       })
@@ -153,9 +151,8 @@ class Product extends Component {
                           regNum_options = { regNum_options }
                           actionAddToCart = { actionAddToCart }
                           actionRemoveFromCart = { RemoveFromCart }
-                          text_addToCart = { GetLable( prop_lang, firestore_lables, 'table', 'btn_addCart') }
-                          text_kitRegInfo = { GetLable( prop_lang, firestore_lables, 'text', 'kit_reg_info') }
-                          // [] in the last 2 passed values - the ones as string, point to specific entrys in [firestore_lables]
+                          text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
+                          text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
                         />
                       ); 
 
@@ -179,7 +176,6 @@ const mapStateToProps = (state) => {
 
     firestore_products: state.rootFirestore.ordered.products,
     firestore_uniqueProds: state.rootFirestore.ordered.uniqueProds,
-    firestore_lables: state.rootFirestore.ordered.lables,  
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -197,7 +193,6 @@ Product.propTypes = {
 
   firestore_products: PropTypes.any,
   firestore_uniqueProds: PropTypes.any,
-  firestore_lables: PropTypes.any,
 
   actionAddToCart: PropTypes.func,
   RemoveFromCart: PropTypes.func,
@@ -213,8 +208,7 @@ export default compose(
           ['NUM_id','==', props.match.params.prod_id]
         ]
       },
-      { collection: 'uniqueProds' },
-      { collection: 'lables' }
+      { collection: 'uniqueProds' }
     ]
   })
 )(Product)

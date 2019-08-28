@@ -6,15 +6,14 @@
 
 // [] fundemental components
     import React, { Component } from "react"
-    import { compose } from 'redux'
     import { connect } from 'react-redux'
     import PropTypes from 'prop-types'
-    import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
     import { Nav, Navbar, NavDropdown } from "react-bootstrap"
     import { LinkContainer } from "react-router-bootstrap"
     import Select from 'react-select'
 // [] my components
+    import NavbarText from '../../json/navbar.json'
 // [] my images
     import Logo from '../../../images/icons/icon-modela.png'
     import  { LanguageFlags } from '../functions/import_images' 
@@ -36,7 +35,9 @@ class Navigation extends Component {
         //console.log('navbar props:', this.props);
         //console.log('Language : '+ this.props.prop_lang );
 
-        const { selectedOption, prop_cart, prop_lang, prop_navbar } = this.props; 
+        const { selectedOption, prop_cart, prop_lang, /*prop_navbar*/ } = this.props; 
+
+        const prop_navbar = NavbarText;
 
         /** [] language select  */
             // [] language options
@@ -77,7 +78,7 @@ class Navigation extends Component {
                                 } else if( elem.Parent === '1'){
                                     return(
                                         <NavDropdown 
-                                            id="basic-nav-dropdown"
+                                            id="collasible-nav-dropdown"
                                             className="my_navbar_drop" 
                                             key={ index } 
                                             title={ elem[prop_lang] } 
@@ -87,7 +88,9 @@ class Navigation extends Component {
                                                  if( innerElem.Parent === elem.Name )
                                                     return(
                                                         <LinkContainer key={ index } to={"/"+innerElem.Name}>
-                                                            <Nav.Link className="my_navbar_dropElem">{ innerElem[prop_lang] }</Nav.Link>
+                                                            <NavDropdown.Item className="my_navbar_dropElem">
+                                                                { innerElem[prop_lang] }
+                                                            </NavDropdown.Item>
                                                         </LinkContainer>
                                                     )
                                             })
@@ -99,7 +102,7 @@ class Navigation extends Component {
                         }
                     </Nav>
 
-                    <Nav className="mr-auto my_navbar_secound">
+                    <Nav className="my_navbar_secound">
                         <Select
                             menuPortalTarget={document.querySelector('body')}
                             className = "basic-single my_nav_select"
@@ -109,7 +112,7 @@ class Navigation extends Component {
                             options = { langOptions }  
                             value = { selectedOption } // []
                             defaultValue = { langOptions[lang_number] }
-                            onChange = { (selectedOption) => {                                
+                            onChange = { (selectedOption) => { 
                                 this.setState({ selectedOption });
                                 this.props.ChangeLanguge( selectedOption.value );
                             } }
@@ -124,7 +127,9 @@ class Navigation extends Component {
                                     </span>
                                     {       
                                         prop_cart.length !== 0 ? (
-                                            <span className="my_cartCount">{ prop_cart.length }</span>
+                                            <span className="my_cartCount">
+                                                { prop_cart.length }
+                                            </span>
                                         ) : ( null ) 
                                     }              
                                 </div>                  
@@ -141,8 +146,6 @@ class Navigation extends Component {
 
 
 const mapStateToProps = (state) => ({
-    prop_navbar: state.rootFirestore.ordered.navbar,
-
     prop_lang: state.rootLang.lang,
     prop_cart: state.rootCart.redu_cartItems,
 })
@@ -159,15 +162,9 @@ const mapDispatchToProps = (dispatch) => {
 Navigation.propTypes = {        
     selectedOption: PropTypes.any,
 
-    prop_navbar: PropTypes.any,
     prop_lang: PropTypes.any,
     prop_cart: PropTypes.any,
 
     ChangeLanguge: PropTypes.func,
 }
-export default  compose(
-    connect( mapStateToProps, mapDispatchToProps ),
-    firestoreConnect([
-      { collection: 'navbar', orderBy: ['order_value'] }
-    ])
-  )(Navigation)
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

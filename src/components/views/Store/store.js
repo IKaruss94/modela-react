@@ -15,7 +15,7 @@
 // [] structure and style components
   import { Helmet } from 'react-helmet'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
+  import PageLoading from '../../Errors/pageLoading'
   import StoreProductCat from './store_ProductCategories'
   import Product from '../Product/product'
 

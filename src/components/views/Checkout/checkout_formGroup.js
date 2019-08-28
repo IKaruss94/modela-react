@@ -9,7 +9,7 @@
     import React from 'react'
     import PropTypes from 'prop-types'
 // [] structure and style components
-    import Form from 'react-bootstrap/Form'
+    import Form from 'react-bootstrap/Form' 
 // [] my components
 // [] my images
 
@@ -22,7 +22,7 @@ const CheckoutFormGroups = ( {
     formik_errors,
     prop_lang,
 } ) => {
-    return(                 
+    return(     
         <Form.Group controlId = { data.FormGroup === 'client' ? ( 'CheckoutClient.'+data.Name ) : ( 'CheckoutDeliver.'+data.Name ) } >
             <Form.Label className="my_checkout_lable">
             {

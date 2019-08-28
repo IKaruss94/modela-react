@@ -10,7 +10,7 @@
 // [] structure and style components
 // [] my components
 // [] my images
-  import LoadingGif from '../../../../images/icons/modela_loading.gif'
+  import LoadingGif from '../../../images/icons/modela_loading.gif'
 
 // -------------------------------------------------------------------------------
 

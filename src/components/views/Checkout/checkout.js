@@ -7,22 +7,22 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
-  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
-  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   //import ReactHtmlParser from 'react-html-parser'
   import { Helmet } from 'react-helmet'
   import { Container, Row, Col, Button } from 'react-bootstrap'
+  import { LinkContainer } from 'react-router-bootstrap'
   import { Formik } from 'formik'
   import * as yup from 'yup'
   import Swal from 'sweetalert2'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
-  import GetLable from '../../functions/process_lable'
+  //import PageLoading from '../../Errors/pageLoading'
+  import GetLabel from '../../functions/process_label'
+  import CheckoutText from '../../../json/checkout.json'
   //import SUBMIT_DATA from '../../order_submission/manage_submission'
-  import CartTable from '../Cart/cart_table'
+  import CartTable from '../../multipage_components/cart_table'
   import CheckoutForm from './checkout_form'
 
 // -------------------------------------------------------------------------------
@@ -34,17 +34,14 @@ class Checkout extends Component {
     // [] setting props
       const { 
         history, 
-        location, 
-        prop_lang,        
+        prop_lang, 
         prop_cart, 
-        prop_data,         
-        prop_lables,
-        //ClearCart, !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //ClearCart !!! unComment wehn setting up submitting
       } = this.props;
-
-    //[] making an array of payment names for use in emails     
+    
+      //[] making an array of payment names for use in emails     
       let paymentNames = [];   
-      prop_data && prop_data.map( elem => {
+      CheckoutText && CheckoutText.map( elem => {
         if( elem.FormGroup === 'payment' && elem.Type === 'option' ) {
           paymentNames.push({ Name:elem.Name, LongName:elem.ENG });                
         }
@@ -117,12 +114,20 @@ class Checkout extends Component {
       }
 
       
-    // [] choosing what to render
-    
-      if ( prop_data === undefined || prop_lables === undefined ) { 
-        return PageLoading(location.pathname) 
+    // [] return statement   
+      if( prop_cart.length == 0 ){
+        return(
+          <Container>                 
+            <LinkContainer to="/store">
+              <Button variant="primary" size="lg" block>
+                { GetLabel( prop_lang, 'button', 'to_checkout_no') }
+              </Button>
+            </LinkContainer>  
+          </Container>
+        )
       }
-      else {
+      else
+      {
         return (
           <Container> 
             <Helmet><title>Checkout</title></Helmet>
@@ -139,9 +144,8 @@ class Checkout extends Component {
               block 
               onClick={ () => { history.push( '/cart' ) } }
             >
-              { GetLable( prop_lang, prop_lables, 'button', 'btn_backToCart') }
+              { GetLabel( prop_lang, 'button', 'btn_backToCart') }
             </Button>
-
 
 
             <Formik
@@ -200,18 +204,16 @@ class Checkout extends Component {
               
               // [] !SUBMITTING -----------------------------------------------------------------
               }}
-            >
+            > 
               {({
                 handleSubmit,
                 handleChange,
                 setFieldValue,
                 values,
                 errors,
-              }) => (
+              }) => (                
                 <CheckoutForm 
-                  pass_prop_data        = { prop_data }
                   prop_lang             = { prop_lang }
-                  prop_lables           = { prop_lables }
                   formik_handleSubmit   = { handleSubmit } 
                   formik_handleChange   = { handleChange }
                   formik_setFieldValue  = { setFieldValue }
@@ -222,8 +224,8 @@ class Checkout extends Component {
             </Formik>
               
           </Container>
-        )       
-      } // [] end of [else]
+        )   
+      } //[] end of else    
     //
   } // [] end of [render]
 }
@@ -231,9 +233,6 @@ class Checkout extends Component {
 const mapStateToProps = (state) => ({
   prop_lang: state.rootLang.lang,
   prop_cart: state.rootCart.redu_cartItems,  
-
-  prop_lables: state.rootFirestore.ordered.lables,
-  prop_data: state.rootFirestore.ordered.checkout,
 })
 const mapDispatchToProps = (dispatch) => {
   return{
@@ -242,19 +241,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 Checkout.propTypes = { 
   history: PropTypes.any,
-  location: PropTypes.any,
   prop_lang: PropTypes.any,
   prop_cart: PropTypes.any,
 
-  prop_lables: PropTypes.any,
-  prop_data: PropTypes.any,
-
   ClearCart: PropTypes.func,
 }
-export default  compose(
-  connect( mapStateToProps, mapDispatchToProps ),
-  firestoreConnect([
-    { collection: 'checkout' },
-    { collection: 'lables' }
-  ])
-)(Checkout)
+export default connect( mapStateToProps, mapDispatchToProps )(Checkout)

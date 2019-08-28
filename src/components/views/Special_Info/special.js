@@ -15,7 +15,7 @@
   import { Helmet } from 'react-helmet'
   import { Container, Table } from 'react-bootstrap'
 // [] my components  
-  import PageLoading from '../Errors/pageLoading'
+  import PageLoading from '../../Errors/pageLoading'
   import SpecialTableRow from './special_tableRow'
 
 // -------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class SpecialInfo extends Component {
           <Container>
             <Helmet><title>Special info</title></Helmet>
             
-            { prop_lang === 'ENG' ? (<div className="my_spec_explain">This page is avilable in RUSSIAN ONLY</div>):(null) }
+            { prop_lang === 'ENG' ? (<div className="my_spec_explain">This page is avilable ONLY IN RUSSIAN</div>):(null) }
             { prop_lang === 'LAT' ? (<div className="my_spec_explain">Šī lapa ir pieejama TIKAI KRIEVU VALODĀ</div>):(null) }
             
             <div className="my_special_suround" lang="ru">

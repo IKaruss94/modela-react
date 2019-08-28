@@ -15,7 +15,7 @@ import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import { Helmet } from 'react-helmet'
 import { Container } from 'react-bootstrap'
 // [] my components
-import PageLoading from '../../Errors/pageLoading'
+import PageLoading from '../../../Errors/pageLoading'
 
 // ------------------------------------------------------------------------------- 
 

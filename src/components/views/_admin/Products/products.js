@@ -15,7 +15,7 @@
   import { Helmet } from 'react-helmet'
   import { Container, Row, Col, Button } from 'react-bootstrap'
 // [] my components
-  import PageLoading from '../../Errors/pageLoading'
+  import PageLoading from '../../../Errors/pageLoading'
   import ProductModal from './product_modal'
 
 // ------------------------------------------------------------------------------- 

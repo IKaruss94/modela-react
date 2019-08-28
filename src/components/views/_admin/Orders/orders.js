@@ -15,7 +15,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { Helmet } from 'react-helmet'
 import { Container, Button, Table  } from 'react-bootstrap'
 // [] my components
-import PageLoading from '../../Errors/pageLoading'
+import PageLoading from '../../../Errors/pageLoading'
 import OrderModal from './orders_modal'
 
 

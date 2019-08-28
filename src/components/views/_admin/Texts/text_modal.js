@@ -6,12 +6,13 @@
 */ 
 
 // [] fundemental components
-    import React, {useState, Fragment} from 'react'
+    //import React, {useState, Fragment} from 'react'
+    import React from 'react'
     import PropTypes from 'prop-types'
 // [] structure and style components
     import { Modal, Form, Button } from 'react-bootstrap'
     import ReactHtmlParser from 'react-html-parser'
-    import RichTextEditor from 'react-rte';
+    //import RichTextEditor from 'react-rte';
 // [] my components
 
 // -------------------------------------------------------------------------------
