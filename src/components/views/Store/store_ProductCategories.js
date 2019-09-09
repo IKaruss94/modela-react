@@ -37,7 +37,11 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                         if( elem_prod.Category === elem_cat.ID_cat && elem_prod.Visable ) //[] if product is in category and VISABLE         
                           
                         return(                            
-                            <Link to={ match.url +"/"+ elem_prod.NUM_id } className="my_storeImageLink" >
+                            <Link 
+                              to={ match.url +"/"+ elem_prod.NUM_id } 
+                              className="my_storeImageLink" 
+                            >
+
                               <Img
                                 src={[
                                   storeThumbnails[ elem_prod.IMG_thumbnail ]
@@ -46,6 +50,7 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                                   <div className="my_noStoreImage"># {elem_prod.NUM_id}</div>
                                 }
                               />
+
                             </Link>
                           )
 

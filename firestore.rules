@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /orders/{orderID} {
+      allow read : if request.auth.uid != null;
+     
+      allow create : if request.auth.uid != null;
+      allow update : if request.auth.uid != null;
+      allow delete : if false;
+    }
+
+    match /production_categories/{prodCatID} {
+      allow read;      
+      allow create : if request.auth.uid == true;
+      allow update : if request.auth.uid == true;
+      allow delete : if false;
+    }
+
+    match /products/{prodID} {
+      allow read;      
+      allow create : if request.auth.uid != null;
+      allow update : if request.auth.uid != null;
+      allow delete : if request.auth.uid != null;
+    }
+
+    match /uniqueProds/{uniqueProdsID} {
+      allow read;      
+      allow write : if false;
+    }
+
+    match /special/{specialID} {
+      allow read;
+      allow write : if false;
+    }
+  }
+}

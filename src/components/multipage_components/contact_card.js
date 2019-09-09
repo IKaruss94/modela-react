@@ -53,11 +53,11 @@ const ContactCard = ({ prop_lang }) => {
                 <br />
                 <span className="my_CardText"><strong>{ ContactText[prop_lang] }</strong></span>
 
-                <div className="my_contatct_icons">   
+                <span className="my_contatct_icons">   
                   <a href="https://www.facebook.com/pages/new_modela/510323402315624?ref=hl"><img src={FBicon} /></a>
-                  <a href="/"><img src={EBAYicon} /></a>
+                  <a href="https://www.ebay.ie/usr/modela_l?_trksid=p2047675.l2559"><img src={EBAYicon} /></a>
             
-                </div>                    
+                </span>                    
               </Card.Text>
 
           </Card.Body>

@@ -1,0 +1,11 @@
+
+
+[
+    {
+        "ForPage": "cart",
+        "WhatsTheProblem": "clear_cart",
+        "ENG": "Are you sure you want to empty the cart. | Yes | No ",
+        "LAT": "Vai esat parliecināti ka gribat iztukšot grozu. | Jā | Nē ",
+        "RUS": "Вы уверены, что хотите опустошить корзину? | Да | Нет"
+    }
+]

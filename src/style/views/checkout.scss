@@ -1,5 +1,10 @@
 
 
+
+.my_form_chekout {
+    font-size: 2.4rem;
+}
+
 .my_checkout_prodTable {
     width: 100%;
     margin: 20px 0px;
@@ -17,27 +22,21 @@
 
     background-color: skyblue;
 
-    .my_checkout_label {
+    .myCheckout_label {
         padding: 5px 10px;
-        //border: 1px solid cyan;
-        //border-radius: 5px;
+        font-weight: 700;
+        font-size: 2.4rem;
 
-        font-size: 2rem;
-        font-weight: 600;
 
         .my_checkout_errSign {
             color: rgb(95, 11, 28);
         }
     }
-
-    .my_checkout_checkbox {
-        transform: scale(1.5);
-    }
+    
 }
 
 
 .my_checkout_select {
-    font-size: 1.6rem;
     height: calc(3.2rem + 2px) !important;
     // [] becouse default [font-size] is set [62.5% AKA 1rem=10px] in [global.scss], so default styling for this abstructs text
  }
@@ -48,19 +47,63 @@
 }
 
 
+/** Delivery */
+    .myCheckout_label#checkout_delCheckLable {
+        cursor: pointer;
+        transition: 256ms;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+    }
+
+    .my_checkout_checkbox {
+        transform: scale(1.8);
+    }
+/** */
+
 
 /** CLIENT */
+    //#checkoutClient {}
+
     .myCheckout_clientField {
         display: flex;
-        flex-direction: column;
-        margin: 10px;
-
-        .myCheckout_clientLable {
-            font-size: 2rem;
+        flex-direction: row;
+        overflow: hidden;
+        font-size: 2rem;
+        
+        margin: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
+        .myCheckout_clientLabel {
+            font-weight: 600;
+            width: 24%;
         }
         .myCheckout_clientInput {
-            padding: 5px;
-            border: none;
+            padding: 4px;
+            width: 76%;
+            border: 2px solid gray; 
+            background-color: rgba( 255,255,255, .5);
+
+            &.error { 
+                border: 2px solid red; 
+                background-color: rgba( 255,200,200, .5);
+            }
+
+            &:focus {
+              border-color: $nav_color;
+              background-color: rgba( 255,255,255, 1);
+            } 
+
+            &[name='fullName'], &[name='del_name'] { width: 360px; }
+            &[name='email'] { width: 360px; }
+            &[name='phone'], &[name='del_phone'] { width: 360px; }
+            &[name='address'], &[name='del_address'] { width: 500px; }
+            &[name='zip'], &[name='del_zip'] { width: 160px; }
+            &[name='city'], &[name='del_city'] { width: 360px; }
+            &[name='state'], &[name='del_state'] { width: 360px; }
+            &[name='country'], &[name='del_country'] { width: 360px; }
         }
     }
 /***/

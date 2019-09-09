@@ -13,10 +13,10 @@
     import { LinkContainer } from "react-router-bootstrap"
     import Select from 'react-select'
 // [] my components
-    import NavbarText from '../../json/navbar.json'
+    import NavbarText from '../json/navbar.json'
 // [] my images
-    import Logo from '../../../images/icons/icon-modela.png'
-    import  { LanguageFlags } from '../functions/import_images' 
+    import Logo from '../../images/icons/icon-modela.png'
+    import  { LanguageFlags } from './functions/import_images' 
 
 // -------------------------------------------------------------------------------
 

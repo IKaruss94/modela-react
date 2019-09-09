@@ -98,17 +98,14 @@ const ProductTableRow = ({
         setChosenRegNums( newValue );
       }
   /** */
-  
-  /** [] in-cart checks */
-    // [] check [if item already in cart], used in a function later @ [.my_prod_tableCart]
-      let checkInCart = (cartElem) => { 
-        return cartElem.id === prod.id
-      }     
-  /** */
 
 
   if( prod.Available ) {
-    const inCartValue =  cartItems.find(checkInCart);
+
+    // [] check [if item already in cart], used in a function later @ [.my_prod_tableCart]
+    const inCartValue =  cartItems.find( cartElem => { 
+      return cartElem.id === prod.id
+    });
 
     return(
       <tr key={prod.NUM_variant}>{

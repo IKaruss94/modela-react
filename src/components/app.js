@@ -12,9 +12,8 @@
 // [] structure and style components
 // [] my components
   import PageNotFound from './Errors/pageNotFound'  
-  import Navigation from './nav'
+  import Navigation from './navbar'
   import { Cart, Checkout, Contact, Downloads, Home, Product, Services, Special, Store, Trade } from './views';
-  import { Dashboard, Lables, Login, Products, Orders, Texts } from './views/_admin'
 
 
 // -------------------------------------------------------------------------------
@@ -44,13 +43,6 @@ class App extends Component {
               <Route exact path='/special' component={Special} />
               <Route exact path='/store' component={Store} />
               <Route exact path='/trade' component={Trade} />
-
-              <Route exact path='/_admin/login' component={Login} />
-              <Route exact path='/_admin/dashboard' component={Dashboard} />
-              <Route exact path='/_admin/lables' component={Lables} />
-              <Route exact path='/_admin/products' component={Products} />
-              <Route exact path='/_admin/orders' component={Orders} />
-              <Route exact path='/_admin/texts' component={Texts} />
 
               <Route component={PageNotFound} />
             </Switch>

@@ -7,15 +7,14 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
-  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
-  import { firestoreConnect } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { Container, Col, Row } from 'react-bootstrap'
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
+  import JSONdownloads from '../../../json/downloads'
   import DownloadCard from './downloadElement'
 // [] my images
   import { DownloadImages } from '../../functions/import_images'
@@ -38,36 +37,34 @@ class Downloads extends Component {
   render(){
     //console.log('download props', this.props);
     //
-    const { location, prop_lang, prop_downloads } = this.props; 
+    const { prop_lang } = this.props; 
 
     // []
-      if ( prop_downloads === undefined ) { 
-        return PageLoading(location.pathname) 
-      }
+      if ( JSONdownloads === undefined ) { return PageLoading() }
       else {
         return (
           <Container id="download_div">
             <Helmet><title>Downloads</title></Helmet>
             { 
-              prop_downloads && prop_downloads.map((elem, index) => {  
+              JSONdownloads && JSONdownloads.map((elem, index) => {  
                 if( index % 2 ) {
                   return(                  
                     <Row key={index}> 
                       <Col lg>
-                        <DownloadCard key={ prop_downloads[index -1].ID_data } download={ prop_downloads[index -1] } image={DownloadImages} prop_lang={prop_lang} />
+                        <DownloadCard key={ JSONdownloads[index -1].ID_data } download={ JSONdownloads[index -1] } image={DownloadImages} prop_lang={prop_lang} />
                       </Col>
                       <Col lg>
-                        <DownloadCard key={ prop_downloads[index].ID_data } download={ prop_downloads[index] } image={DownloadImages} prop_lang={prop_lang} />
+                        <DownloadCard key={ JSONdownloads[index].ID_data } download={ JSONdownloads[index] } image={DownloadImages} prop_lang={prop_lang} />
                       </Col> 
                     </Row>
                   )
                 }
-                else if( index === (prop_downloads.length)-1 )
+                else if( index === (JSONdownloads.length)-1 )
                 {
                   return(                  
                     <Row key={index}> 
                       <Col lg>
-                        <DownloadCard key={ prop_downloads[index].ID_data } download={ prop_downloads[index] } image={DownloadImages} prop_lang={prop_lang} />
+                        <DownloadCard key={ JSONdownloads[index].ID_data } download={ JSONdownloads[index] } image={DownloadImages} prop_lang={prop_lang} />
                       </Col> 
                       <Col lg></Col> 
                     </Row>
@@ -82,23 +79,12 @@ class Downloads extends Component {
   }
 } 
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {        
-    prop_downloads: state.rootFirestore.ordered.downloads,
+const mapStateToProps = (state) => ({        
     prop_lang: state.rootLang.lang,
-  }
-}
+})
 Downloads.propTypes = {
   location: PropTypes.any,
   prop_lang: PropTypes.any,
-  prop_downloads: PropTypes.any,
 };
 
-
-export default compose(
-  connect( mapStateToProps ),
-  firestoreConnect([
-    { collection: 'downloads' }
-  ])
-)(Downloads)
+export default connect( mapStateToProps )(Downloads)

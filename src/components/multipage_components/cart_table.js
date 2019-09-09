@@ -34,7 +34,7 @@ const CartItemTable = ( props ) => {
 
     // []   
         return(      
-            <Table responsive striped variant="light" className="my_ProductTable">
+            <Table responsive striped variant="light" className="myCart_table">
                 <thead>
                     <tr>                      
                     {

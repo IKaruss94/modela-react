@@ -16,12 +16,11 @@
   import { LinkContainer } from 'react-router-bootstrap'
   import { Formik } from 'formik'
   import * as yup from 'yup'
-  import Swal from 'sweetalert2'
 // [] my components
   //import PageLoading from '../../Errors/pageLoading'
   import GetLabel from '../../functions/process_label'
-  import CheckoutText from '../../../json/checkout.json'
-  //import SUBMIT_DATA from '../../order_submission/manage_submission'
+  import SubmitOrder from '../../functions/submit_order'
+  import JSON_checkout from '../../../json/checkout.json'
   import CartTable from '../../multipage_components/cart_table'
   import CheckoutForm from './checkout_form'
 
@@ -36,12 +35,12 @@ class Checkout extends Component {
         history, 
         prop_lang, 
         prop_cart, 
-        //ClearCart !!! unComment wehn setting up submitting
+        ClearCart
       } = this.props;
     
       //[] making an array of payment names for use in emails     
       let paymentNames = [];   
-      CheckoutText && CheckoutText.map( elem => {
+      JSON_checkout && JSON_checkout.map( elem => {
         if( elem.FormGroup === 'payment' && elem.Type === 'option' ) {
           paymentNames.push({ Name:elem.Name, LongName:elem.ENG });                
         }
@@ -50,68 +49,54 @@ class Checkout extends Component {
     
     // [] form requierment schema
       const checkoutSchema = yup.object().shape({   
-        fullName: yup
-          .string()
+        fullName: yup.string()
           .required('Required'),
-        email: yup
-          .string()
+        email: yup.string()
           .email('Invalid email')
           .required('Required'),
-        address: yup
-          .string()
+        address: yup.string()
           .required('Required'),
-        city: yup
-          .string()
+        city: yup.string()
           .required('Required'),
-        zip: yup
-          .string()
+        zip: yup.string()
           .required('Required'),
-        country: yup
-          .string()
+        country: yup.string()
           .required('Required'),
-        phone: yup
-          .number('Phone NUMBER')
+        phone: yup.number('Needs to be a number.')
           .required('Required'),
           
-        del_fullName: yup
-          .string(),
-        del_address: yup
-          .string(),
-        del_city: yup
-          .string(),
-        del_zip: yup
-          .string(),
-        del_state: yup
-          .string(),
-        del_country: yup
-          .string(),
-        del_phone: yup
-          .number('Phone NUMBER'),
+        del_name: yup.string(),
+        del_address: yup.string(),
+        del_city: yup.string(),
+        del_zip: yup.string(),
+        del_state: yup.string(),
+        del_country: yup.string(),
+        del_phone: yup.number('Phone NUMBER'),
 
-        payment_method: yup
-          .string()
+        payment_method: yup.string()
           .required('Required'),
       });
-    // [] form initial value, defines form as controlled
-      const checkoutInitVal = {
-        fullName: '',
-        email: '',
-        address: '',
-        city: '',
-        zip: '',
-        state: '',
-        country: '',
-        phone: '',
-        del_check: false,
-        del_fullName: '',
-        del_address: '',
-        del_city: '',
-        del_zip: '',
-        del_state: '',
-        del_country: '',
-        del_phone: '',
-        payment_method: ''
-      }
+    // [] form initial value, defines form as controlled      
+        const checkoutInitVal = {
+          fullName: '',
+          email: '',
+          address: '',
+          city: '',
+          zip: '',
+          state: '',
+          country: '',
+          phone: '',
+          del_check: false,
+          del_name: '',
+          del_address: '',
+          del_city: '',
+          del_zip: '',
+          del_state: '',
+          del_country: '',
+          del_phone: '',
+          payment_method: ''
+        }
+      
 
       
     // [] return statement   
@@ -154,55 +139,16 @@ class Checkout extends Component {
               validateOnChange
               onSubmit = { ( formData ) => {
               // [] SUBMITTING ---------------------------------------------------
-              
-                //console.log( 'CHECKOUT test', formData, prop_cart ); 
-                // [] function to actualy submit
 
-                Swal.fire({
-                  type: 'success',
-                  title: 'Order [would be] submitted.',
-                  confirmButtonText: 'OK',
-                  timer: 5000,
-                })
-                console.log('submitted - form data: ', formData);
-                console.log('submitted - cart data: ', prop_cart);
-
-                /*
-                Swal.fire({
-                  type: 'info',
-                  title: 'Submitting your order', 
-                  showConfirmButton: false, 
-                  allowOutsideClick: false,
-                });
-                Swal.showLoading();
-                
-                SUBMIT_DATA( formData, prop_cart, paymentNames ).then( (res) => {
-                //PostFormToServer( formData, prop_cart ).then( (res) => {
-                  
-                  if( res === 'OK' ) {
-                    Swal.fire({
-                      type: 'success',
-                      title: 'Order submitted!',
-                      confirmButtonText: 'OK',
-                      timer: 5000,
-                    })
-                    .then(      
-                      ClearCart(),                
-                      history.push( '/' )
-                    );
-                  } else {
-                    Swal.fire({
-                      type: 'error',
-                      title: 'An error has occured.', 
-                      text: res,
-                      confirmButtonText: 'OK', 
-                    });
-                  }    
-                                
-                });
-                */
-              
-              // [] !SUBMITTING -----------------------------------------------------------------
+                //[] Submitting data to [src/components/functions/submit_order.js]
+                  SubmitOrder({
+                    pass_history: this.props.history,
+                    pass_formData: formData, 
+                    pass_cart: prop_cart,
+                    pass_ClearCart: ClearCart,
+                  });
+            
+              // [!]------------------------------
               }}
             > 
               {({

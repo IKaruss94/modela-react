@@ -9,7 +9,6 @@
   @import "base/custom_carousel";
 
 // Views
-  @import "views/admin.scss"; //[] naming a file [admin] causes problems, [.scss] solves it
   @import "views/cart";
   @import "views/checkout";
   @import "views/contact";

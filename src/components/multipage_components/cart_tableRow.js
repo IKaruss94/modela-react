@@ -23,19 +23,27 @@ const CartTableRow = ( { tableType, cartItem, actionRemove } ) => {
   let itemNumber = null;
   if( cartItem.number.slice(-2) === '99' ){
     if( cartItem.reg_num === null )
-      itemNumber = <td className="align-middle my_customLink" title="N/A">{ cartItem.number + ' *'}</td>
+      itemNumber = <td className="align-middle" title="N/A">{ cartItem.number + ' *'}</td>
     else 
-      itemNumber = <td className="align-middle my_customLink" title={ cartItem.reg_num }>{ cartItem.number + ' *'}</td>
+      itemNumber = <td className="align-middle" title={ cartItem.reg_num }>{ cartItem.number + ' *'}</td>
   } else {
-    itemNumber = <td className="align-middle my_customLink">{ cartItem.number }</td>
+    itemNumber = <td className="align-middle">{ cartItem.number }</td>
   }
 
     return(
       <tr key={ cartItem.id }>
+
+        {          
+          tableType === 'cart' ? (
+            <LinkContainer 
+              to={"/store/"+cartItem.number.split('-')[0] }
+              className="myCart_numLink"
+              >
+              { itemNumber }
+            </LinkContainer>
+          ) : ( itemNumber )
+        }
         
-        <LinkContainer to={"/store/"+cartItem.number.split('-')[0] }>
-          { itemNumber }
-        </LinkContainer>
         <td className="align-middle">{ cartItem.quantity }</td>
 
         <td className="align-middle" title={ cartItem.quantity +' * '+  cartItem.priec_eu }>

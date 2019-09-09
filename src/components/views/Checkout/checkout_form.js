@@ -14,46 +14,76 @@
     import { Form, Field } from 'formik'    
     import Select from 'react-select'
 // [] my components
-    import CheckoutInput from './checkout_formGroup'
-    import CheckoutText from '../../../json/checkout.json'
+    //import CheckoutInput from './checkout_formGroup'
+    import JSONcheckout from '../../../json/checkout'
     import GetLabel from '../../functions/process_label'
 // [] my images
 
 // -------------------------------------------------------------------------------
 
 
+/** */
+    const InputField = (props) => {
+        const { language, fieldLabels, errors, field, form } = props;
 
-const InputField = (props) => {
-    const { language, fieldLabels, field, form } = props;
-    //console.log('input props', field.name , props);
+        //console.log('input props', props);
 
-    return(
-        <div className="myCheckout_clientField">            
-            <label htmlFor={field.name} className="myCheckout_clientLabel">{ fieldLabels[language] }</label> 
-            <input 
-                {...field} 
-                className = "myCheckout_clientInput"  
-                type = { fieldLabels.Type }    
-            />
-        </div>
-    )
-}
-InputField.propTypes = {  
-    fieldLabels: PropTypes.object,
-    language: PropTypes.string,
-    field: PropTypes.any,
-    form: PropTypes.any,
-}
+        if( errors[field.name] && form.touched[field.name] ) { 
+            return(
+                <div className="myCheckout_clientField">
+                    <label 
+                        htmlFor={field.name} 
+                        className="myCheckout_clientLabel error"
+                        title={ errors[field.name] }
+                    >
+                        { fieldLabels[language] + ' *' }
+                    </label>           
+                    <input 
+                        {...field} 
+                        className = "myCheckout_clientInput error"  
+                        type = { fieldLabels.Type }   
+                    />     
+                </div>
+            )
+         } else {   
+             return(
+                <div className="myCheckout_clientField">
+                    <label 
+                        htmlFor={field.name} 
+                        className="myCheckout_clientLabel"
+                    >
+                        { fieldLabels[language] }
+                    </label>        
+                    <input 
+                        {...field} 
+                        className = "myCheckout_clientInput"  
+                        type = { fieldLabels.Type }   
+                    />
+                </div>
+            )
+        }
+        
+    }
+    InputField.propTypes = {  
+        fieldLabels: PropTypes.object,
+        language: PropTypes.string,
+        errors: PropTypes.any,
+        field: PropTypes.any,
+        form: PropTypes.any,
+    }
+/** */
 
-const CheckoutForm = ( { 
-    formik_values, 
-    formik_errors,
-    formik_handleSubmit, 
-    formik_handleChange,
-    formik_setFieldValue,
-    prop_lang,
-} ) => {
+const CheckoutForm = ( props ) => {
 //#######################################################################################################
+    //console.log('checkout form props ', props);
+
+    const { 
+        formik_values, 
+        formik_errors,
+        formik_handleSubmit, 
+        formik_setFieldValue,
+        prop_lang,
+    } = props;
 
     //[] state variables
         //[] is [separate delivery destination] form open
@@ -62,17 +92,16 @@ const CheckoutForm = ( {
         const [selectedOption, setSelectedOption] = useState(null);
     //    
     //[] some variables
-        let deliveryCheckboxLabel = []; 
-
         let paymentLabel = [];  
         let paymentOptions = [];
 
         let orderClient = [];
         let orderDelivery = [];
+        let orderDeliveryCheckbox = []; 
         let orderPayment = [];
     //
     //[] sorting out the labels        
-        CheckoutText && CheckoutText.map( elem => {
+        JSONcheckout && JSONcheckout.map( elem => {
             switch (elem.FormGroup){
                 //[] make array of data fields for client
                 case 'client': {                     
@@ -88,7 +117,7 @@ const CheckoutForm = ( {
 
                 // [] set label for [delivery checkbox]
                 case '0' : {
-                    deliveryCheckboxLabel = elem;                                
+                    orderDeliveryCheckbox = elem;                                
                     break;
                 }
 
@@ -165,7 +194,10 @@ const CheckoutForm = ( {
     //#######################################################################################################
 
     return(
-        <Form id="my_form_chekout" >     
+        <Form id="my_form_chekout" >  
+
+
+
             <Row id="checkoutClient" className="my_checkout_formRow">
                 <Col> 
                 {                    
@@ -176,6 +208,7 @@ const CheckoutForm = ( {
                                 name={ elem.Name } 
                                 fieldLabels = { elem }
                                 language = { prop_lang }
+                                errors = { formik_errors }
                                 component={ InputField } 
                             />
                         ) 
@@ -184,46 +217,64 @@ const CheckoutForm = ( {
                 </Col>
             </Row>
 
-            <Row id="checkoutShowDelivery" className="my_checkout_formRow">
+
+
+            <Row className="my_checkout_formRow">
                 <Col>
-                    <label htmlFor="del_check" className="my_checkout_label">{ deliveryCheckboxLabel[prop_lang] }</label>
-                    <Field 
-                        type='checkbox'
-                        name='del_check'
-                        className="my_checkout_checkbox" 
-                        id='checkout_delCheck' //{`inline-checkbox-1`} 
-                        onChange={ () => checkboxChange() } 
-                    />
+
+                    <Row id="checkoutShowDelivery">
+                        <Col>
+                            <label 
+                                htmlFor="del_check" 
+                                id="checkout_delCheckLable"
+                                className="myCheckout_label"
+                                onClick={ () => checkboxChange() } 
+                            >                            
+                                { orderDeliveryCheckbox[prop_lang] }
+                            </label>
+                            <Field 
+                                type='checkbox'
+                                name='del_check'
+                                id='checkout_delCheck' //{`inline-checkbox-1`} 
+                                className="my_checkout_checkbox" 
+                                checked = { formik_values.del_check }
+                                onChange={ () => checkboxChange() } 
+                            />
+                        </Col>
+                    </Row> 
+                    
+                    {isOpen && (     
+                        <CSSTransitionGroup
+                            transitionName="my_transi_service" //"example""my_transi_service"
+                            transitionAppear={true}
+                            transitionAppearTimeout={500}
+                            transitionEnter={false}
+                            transitionLeave={false}
+                        >                 
+                            <Row id="checkoutDelivery">
+                                <Col>
+                                {                           
+                                    orderDelivery && orderDelivery.map( elem => {
+                                        return(                            
+                                            <Field 
+                                                key={ elem.Name } 
+                                                name={ elem.Name } 
+                                                fieldLabels = { elem }
+                                                language = { prop_lang }
+                                                errors = { formik_errors }
+                                                component={ InputField } 
+                                            />
+                                        ) 
+                                    })  
+                                }
+                                </Col>
+                            </Row>
+                        </CSSTransitionGroup>
+                    )}
                 </Col>
             </Row>
             
-            {isOpen && (     
-                <CSSTransitionGroup
-                    transitionName="my_transi_service" //"example""my_transi_service"
-                    transitionAppear={true}
-                    transitionAppearTimeout={500}
-                    transitionEnter={false}
-                    transitionLeave={false}
-                >                 
-                    <Row id="checkoutDelivery" className="my_checkout_formRow">
-                        <Col>
-                        {                           
-                            orderDelivery && orderDelivery.map( elem => {
-                                return(                            
-                                    <Field 
-                                        key={ elem.Name } 
-                                        name={ elem.Name } 
-                                        fieldLabels = { elem }
-                                        language = { prop_lang }
-                                        component={ InputField } 
-                                    />
-                                ) 
-                            })  
-                        }
-                        </Col>
-                    </Row>
-                </CSSTransitionGroup>
-            )}
+           
 {
     // [] next row = [select]
 }
@@ -233,9 +284,9 @@ const CheckoutForm = ( {
                         {    
                             // [] change label if requierments are not met, as defined in checking.js -> checkoutSchema       
                             !formik_errors[paymentLabel.Name] ? (
-                                <label htmlFor="payment_method" className="my_checkout_label">{ paymentLabel[prop_lang] }</label> 
+                                <label htmlFor="payment_method" className="myCheckout_label">{ paymentLabel[prop_lang] }</label> 
                             ) : (
-                                <label htmlFor="payment_method" className="my_checkout_error my_checkout_label">
+                                <label htmlFor="payment_method" className="my_checkout_error myCheckout_label">
                                     { paymentLabel[prop_lang] } 
                                     <i className="my_checkout_errSign" title={formik_errors[paymentLabel.Name]}>*</i>
                                 </label>
@@ -260,6 +311,7 @@ const CheckoutForm = ( {
                 {          
                     Object.values(formik_errors).length === 0 ? (
                         <Button 
+                            className="myBTN_big"
                             variant="primary" 
                             size="lg" 
                             block 
@@ -267,6 +319,7 @@ const CheckoutForm = ( {
                         >{ GetLabel( prop_lang, 'button', 'submit') }</Button>
                     ) : (
                         <Button 
+                            className="myBTN_big"
                             variant="danger" 
                             size="lg" 
                             block 

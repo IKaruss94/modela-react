@@ -10,7 +10,7 @@
   import React from 'react'
   import PropTypes from 'prop-types'  
 // [] my components
-  import LableText from '../../json/lables.json'
+  import JSONlabel from '../../json/labels'
 // [] my images
   import LoadingGIF from '../../../images/icons/modela_loading.gif'
 
@@ -20,7 +20,7 @@
 
 const ProcessLable = ( prop_lang, func_type, func_name ) => {
   
-  const res = LableText.find( (elem) => {
+  const res = JSONlabel.find( (elem) => {
     if( elem.Type === func_type && elem.Name === func_name ) { return elem; } 
   })
   //console.log( prop_lang, func_type, func_name, ' === ', res);

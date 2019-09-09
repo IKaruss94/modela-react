@@ -14,7 +14,7 @@
     {
         "Order_id": "1",
         "FormGroup":"client",
-        "Name":"email","Type":"email","IsRequiered":"1","Placeholder":"","ENG":"E-mail","RUS":"Е-почта","LAT":"E-pasts"
+        "Name":"email","Type":"email","IsRequiered":"1","Placeholder":"","ENG":"E-mail","RUS":"Электронная почта","LAT":"E-pasts"
     },
     {
         "Order_id": "2",

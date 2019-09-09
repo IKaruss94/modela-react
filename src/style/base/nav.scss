@@ -11,14 +11,17 @@
 
 
 .navbar-brand {
+  cursor: default;
   height: 65px;
   padding: 7px 30px 7px 50px;
 
   #img_logo {    
+    cursor: pointer;
     height: 50px;
-  }
-  #img_logo:hover {    
-    background-color: #ffd81b;
+  
+    &:hover, &:focus {    
+      background-color: #ffd81b;
+    }
   }
 }
 
@@ -58,7 +61,7 @@
 
   transition: 256ms;
 
-  &:hover{
+  &:hover, &:focus{
     color: #000;
   }
 }
@@ -78,9 +81,10 @@
 .my_navbar_dropElem {
   font-size: 1.6rem;
   padding: 10px;
-}
-.my_navbar_dropElem:hover {
-  background-color: lightgray;
+
+  &:hover, &:focus{
+    background-color: lightgray;
+  }
 }
 
 // language SELECT
@@ -110,7 +114,7 @@
       border-radius: 25%;
       transition-duration: 500ms;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: yellow;
         border-radius: 50%;
       }

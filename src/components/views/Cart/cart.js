@@ -14,10 +14,11 @@
   import { Container, Row, Button } from 'react-bootstrap'
   import ReactHtmlParser from 'react-html-parser'
   import { LinkContainer } from 'react-router-bootstrap'
+  import Swal from 'sweetalert2'
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
-  import LableText from '../../../json/lables'
-  import LongText from '../../../json/long_text'
+  import JSONlongtext from '../../../json/long_text'
+  import JSONalert from '../../../json/alerts'
   import GetLabel from '../../functions/process_label'
   import CartTable from '../../multipage_components/cart_table'
 
@@ -32,14 +33,18 @@ class Cart extends Component {
       const { history, prop_lang, prop_cart, ClearCart } = this.props;
              
     //[] rendering
-      if ( LongText === undefined || LableText === undefined ) { 
-        return PageLoading() 
-      }
+      if ( 
+        JSONlongtext === undefined || 
+        JSONalert === undefined
+      ) {  return PageLoading() }
       else {
-        const cartDetails = LongText.find( elem => {
+        const cartDetails = JSONlongtext.find( elem => {
           return elem.ForPage === 'cart'
         });
 
+        const alert_clearCart = JSONalert.find( elem => {
+          return elem.WhatsTheProblem === 'clear_cart'
+        });
 
         return (
           <Container> 
@@ -57,13 +62,21 @@ class Cart extends Component {
               {
                 prop_cart.length > 0 ? (
                   <LinkContainer to="/checkout">
-                    <Button variant="primary" size="lg" block>
+                    <Button 
+                      className="myBTN_big" 
+                      variant="primary" 
+                      block
+                    >
                       { GetLabel( prop_lang, 'button', 'to_checkout_ok') }
                     </Button>
                   </LinkContainer>  
                 ):(                  
                   <LinkContainer to="/store">
-                    <Button variant="primary" size="lg" block>
+                    <Button 
+                      className="myBTN_big" 
+                      variant="primary" 
+                      block
+                    >
                       { GetLabel( prop_lang, 'button', 'to_checkout_no') }
                     </Button>
                   </LinkContainer>  
@@ -73,11 +86,25 @@ class Cart extends Component {
                   variant="secondary" 
                   size="lg" 
                   block
-                  onClick = { () => {                      
-                    //localStorage.removeItem('state'),
-                    ClearCart(),
-                    history.push( '/' )
-                  } }
+                  onClick = { 
+                    () => {    
+                      Swal.fire({
+                        type: 'info',
+                        title: alert_clearCart[prop_lang].split('|')[0], 
+                        confirmButtonText: alert_clearCart[prop_lang].split('|')[1], 
+                        showCancelButton: true,
+                        cancelButtonText: alert_clearCart[prop_lang].split('|')[2],
+                        fontSize: '24px', 
+                      })
+                      .then( (result) => {
+                        console.log('swal res', result.value);
+                        if (result.value) {                                                              
+                          ClearCart(),
+                          history.push( '/' )
+                        }
+                      });                  
+                    } 
+                  }
                 >
                   { GetLabel( prop_lang, 'button', 'clear_cart') }
                 </Button>
