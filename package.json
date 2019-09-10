@@ -1,10 +1,10 @@
 {
-  "name": "modela",
-  "version": "0.1.0",
+  "name": "modela-react",
+  "version": "0.8.0",
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": ">=7.5.0"
+    "node": ">=12.0.0"
   },
   "proxy": "http://localhost:4000",
   "scripts": {
@@ -16,26 +16,25 @@
     "start": "node ./public/bundle.js"
   },
   "dependencies": {
-    "@react-google-maps/api": "^1.6.0",
-    "animate.css": "^3.7.2",
     "axios": "^0.19.0",
     "babel-cli": "^6.26.0",
     "bootstrap": "^4.3.1",
-    "email-templates": "^6.0.0",
-    "firebase": "^6.5.0",
-    "firebase-admin": "^8.4.0",
+    "email-templates": "^6.0.2",
+    "firebase": "^6.6.0",
+    "firebase-admin": "^8.5.0",
     "firebase-functions": "^3.2.0",
     "formik": "^1.5.8",
+    "google-maps-react": "^2.0.2",
     "googleapis": "^39.2.0",
     "gsap": "^2.1.3",
     "install": "^0.12.2",
     "lightbox-react": "^0.3.7",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
+    "node": "^12.10.0",
     "node-sass": "^4.12.0",
-    "npm": "^6.11.2",
+    "npm": "^6.11.3",
     "prop-types": "^15.7.2",
-    "pug": "^2.0.4",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-collapsible": "^2.6.0",
@@ -50,7 +49,7 @@
     "react-lightbox-component": "^1.2.1",
     "react-moment": "^0.9.2",
     "react-redux": "^7.1.1",
-    "react-redux-firebase": "^3.0.0-alpha.16",
+    "react-redux-firebase": "^3.0.0-beta.2",
     "react-responsive-carousel": "^3.1.50",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.0.1",
@@ -67,8 +66,8 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -87,7 +86,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
+    "webpack-cli": "^3.3.8",
     "webpack-dev-middleware": "^3.7.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"

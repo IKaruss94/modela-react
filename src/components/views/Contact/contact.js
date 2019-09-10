@@ -7,10 +7,14 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
+  import { connect } from 'react-redux'
+  import PropTypes from 'prop-types'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { Container, Col, Row, Button } from 'react-bootstrap'
+  import { LinkContainer } from "react-router-bootstrap"
 // [] my components'
+  import GetLabel from '../../functions/process_label'
   import ContactCard from '../../multipage_components/contact_card'
   import ContactMap from './contact_map'
 // [] my images
@@ -30,22 +34,43 @@ class Contact extends Component {
 
           <Row> 
 
-            <Col md>
+            <Col sm={12} lg={6}>
               <ContactCard className="my_contactCard" /> 
             </Col>  
 
-            <Col className="my_contactMapCol" md>
+            <Col className="my_contactMapCol" sm={12} lg={6}>
               <ContactMap />
             </Col>  
 
           </Row>
 
-          <Button type="primery">Price & Trade information</Button>
+          <Row>
+            <Col>
+
+              <LinkContainer to="/trade">
+                <Button 
+                  type="primery"
+                  className="myContact_tradeBtn"
+                  block
+                >{
+                  GetLabel( this.props.prop_lang, 'button', 'btn_contactToTade')
+                }</Button>
+              </LinkContainer>
+              
+            </Col>
+          </Row>
+
         </Container>
       )
       
   } // end of - render
 
 }
+Contact.propTypes = {
+  prop_lang: PropTypes.string,
+};
 
-export default (Contact)
+const mapStateToProps = (state) => ({
+    prop_lang: state.rootLang.lang
+});
+export default connect( mapStateToProps )(Contact)

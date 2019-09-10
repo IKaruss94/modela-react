@@ -27,7 +27,7 @@ const ProductImageCarousel = ( {products} ) => {
     //console.log('state : ', prodID, imageIndex, prodNames);
 
     return(   
-        <Carousel className="my_carousel my_prod my_prodCarousel">
+        <Carousel className="my_carousel my_prod myProd_Carousel">
             {
                 products && products.map( (product, index) => {
                     arr_imageNames.push( product.NUM_id+"-"+product.NUM_variant+".gif" );

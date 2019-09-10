@@ -173,5 +173,14 @@
         "ENG": "Back to cart",
         "LAT": "Atpakaļ uz grozu",
         "RUS": "Вернутся к корзине"
+    },
+    {        
+        "Name": "btn_contactToTade",
+        "Type": "button",
+        "ENG": "Pricing & Trade rules",
+        "LAT": "Cenu un tirgošanas nosacījumi",
+        "RUS": "Условия цен и Правила торговли"
     }
+
+    
 ]

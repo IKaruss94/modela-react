@@ -25,11 +25,27 @@
 
 // -------------------------------------------------------------------------------
 
-class Product extends Component {  
+class Product extends Component { 
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedOption: null
+    }
+
+    this.handleOptionSelect.bind(this);
+    this.handleChangeProduct.bind(this);
+  }
+
+  handleOptionSelect( e ){    
+    this.setState({ selectedOption: e });
+  }
+  handleChangeProduct( new_prod_num ){
+    this.handleOptionSelect(null);
+    this.props.history.push( '/store/'+ new_prod_num );
+  }
 
   render(){         
-    //console.log('product props', this.props);  
-
+    //console.log('product props', this.props); 
     // [] setting props / destruturing
       const { 
         prop_lang, prop_cart, 
@@ -60,20 +76,23 @@ class Product extends Component {
         //   
 
         // [] getting the IDs of the 'previous' & 'next' products
-          let arr_length = firestore_uniqueProds.length;
           let prod_PervNext = [];
+
           firestore_uniqueProds && firestore_uniqueProds.map( (elem_prod, index) => {
             if( elem_prod.NUM_id === prod_id ) {
 
-              if( index === 0 || !( firestore_uniqueProds[index-1].Visable) ) {            
+              //[] if first in array
+              if( index === 0 ) {          
                 prod_PervNext.push( '00000' );
                 prod_PervNext.push( firestore_uniqueProds[index+1].NUM_id );
               }
-              else if( index === arr_length-1 || !( firestore_uniqueProds[index+1].Visable) ) {
+              //[] if last in array
+              else if( index === firestore_uniqueProds.length - 1 ) {   
                 prod_PervNext.push( firestore_uniqueProds[index-1].NUM_id );
                 prod_PervNext.push( '00000' );
-              }
-              else {
+              }              
+              //[] not first & not last
+              else {     
                 prod_PervNext.push( firestore_uniqueProds[index-1].NUM_id );
                 prod_PervNext.push( firestore_uniqueProds[index+1].NUM_id );
               }
@@ -91,76 +110,82 @@ class Product extends Component {
         return (
           <Container> 
             <Helmet><title>{'#'+ product_zero.NUM_id }</title></Helmet>
-            <Row>
+
+            <Row id = "prodHeader">
               <Product_Header 
                 product={ product_zero } 
                 prod_PervNext = { prod_PervNext }
-                props = { this.props }
                 prop_lang = { prop_lang }
-              />  
-            </Row>   
+                prop_ChangeProd = { (e) => this.handleChangeProduct(e) }
+              />
+            </Row>
 
-            <Row id="prodCarousel">
-                <Product_Carusel 
-                  products={firestore_products} 
-                />
-            </Row> 
+            <Row id = "prodCarousel">
+              <Product_Carusel 
+                products={firestore_products} 
+              />
+            </Row>
 
-            <Row id="prodTable">
-                <Table responsive striped variant="light" className="my_ProductTable">
-                  <thead>
-                    <tr>
-                    {
-                      tableColOrder.map( (elem, index) => {
-                        return (                            
-                          <th key={ index } className="align-middle">
-                            { GetLabel( prop_lang, 'table', elem.toString() ) }
-                          </th>
-                        ) 
-                      })
-                    }
-                    </tr>
-                  </thead>
-                  <tbody>
+            
+            <Row id = "prodTable" >
+              <Table responsive striped variant="light" className="myProd_table">
+                <thead>
+                  <tr>
                   {
-                    variant_list.map( (prod) => {
-                      /* Prepering registration number select, for (model kit) row */
-                        // [] adding values to list of [regNum_noDupes]
-                          if( prod.Regist_num !== '' )                        
-                            regNum_posibleDupes.push( prod.Regist_num ); 
-                        // [] remove duplicates                                                         
-                          // eslint-disable-next-line        
-                          const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
-                        // []
-                          if ( prod.NUM_variant === '99' ){
-                            regNum_noDupes.forEach( elem => {
-                              regNum_options.push({ 
-                                value: elem, 
-                                label: elem.toString() 
-                              });
-                              // [] input format is necesery for use in [react-select]
-                            });
-                          }      
-                      /** */
-
-                      return(
-                        <Product_TableRow 
-                          key={prod.NUM_variant}
-                          prod= { prod } 
-                          cartItems = { prop_cart }
-                          regNum_options = { regNum_options }
-                          actionAddToCart = { actionAddToCart }
-                          actionRemoveFromCart = { RemoveFromCart }
-                          text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
-                          text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
-                        />
-                      ); 
-
-                    })    
+                    tableColOrder.map( (elem, index) => {
+                      return (                            
+                        <th key={ index } className="align-middle">
+                          { GetLabel( prop_lang, 'table', elem.toString() ) }
+                        </th>
+                      ) 
+                    })
                   }
-                  </tbody>
-                </Table>
-            </Row>   
+                  </tr>
+                </thead>
+                <tbody>
+                {
+                  variant_list.map( (prod) => {
+                    /* Prepering registration number select, for (model kit) row */
+                      // [] adding values to list of [regNum_noDupes]
+                        if( prod.Regist_num !== '' )                        
+                          regNum_posibleDupes.push( prod.Regist_num ); 
+                      // [] remove duplicates                                                         
+                        // eslint-disable-next-line        
+                        const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
+                      // []
+                        if ( prod.NUM_variant === '99' ){
+                          regNum_noDupes.forEach( elem => {
+                            regNum_options.push({ 
+                              value: elem, 
+                              label: elem.toString() 
+                            });
+                            // [] input format is necesery for use in [react-select]
+                          });
+                        }      
+                    /** */
+
+                    return(
+                      <Product_TableRow 
+                        key={prod.NUM_variant}
+                        prod= { prod } 
+                        cartItems = { prop_cart }
+                        regNum_options = { regNum_options }
+
+                        prop_selectedOption = { this.state.selectedOption }
+                        prop_optionChange = { (e) => { this.handleOptionSelect(e) } }
+
+                        actionAddToCart = { actionAddToCart }
+                        actionRemoveFromCart = { RemoveFromCart }
+                        text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
+                        text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
+                      />
+                    ); 
+
+                  })    
+                }
+                </tbody>
+              </Table>  
+            </Row>
   
         </Container>
         )       
@@ -180,11 +205,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return{
-    actionAddToCart: (newCartItem) => { console.log('cart?', newCartItem); dispatch({ type:'ADD_TO_CART', newItem: newCartItem }) },
+    actionAddToCart: (newCartItem) => { dispatch({ type:'ADD_TO_CART', newItem: newCartItem }) },
     RemoveFromCart: (id) => { dispatch({ type:'REMOVE_FROM_CART', itemID: id }) },
   }
 }
 Product.propTypes = {  
+  history: PropTypes.any,
   match: PropTypes.any,
   location: PropTypes.any,
 
@@ -208,7 +234,12 @@ export default compose(
           ['NUM_id','==', props.match.params.prod_id]
         ]
       },
-      { collection: 'uniqueProds' }
+      { 
+        collection: 'uniqueProds', 
+        where: [
+          ['Visable', '==', true]
+        ] 
+      }
     ]
   })
 )(Product)

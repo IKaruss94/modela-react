@@ -100,23 +100,3 @@ export default compose(
     { collection: 'uniqueProds' }
   ])
 )(Home)
-
-/*        
-        <Jumbotron fluid className="my_home_jumbo">
-          <div className="my_home_jumboImg" style={ homeStyle }>
-
-            <div className="my_home_title">
-              <Img className="my_home_titleImg img-rounded img-responsive"
-                    src={[ BigLogo ]}
-                    unloader={
-                        <div className="my_home_noImage">MODELA</div>
-                    }
-                />
-              <p className="my_home_titleText">SCALE MODEL ENGINEERING AND PRODUCTION <br/> since August 17, 2000</p>   
-            </div>
-
-          </div>
-          <div className="my_home_colorGap"></div> 
-
-        </Jumbotron>
-*/

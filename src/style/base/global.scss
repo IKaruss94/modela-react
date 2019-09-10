@@ -27,6 +27,14 @@ body {
 /** */
 
 
+.myImg_loading {
+  background-size: cover;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  width: 100%;
+  margin: auto;
+}
+
 
 .my_noHover {  
   pointer-events:none;

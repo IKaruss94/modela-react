@@ -142,6 +142,7 @@ class Checkout extends Component {
 
                 //[] Submitting data to [src/components/functions/submit_order.js]
                   SubmitOrder({
+                    pass_lang: prop_lang,
                     pass_history: this.props.history,
                     pass_formData: formData, 
                     pass_cart: prop_cart,

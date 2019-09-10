@@ -17,10 +17,10 @@ app.get('*', (req, res) => {
   const PORT = process.env.PORT || 8080;
   app.listen( PORT, (err) => {
     if (err) {
-      console.log(err);
+      console.log('prod app.listen error: ',err);
       return;
     }
     console.log(`PORT: ${PORT}`);
-    console.log('Press Ctrl+C to quit.')
+    console.log('Press Ctrl+C to quit.');
   });
 //

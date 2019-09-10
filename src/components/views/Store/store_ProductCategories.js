@@ -6,20 +6,21 @@
 */ 
 
 // [] fundemental components
-  import React from 'react'
+  import React, { Fragment } from 'react'
   import PropTypes from 'prop-types'
 // [] structure and style components
   import Collapsible from 'react-collapsible'
   import { Link } from 'react-router-dom'
   import Img from 'react-image'
 // [] my images
+  import LoadingGif from '../../../../images/icons/modela_loading.gif'
   import { storeThumbnails } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 
 const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang }) => {
     return(
-      <div>
+      <Fragment>
         {               
             pass_categories && pass_categories.map( elem_cat => {           
                //console.log('cat ID',elem_cat.ID_prodCat);              
@@ -38,6 +39,7 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                           
                         return(                            
                             <Link 
+                              key={ elem_prod.NUM_id }
                               to={ match.url +"/"+ elem_prod.NUM_id } 
                               className="my_storeImageLink" 
                             >
@@ -46,6 +48,9 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                                 src={[
                                   storeThumbnails[ elem_prod.IMG_thumbnail ]
                                 ]}
+                                loader={ 
+                                  <img src={LoadingGif} className="myImg_loading" alt="loading" height="100" />
+                                }
                                 unloader={
                                   <div className="my_noStoreImage"># {elem_prod.NUM_id}</div>
                                 }
@@ -64,7 +69,7 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
 
           
         }
-      </div>
+      </Fragment>
     )
 }
 

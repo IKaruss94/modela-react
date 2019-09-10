@@ -4,16 +4,14 @@ const nodeExternals = require('webpack-node-externals');
 
 //----------------------------------------------
 
-module.exports = (env, argv) => {
-  const SERVER_PATH = (argv.mode === 'production') ?
-  './src/server/server_prod.js' :
-  './src/server/server_dev.js'
+module.exports = (env, argv) => { //[] (env. argv)
+  const SERVER_PATH = argv.mode === 'production' ? ('./src/server/server_prod.js') : ('./src/server/server_dev.js');
 
   return({
     entry: {
       server: SERVER_PATH,
     },
-  
+    
     output: {
       path: (argv.mode === 'production') ?
         path.join(__dirname, 'build_public') :

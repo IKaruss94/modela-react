@@ -25,83 +25,117 @@
 
 // -------------------------------------------------------------------------------
 
-const TDimage = ({ imageGroup, img, name }) => {
-  return(         
-    <td className="align-middle">
-      <Img className="my_prod_tableImg img-rounded img-responsive"
-        src={[
-          imageGroup[img]
-        ]}
-        unloader={
-            <div className="my_noImage_prodEmblems">{name}</div>
-        }
-      />
-    </td>
-  );
-}
-const TDprice = ({ price }) => {
-  let num_price = parseFloat(price, 10);
-   
-  return(         
-    <td className="my_prod_tablePrice align-middle">
-      <Currency
-        quantity={num_price}
-        currency="EUR"
-      />
-    </td>
-  );
-}
-const TDquantitiy = ({ quantity, handleQuantityChange }) => {
-  return(
-    <td className="align-middle">
-      <Form>
-        <Form.Control 
-          className="my_quntityInput"    
-          type="number" 
-          min="1" 
-          max="100" 
-          placeholder="0"
-          value={ quantity }
-          onChange={ handleQuantityChange }
+
+
+//[] table image
+  const TDimage = ({ imageGroup, img, name }) => {
+    return(         
+      <td className="align-middle">
+        <Img className="my_prod_tableImg img-rounded img-responsive"
+          src={[
+            imageGroup[img]
+          ]}
+          unloader={
+              <div className="my_noImage_prodEmblems">{name}</div>
+          }
         />
-      </Form>
-    </td>
-  )
-}
+      </td>
+    );
+  }
+  TDimage.propTypes = {
+    imageGroup: PropTypes.any,
+    img: PropTypes.any,
+    name: PropTypes.any,
+  }
+//[!]
+
+//[] table price values
+  const TDprice = ({ price }) => {
+    let num_price = parseFloat(price, 10);
+    
+    return(         
+      <td className="my_prod_tablePrice align-middle">
+        <Currency
+          quantity={num_price}
+          currency="EUR"
+        />
+      </td>
+    );
+  }
+  TDprice.propTypes = {
+    price: PropTypes.string,
+  }
+//[!]
+
+//[] table quantity input
+  const TDquantitiy = ({ quantity, handleQuantityChange }) => {
+    return(
+      <td className="align-middle">
+        <Form>
+          <Form.Control 
+            className="my_quntityInput"    
+            type="number" 
+            min="1" 
+            max="100" 
+            placeholder="0"
+            value={ quantity }
+            onChange={ handleQuantityChange }
+          />
+        </Form>
+      </td>
+    )
+  }
+  TDquantitiy.propTypes = {
+    quantity: PropTypes.any,
+    handleQuantityChange: PropTypes.func,
+  }
+//[!]
+
+//[] Add item to cart  
+  const AddingToCart = ({ actionAddToCart, product, quantity, selectedRegNums  }) => {
+
+    let regNumString = '';
+    selectedRegNums && selectedRegNums.map( elem => {
+      regNumString === '' ? (        
+        regNumString += elem.value
+      ) : (
+        regNumString += ' | ' + elem.value
+      )
+    });
+
+    actionAddToCart({ 
+      id: product.id, 
+      name: product.Name, 
+      number: product.NUM_id+'-'+product.NUM_variant, 
+      reg_num: product.NUM_variant==='99' ? (regNumString):(product.Regist_num),
+      quantity: quantity,
+      priec_eu: product.Price_vat_eu,
+      preice_export: product.Price_export_eu
+    });
+  }
+//[!]
 
 // -------------------------------------------------------------------------------
 const ProductTableRow = ({
-  prod, 
-  cartItems, 
-  regNum_options, 
-  actionAddToCart, 
-  actionRemoveFromCart, 
-  text_addToCart,
-  text_kitRegInfo,
+  prod, cartItems, regNum_options, prop_selectedOption,
+  prop_optionChange, actionAddToCart, actionRemoveFromCart, 
+  text_addToCart, text_kitRegInfo,
 } ) => {
 
   const [quantity, setQuantity] = useState( 1 );
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [chosenRegNums, setChosenRegNums] = useState(null);
-
-
-  //console.log(cartItems)
+  //const [selectedOption, setSelectedOption] = useState(null); //[] this is for [react-select]
+  //const [chosenRegNums, setChosenRegNums] = useState(null); //[] this is submited with [kit / 99] 
 
   /** [] kit reg-num selector */
     // [] handle change
       const handleRegNumChange = ( chosenValue ) => {        
-        setSelectedOption( chosenValue );
-
-        let newValue;
-        if( chosenRegNums !== null ) newValue = chosenRegNums + ', ' + chosenValue[chosenValue.length-1].value;
-        else newValue = chosenValue[0].value;
-        setChosenRegNums( newValue );
+        prop_optionChange( chosenValue );
       }
   /** */
 
 
-  if( prod.Available ) {
 
+  if( prod.Available ) {
     // [] check [if item already in cart], used in a function later @ [.my_prod_tableCart]
     const inCartValue =  cartItems.find( cartElem => { 
       return cartElem.id === prod.id
@@ -121,7 +155,8 @@ const ProductTableRow = ({
                 classNamePrefix = "react-select"
                 name = "kit-reg-num"
                 isMulti
-                value= { selectedOption }
+                defaultValue = { null }
+                value = { prop_selectedOption }
                 options = { regNum_options } // regNum list is ssupplyed from [product.js]
                 onChange = { handleRegNumChange }
               />   
@@ -198,17 +233,12 @@ const ProductTableRow = ({
                   <Button 
                     key={ prod.NUM_variant } 
                     variant="primary" 
-                    onClick={ 
-                      () => actionAddToCart({ 
-                        id: prod.id, 
-                        name: prod.Name, 
-                        number: prod.NUM_id+'-'+prod.NUM_variant, 
-                        reg_num: prod.NUM_variant==='99' ? (chosenRegNums):(prod.Regist_num),
-                        quantity: quantity,
-                        priec_eu: prod.Price_vat_eu,
-                        preice_export: prod.Price_export_eu
-                      }) 
-                    } 
+                    onClick={ () => AddingToCart({
+                      actionAddToCart: actionAddToCart, 
+                      product: prod, 
+                      quantity: quantity,
+                      selectedRegNums: prop_selectedOption
+                    }) } 
                     // [addToCart] is in [product.js] because you don't call a disatch from a function component  
                   >{ text_addToCart }</Button>
                 </div>
@@ -219,7 +249,6 @@ const ProductTableRow = ({
       </tr>
     );
   }
-
   else {
     return (
       <tr key={prod.NUM_variant}>        
@@ -238,29 +267,17 @@ const ProductTableRow = ({
     );
   }
 }
-
-
 ProductTableRow.propTypes = {  
   num: PropTypes.any,
   reg_num: PropTypes.any,
   regNum_options: PropTypes.any,
-  selectedOption: PropTypes.any,
+  prop_selectedOption: PropTypes.any,
   text_addToCart: PropTypes.any,  
 
+  prop_optionChange: PropTypes.func,
   RegNum: PropTypes.func,
 }
-TDimage.propTypes = {
-  imageGroup: PropTypes.any,
-  img: PropTypes.any,
-  name: PropTypes.any,
-}
-TDprice.propTypes = {
-  price: PropTypes.number,
-}
-TDquantitiy.propTypes = {
-  quantity: PropTypes.number,
-  handleQuantityChange: PropTypes.func,
-}
+
 export default (ProductTableRow);
 
 

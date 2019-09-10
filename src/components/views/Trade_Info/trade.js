@@ -28,26 +28,33 @@ class TradeInfo extends Component {
     // setting props
       const { prop_lang } = this.props; 
 
+      const price_data = LongText.find( elem => {
+        return elem.Name === 'Price'
+      });
+      
+      const trade_data = LongText.find( elem => {
+        return elem.Name === 'Trade Rules'
+      })
+
     // []    
       if ( LongText === undefined ) { return PageLoading() }
       else {
         return (
           <Container id="tradeInfo"> 
             <Helmet><title>Trade info</title></Helmet>
-          {
-            LongText && LongText.map( elem => {            
-              if( elem[prop_lang] !== '' && ( elem.Name === 'Price' || elem.Name === 'Trade Rules' ) )
-                return(   
-                  <Card key={elem.ID_data} className="my_tradeInfo"> 
-                      
-                    <Card.Body>
-                      <div>{ ReactHtmlParser( elem[prop_lang] ) }</div>
-                    </Card.Body>
 
-                  </Card>   
-                )
-            })
-          }     
+              <Card key={price_data.ID_data} className="my_tradeInfo">            
+                <Card.Body>
+                  <div>{ ReactHtmlParser( price_data[prop_lang] ) }</div>
+                </Card.Body>
+              </Card>   
+
+              <Card key={trade_data.ID_data} className="my_tradeInfo"> 
+                <Card.Body>
+                  <div>{ ReactHtmlParser( trade_data[prop_lang] ) }</div>
+                </Card.Body>
+              </Card>   
+
           </Container>
         )
       } // [] end of [else]
@@ -64,3 +71,22 @@ TradeInfo.propTypes = {
 };
 
 export default connect( mapStateToProps )(TradeInfo)
+
+
+/**
+ * 
+          {
+            LongText && LongText.map( elem => {            
+              if( elem[prop_lang] !== '' && ( elem.Name === 'Price' || elem.Name === 'Trade Rules' ) )
+                return(   
+                  <Card key={elem.ID_data} className="my_tradeInfo"> 
+                      
+                    <Card.Body>
+                      <div>{ ReactHtmlParser( elem[prop_lang] ) }</div>
+                    </Card.Body>
+
+                  </Card>   
+                )
+            })
+          }     
+ */

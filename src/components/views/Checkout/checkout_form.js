@@ -130,11 +130,6 @@ const CheckoutForm = ( props ) => {
                     }
                     break;
                 }
-                //[]
-                default : {
-                    console.log('unused label : ', elem);                                
-                    break;
-                }
             }
         })
     //

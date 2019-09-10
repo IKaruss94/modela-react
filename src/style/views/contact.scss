@@ -39,8 +39,8 @@
 }
 
 .my_contactMapCol {  
-  //height: 512px;
-  //width: 512px;
+  height: 512px;
+  //width: 100%;
   margin-top: 20px;
 
   .my_contactMap {
@@ -64,3 +64,10 @@
     }
   }
 /**/
+
+.myContact_tradeBtn {
+  padding: 8px;
+  margin: 20px auto 0px;
+  font-size: 2.2rem;
+  font-weight: bold;
+}

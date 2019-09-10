@@ -6,18 +6,21 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import JSON_checkout from '../../json/checkout.json'
+import JSON_alert from '../../json/alerts'
 
 const SubmitOrder = ( props ) => {
-  const { pass_history, pass_formData, pass_cart, pass_ClearCart } = props;
+  const { pass_lang, pass_history, pass_formData, pass_cart, pass_ClearCart } = props;
   
-  //const LIVEcloudFunc = 'https://us-central1-modela-1501516157418.cloudfunctions.net/OrderSubmit';
   const EMULATORcoludFunc = 'http://localhost:5001/modela-1501516157418/us-central1/OrderSubmit';
   
   try{    
+    const alert_start = JSON_alert.find( elem => {
+      return elem.WhatsTheProblem === 'submit_processing'
+    });
 
     Swal.fire({
       type: 'info',
-      title: 'Submitting your order', 
+      title: alert_start[pass_lang], 
       showConfirmButton: false, 
       allowOutsideClick: false,
     });
@@ -49,7 +52,6 @@ const SubmitOrder = ( props ) => {
         submit_data: pass_formData, 
         submit_cart: pass_cart
       };
-      console.log('test', orderData );
       
   // --- LOADING IS DONE (officialiy in the [.then] method )
 
@@ -61,23 +63,35 @@ const SubmitOrder = ( props ) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
       })
       .then( (res) => {
-        console.log(res);
         
-        if(res.status === 200){        
+        
+        if(res.status === 200){ 
+
+          const alert_ok = JSON_alert.find( elem => {
+            return elem.WhatsTheProblem === 'submit_ok'
+          });
           pass_ClearCart();
           pass_history.push( '/' );
           
           Swal.fire({
             type: 'success',
-            title: 'Order [would be] submitted.',
+            title: alert_ok[pass_lang],
             confirmButtonText: 'OK',
           });
-        } else {        
+
+        } else {    
+
+          const alert_nope = JSON_alert.find( elem => {
+            return elem.WhatsTheProblem === 'submit_nope'
+          });   
+          
           Swal.fire({
             type: 'error',
-            title: 'OOOOOOOOOOOOOPS',
+            title: 'OOOPS',
+            text: alert_nope[pass_lang],
             confirmButtonText: 'OK',
           });
+
         }
         
       })

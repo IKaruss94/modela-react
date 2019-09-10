@@ -2,12 +2,45 @@
 
 $color-carouselCaption: rgba(200, 255, 200, 0.4);
 
-
 $header-height: 400px; //384
 $header-bgColor: #ffffff;
 
+$margin-between-blocks: 30px;
 
-/* ----- HEADER -----*/
+
+/* ------- CSS transition ---------- */
+// --- extra service info show/hide ANIMATION 
+// --- --- the practical part of show/hide is in [service_card.js]
+.myProd_rowAppear-appear {    
+  max-height: 0;
+  overflow: hidden;
+}
+.myProd_rowAppear-appear.myProd_rowAppear-appear-active {   
+  max-height: 1024px;
+  transition: max-height 200ms fade-in;
+}
+
+
+/* ----- SMALL / MOBILE HEADER -----*/
+  .myProd_headerSmall {
+    margin-top: 16px;
+    
+    display: flex;
+    flex-direction: column;
+  }
+  .myProd_smallHeadRow {
+    display: inline-block;
+    overflow: hidden;
+
+    .row {
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+/**/
+
+
+/* ----- DEFAULT HEADER -----*/
   .my_prodHeader {
     margin-top: 16px;
     margin-left: 2px;
@@ -17,6 +50,10 @@ $header-bgColor: #ffffff;
     background-color: $body_color;
     overflow: hidden;
     padding:0px;
+  }
+
+  .my_prodHeadCol {
+    padding: 0px;
   }
 
   // product - header - image
@@ -88,44 +125,36 @@ $header-bgColor: #ffffff;
       background-color: #e3e3e3;//f9f9f9;
       border: none;
       transition: 250ms;
-    }      
-    .my_prodChangeBtn:hover {     
-      transition: 250ms;   
-      background-color: #aaa;
+       
+      &:hover {     
+        background-color: #aaa;
 
-      .material-icons {
-        transform: scale(1.5);
+        .material-icons {
+          transition: 250ms;   
+          transform: scale(1.5);
+        }
       }
-    }
-    
-    // [] buttons to go to next/prev store item
-    .previous::before {
-      font-family: 'Material Icons';
-      content: '\e5cb'; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
-      font-size: 2.4em;
-    }
-    .next::before {
-      font-family: 'Material Icons';
-      content: "\e5cc"; // https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
-      font-size: 2.4rem;
-    }
+
+    }     
 
     // button - if first / last product item
       .btn_disabled { 
         cursor: default;     
         background-color: $header-bgColor;
-      }      
-      .btn_disabled:hover {  
-        background-color: $header-bgColor;  
+
+        &:hover {  
+          background-color: $header-bgColor;  
+        }
       }
-    //
-    .my_prodHeadCol {
-      padding: 0px;
-    }
   //
 /**/
 
 /* ----- CAROUSEL ----- */   
+
+  .myProd_Carousel {
+    margin-top: $margin-between-blocks;
+  }
+
   .my_carousel_image.my_prod,
   .my_carousel_noImage.my_prod {    
     height: 256px;
@@ -138,8 +167,8 @@ $header-bgColor: #ffffff;
 /**/
 
 /* ----- table ----- */
-    .my_ProductTable {
-      margin-top: 50px;
+    .myProd_table {
+      margin-top: $margin-between-blocks;
 
       background-color: $tile-background-color;
       padding: 5px;

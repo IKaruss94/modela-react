@@ -97,7 +97,6 @@ class Cart extends Component {
                         fontSize: '24px', 
                       })
                       .then( (result) => {
-                        console.log('swal res', result.value);
                         if (result.value) {                                                              
                           ClearCart(),
                           history.push( '/' )

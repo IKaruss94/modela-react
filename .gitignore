@@ -21,6 +21,8 @@
 
 .firebaserc
 firebase.json
+firestore.rules
+firestore-debug.log
 
 #my misc stuff
 /ZZZzzzZZZzzzZZZzzzZZZzzzZZZzzz
