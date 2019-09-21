@@ -55,6 +55,14 @@ $tile-background-color: #fff;
 
 }
 
+// symbolyizing that a product is not available at the moment, but still viewable
+  //.myStore_prodAvail{}
+  .myStore_prodNotAvail {
+    border-color: red;
+    img{
+      opacity: .6;
+    }
+  }
 
 
 /* [] for the rest of [.Collapsible] styles see [utilities/modefid_package_stylings.scss] */

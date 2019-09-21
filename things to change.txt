@@ -1,0 +1,8 @@
+
+DB => product 
+    => change [IMG_tooltip] to [ING_thumbnail] & [Images] to [IMG_kit]
+    => remove [ID_order]
+
+
+
+    map api - AIzaSyBbjfJC1xM5lR1dlLyrwhlz40-oONCVvAk

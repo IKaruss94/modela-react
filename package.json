@@ -20,7 +20,7 @@
     "babel-cli": "^6.26.0",
     "bootstrap": "^4.3.1",
     "email-templates": "^6.0.2",
-    "firebase": "^6.6.0",
+    "firebase": "^6.6.1",
     "firebase-admin": "^8.5.0",
     "firebase-functions": "^3.2.0",
     "formik": "^1.5.8",
@@ -61,7 +61,7 @@
     "redux": "^4.0.4",
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
-    "sweetalert2": "^8.17.1",
+    "sweetalert2": "^8.17.4",
     "webpack-dev-server": "3.1.14",
     "yup": "^0.27.0"
   },
@@ -85,8 +85,8 @@
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^1.1.2",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
     "webpack-dev-middleware": "^3.7.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"

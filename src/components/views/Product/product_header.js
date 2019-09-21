@@ -60,7 +60,7 @@
                     ):(null)
                 }
                 {
-                    product.Producer !== '0' ? ( 
+                    product.Producer !== '' ? ( 
                         <span key='Producer' className="my_prodDataTitle">
                             <strong>{ GetLabel( prop_lang, 'prod_header', 'Producer') }: </strong>
                                 { product.Producer }

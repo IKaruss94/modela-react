@@ -97,6 +97,9 @@ export default compose(
   connect( mapStateToProps ),
   withSizes( mapSizesToProps ),
   firestoreConnect([
-    { collection: 'uniqueProds' }
+    { 
+      collection: 'uniqueProds',
+      where: [[ 'Visable', '==', true ]]
+    }
   ])
 )(Home)

@@ -23,7 +23,9 @@ $margin-between-blocks: 30px;
 
 /* ----- SMALL / MOBILE HEADER -----*/
   .myProd_headerSmall {
+    width: 100%;
     margin-top: 16px;
+    background-color: #fff;
     
     display: flex;
     flex-direction: column;
@@ -237,3 +239,17 @@ $margin-between-blocks: 30px;
       font-size: 1.6rem;
     }
 /**/
+
+
+
+/* ------- KIT IMAGES ------------ */
+
+  .prodKits {
+    width: 100%;
+  }
+  
+  .myProd_ImgKit {
+    cursor: pointer;
+    width: 512px;
+    background-color: #fff;
+  }

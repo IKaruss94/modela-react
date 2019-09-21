@@ -35,13 +35,15 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
                     <div className="my_store_collapsedContetn">
                     {
                       pass_products && pass_products.map(elem_prod => {  
-                        if( elem_prod.Category === elem_cat.ID_cat && elem_prod.Visable ) //[] if product is in category and VISABLE         
-                          
-                        return(                            
+                        if( elem_prod.Category === elem_cat.ID_cat && elem_prod.Visable ) //[] if product is in category and VISABLE  
+                        {
+                          const isAvailClass = elem_prod.Available ? ( "myStore_prodAvail"):("myStore_prodNotAvail")
+                          return(                            
                             <Link 
                               key={ elem_prod.NUM_id }
                               to={ match.url +"/"+ elem_prod.NUM_id } 
-                              className="my_storeImageLink" 
+                              className={"my_storeImageLink " + isAvailClass }
+                              
                             >
 
                               <Img
@@ -58,6 +60,7 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
 
                             </Link>
                           )
+                        }  
 
                       })
                     }

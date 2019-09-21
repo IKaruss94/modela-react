@@ -44,9 +44,9 @@
 
 
 /* Collapsable */
-  .Collapsible 
-  {  
+  .Collapsible {  
     margin: 30px 20px;
+    min-width: 80%;
     
     .Collapsible__trigger{ 
       cursor: pointer;

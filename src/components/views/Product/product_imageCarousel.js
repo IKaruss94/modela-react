@@ -14,14 +14,16 @@
     import Carousel from 'react-bootstrap/Carousel'
 // [] my components
 // [] my images
+    import LoadingGif from '../../../../images/icons/modela_loading.gif'
     import { prodCarouselImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 const ProductImageCarousel = ( {products} ) => {
+
     const [isOpen, setIsOpen] = useState(false);
-    const [imageIndex, setImageIndex] = useState(0);
-    
+    const [imageIndex, setImageIndex] = useState(0);    
     const [prodNames, setProdNames] = useState(0);
+    
     let arr_imageNames = [];    
     
     //console.log('state : ', prodID, imageIndex, prodNames);
@@ -45,7 +47,10 @@ const ProductImageCarousel = ( {products} ) => {
                                 <Img className="my_carousel_image my_prod img-rounded img-responsive"
                                     src={[
                                         prodCarouselImages[product.NUM_id+"-"+product.NUM_variant+".gif"] 
-                                    ]}
+                                    ]} 
+                                    loader={ 
+                                        <img src={LoadingGif} className="myImg_loading" alt="loading" height="100" />
+                                    }
                                     unloader={
                                         <div className="my_carousel_noImage my_prod">No image for #{product.NUM_id+"-"+product.NUM_variant}</div>
                                     }

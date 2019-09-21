@@ -12,8 +12,8 @@
   import PropTypes from 'prop-types'
   import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 // [] structure and style components
-  import { Container, Row, Table } from 'react-bootstrap'
   import { Helmet } from 'react-helmet'
+  import { Container, Row, Table } from 'react-bootstrap'
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
   import GetLabel from '../../functions/process_label'
@@ -21,7 +21,10 @@
   import Product_Header from './product_header'
   import Product_Carusel from './product_imageCarousel'
   import Product_TableRow from './product_tableRow'
+  import Product_KitImages from './product_kitImages'
+
 // [] my images
+  //import LoadingGif from '../../../../images/icons/modela_loading.gif'
 
 // -------------------------------------------------------------------------------
 
@@ -51,7 +54,7 @@ class Product extends Component {
         prop_lang, prop_cart, 
         firestore_products, firestore_uniqueProds, 
         actionAddToCart, RemoveFromCart 
-      } = this.props; 
+      } = this.props;       
      
 
     //[] if firestore data is not loaded
@@ -74,6 +77,8 @@ class Product extends Component {
               variant_list.push( elem_prod );       
           })  
         //   
+
+
 
         // [] getting the IDs of the 'previous' & 'next' products
           let prod_PervNext = [];
@@ -126,66 +131,79 @@ class Product extends Component {
               />
             </Row>
 
-            
-            <Row id = "prodTable" >
-              <Table responsive striped variant="light" className="myProd_table">
-                <thead>
-                  <tr>
-                  {
-                    tableColOrder.map( (elem, index) => {
-                      return (                            
-                        <th key={ index } className="align-middle">
-                          { GetLabel( prop_lang, 'table', elem.toString() ) }
-                        </th>
-                      ) 
-                    })
-                  }
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                  variant_list.map( (prod) => {
-                    /* Prepering registration number select, for (model kit) row */
-                      // [] adding values to list of [regNum_noDupes]
-                        if( prod.Regist_num !== '' )                        
-                          regNum_posibleDupes.push( prod.Regist_num ); 
-                      // [] remove duplicates                                                         
-                        // eslint-disable-next-line        
-                        const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
-                      // []
-                        if ( prod.NUM_variant === '99' ){
-                          regNum_noDupes.forEach( elem => {
-                            regNum_options.push({ 
-                              value: elem, 
-                              label: elem.toString() 
-                            });
-                            // [] input format is necesery for use in [react-select]
-                          });
-                        }      
-                    /** */
-
-                    return(
-                      <Product_TableRow 
-                        key={prod.NUM_variant}
-                        prod= { prod } 
-                        cartItems = { prop_cart }
-                        regNum_options = { regNum_options }
-
-                        prop_selectedOption = { this.state.selectedOption }
-                        prop_optionChange = { (e) => { this.handleOptionSelect(e) } }
-
-                        actionAddToCart = { actionAddToCart }
-                        actionRemoveFromCart = { RemoveFromCart }
-                        text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
-                        text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
-                      />
-                    ); 
-
-                  })    
-                }
-                </tbody>
-              </Table>  
+            {
+              variant_list.length === 0 ? (
+                console.log( prod_id ,' - has no active prods' )
+              ) : (            
+                <Row id = "prodTable" >
+                  <Table responsive striped variant="light" className="myProd_table">
+                    <thead>
+                      <tr>
+                      {
+                        tableColOrder.map( (elem, index) => {
+                          return (                            
+                            <th key={ index } className="align-middle">
+                              { GetLabel( prop_lang, 'table', elem.toString() ) }
+                            </th>
+                          ) 
+                        })
+                      }
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {
+                      variant_list.map( (prod) => {
+                        /* Prepering registration number select, for (model kit) row */
+                          // [] adding values to list of [regNum_noDupes]
+                            if( prod.Regist_num !== '' )                        
+                              regNum_posibleDupes.push( prod.Regist_num ); 
+                          // [] remove duplicates                                                         
+                            // eslint-disable-next-line        
+                            const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
+                          // []
+                            if ( prod.NUM_variant === '99' ){
+                              regNum_noDupes.forEach( elem => {
+                                regNum_options.push({ 
+                                  value: elem, 
+                                  label: elem.toString() 
+                                });
+                                // [] input format is necesery for use in [react-select]
+                              });
+                            }      
+                        /** */
+    
+                        return(
+                          <Product_TableRow 
+                            key={prod.NUM_variant}
+                            prod= { prod } 
+                            cartItems = { prop_cart }
+                            regNum_options = { regNum_options }
+    
+                            prop_selectedOption = { this.state.selectedOption }
+                            prop_optionChange = { (e) => { this.handleOptionSelect(e) } }
+    
+                            actionAddToCart = { actionAddToCart }
+                            actionRemoveFromCart = { RemoveFromCart }
+                            text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
+                            text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
+                          />
+                        ); 
+    
+                      })    
+                    }
+                    </tbody>
+                  </Table>  
+                </Row>
+              )
+            }
+              
+            <Row id = "prodKits">
+              <Product_KitImages 
+                num_id={ product_zero.NUM_id }
+                kitImages={ product_zero.Images.split('; ') }
+              />
             </Row>
+            
   
         </Container>
         )       

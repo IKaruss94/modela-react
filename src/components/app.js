@@ -53,13 +53,4 @@ class App extends Component {
   } // end of - render
 }
 
-/*
-  export default compose(
-    firestoreConnect([
-      { collection: 'products' },
-      { collection: 'uniqueProds' },
-      { collection: 'lables' }
-    ])
-  )(App)
-*/
 export default (App)

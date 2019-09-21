@@ -47,5 +47,5 @@ ContactMap.propTypes = {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ''
+    apiKey: '' //[] api key here
   })(ContactMap);

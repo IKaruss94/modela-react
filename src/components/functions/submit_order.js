@@ -11,8 +11,11 @@ import JSON_alert from '../../json/alerts'
 const SubmitOrder = ( props ) => {
   const { pass_lang, pass_history, pass_formData, pass_cart, pass_ClearCart } = props;
   
-  const EMULATORcoludFunc = 'http://localhost:5001/modela-1501516157418/us-central1/OrderSubmit';
+  const LIVEcloudFunc = 'https://us-central1-modela-1501516157418.cloudfunctions.net/OrderSubmit';
+  //const EMULATORcoludFunc = 'http://localhost:5001/modela-1501516157418/us-central1/OrderSubmit';
   
+  const ACTIVEcloudFunc = LIVEcloudFunc;
+
   try{    
     const alert_start = JSON_alert.find( elem => {
       return elem.WhatsTheProblem === 'submit_processing'
@@ -58,7 +61,7 @@ const SubmitOrder = ( props ) => {
     //[] after submiting a function to firebase you get an URL, that goes here
       axios({
         method: 'POST',
-        url: EMULATORcoludFunc,
+        url: ACTIVEcloudFunc,
         data: orderData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
       })
