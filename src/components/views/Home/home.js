@@ -55,18 +55,18 @@ class Home extends Component {
               <Helmet><title>Modela</title></Helmet>              
 
               <Row> 
-                <Col className="my_home_carousel" md={12} lg={8}>
+                <Col className="my_home_carousel">
                   <HomeCarousel isMobile={ prop_isMobile } store_data={firestore_uniqueProds} prop_history={this.props.history} />
-                </Col>   
-                <Col className="my_home_contact" md={6} lg={4}>
-                  <ContactCard className="my_contactCard" /> 
                 </Col> 
               </Row>      
 
               <Row> 
-                <Col className="my_about">
+                <Col className="my_about" md={12} lg={7}>
                   { home_about }
-                </Col>
+                </Col>  
+                <Col className="my_home_contact" md={6} lg={4}>
+                  <ContactCard className="my_contactCard" /> 
+                </Col> 
               </Row>
 
             </Container>

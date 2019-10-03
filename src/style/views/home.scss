@@ -116,7 +116,9 @@ $jumbo_height: 800px;
 
   .my_carousel.my_home {
     padding:5px;
-    height: $carousel_height+40;
+    min-height: $carousel_height+40;
+    max-width: 100%;  
+    min-width: 80%;
     
     border-radius: 1%;
   }
@@ -124,8 +126,6 @@ $jumbo_height: 800px;
   .my_carousel_image.my_home, 
   .my_carousel_noImage.my_home  {
     max-height: $carousel_height; 
-    max-width: 100%;  
-    min-width: 80%;
     display:block;
     margin: 15px auto 5px;
   }
