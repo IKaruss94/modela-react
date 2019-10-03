@@ -18,17 +18,19 @@
 
 // -------------------------------------------------------------------------------
 
-const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang }) => {
+const StoreProdCategories = ({ pass_scale, pass_products, pass_categories, match, prop_lang }) => {   
     return(
       <Fragment>
         {               
-            pass_categories && pass_categories.map( elem_cat => {           
-               //console.log('cat ID',elem_cat.ID_prodCat);              
+            pass_categories && pass_categories.map( elem_cat => {  
+              //[] if category is for different scale, then ignore       
+              if( elem_cat.Scale !== pass_scale ) return null;
+
               return(                    
                   <Collapsible 
                     key={elem_cat.ID_cat} 
                     className="my_store_collapsible"
-                    trigger={ elem_cat[prop_lang] } 
+                    trigger={ elem_cat.Scale === "other" ? ( elem_cat[prop_lang] ):( elem_cat.Scale +" - "+ elem_cat[prop_lang] ) } 
                     open
                   >  
                   
@@ -77,9 +79,10 @@ const StoreProdCategories = ({ pass_products, pass_categories, match, prop_lang 
 }
 
 StoreProdCategories.propTypes = {  
-  match: PropTypes.any,
+  match: PropTypes.object,
   prop_lang: PropTypes.any,
+  pass_scale: PropTypes.string,
   pass_products: PropTypes.any,
-  pass_categories: PropTypes.any
+  pass_categories: PropTypes.any,
 };
 export default StoreProdCategories;

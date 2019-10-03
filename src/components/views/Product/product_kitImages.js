@@ -84,6 +84,7 @@ const ProductKit = ({ num_id, kitImages }) => {
 };
 
 ProductKit.propTypes = {  
-    products: PropTypes.any
+    num_id: PropTypes.any,
+    kitImages: PropTypes.any
 };  
 export default (ProductKit);

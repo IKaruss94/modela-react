@@ -7,6 +7,22 @@ $tile-background-color: #fff;
   height: 100%;
 }
 
+
+.myStore_btnGroup {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+
+  .myStore_btnScaleToggle {
+    width: 100%;
+    padding: 16px;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
 .my_store_collapsedContetn {
   width: 100%;
   display: flex;

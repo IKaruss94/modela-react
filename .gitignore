@@ -29,10 +29,7 @@ firestore-debug.log
 /src/components/order_submission
 /config
 /populate-firestore
-_errorCodes.txt
-_HowTo.txt
-_NOTES.txt
-_TODOS.txt
+/notes&stuff
 credentials.json
 
 # misc

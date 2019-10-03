@@ -14,6 +14,7 @@
   import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 // [] structure and style components
   import { Helmet } from 'react-helmet'
+  import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap' 
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
   import StoreProductCat from './store_ProductCategories'
@@ -22,6 +23,19 @@
 // ------------------------------------------------------------------------------- 
 
 class Store extends Component {   
+
+  constructor(props){
+    super(props);
+    this.state = {
+      activeScale: "32"
+    }
+
+    this.handleScaleChange.bind(this);
+  }
+
+  handleScaleChange( newScale ){
+    this.setState({ activeScale: newScale });
+  }
   
   render(){      
     //console.log('store props', this.props);
@@ -32,11 +46,59 @@ class Store extends Component {
         return PageLoading(location.pathname) 
       }
       else {
+
+        const prodScales = () => {
+          let returnValues = [];
+          firestore_uniqueProds && firestore_uniqueProds.map( elem => {
+            const scale = elem.NUM_id.substring(0,2);
+            
+            if( returnValues.indexOf(scale) < 0 ){
+              returnValues.push(scale);
+            }
+          });
+
+          return returnValues;
+        };
+        const sortedProdScales = prodScales().sort();
+
+
         return (
           <div id="store" className="large-container">  
             <Helmet><title>Store</title></Helmet>
             
-            <StoreProductCat pass_products={firestore_uniqueProds} pass_categories={prop_categories} match={match} prop_lang={prop_lang} />
+            <ToggleButtonGroup  
+              aria-label="Model scales"
+              className="myStore_btnGroup"
+              name="model_scales"
+              defaultValue={ this.state.activeScale }
+            >
+            {
+              sortedProdScales.map( elem => {
+                return(
+                  <ToggleButton 
+                    key={ elem }
+                    className="myStore_btnScaleToggle"
+                    variant="secondary"                    
+                    value= { elem }
+                    onChange={ () => this.handleScaleChange(elem) }
+                  > 
+                  { "1/" + elem }
+                  </ToggleButton >
+                )
+              })
+            }
+            </ToggleButtonGroup>
+
+
+             
+            <StoreProductCat 
+              pass_scale={"1/"+ this.state.activeScale}
+              pass_products={firestore_uniqueProds} 
+              pass_categories={prop_categories} 
+              match={match} 
+              prop_lang={prop_lang} 
+            />
+
 
             <Route path={ match.url +'/:prod_id' } component={Product} />
           </div>
@@ -63,7 +125,7 @@ Store.propTypes = {
 export default compose(
   connect( mapStateToProps ),
   firestoreConnect([
-    { collection: 'uniqueProds' },
+    { collection: 'uniqueProds', where:[ 'Visable', '==', true ] },
     { collection: 'production_categories' }
   ])
 )(Store)
