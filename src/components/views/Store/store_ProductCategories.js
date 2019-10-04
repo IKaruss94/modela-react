@@ -10,15 +10,15 @@
   import PropTypes from 'prop-types'
 // [] structure and style components
   import Collapsible from 'react-collapsible'
-  import { Link } from 'react-router-dom'
   import Img from 'react-image'
+  import { Link } from 'react-router-dom'
 // [] my images
   import LoadingGif from '../../../../images/icons/modela_loading.gif'
   import { storeThumbnails } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 
-const StoreProdCategories = ({ pass_scale, pass_products, pass_categories, match, prop_lang }) => {   
+const StoreProdCategories = ({ pass_scale, pass_products, pass_categories, prop_lang }) => {   
     return(
       <Fragment>
         {               
@@ -43,9 +43,8 @@ const StoreProdCategories = ({ pass_scale, pass_products, pass_categories, match
                           return(                            
                             <Link 
                               key={ elem_prod.NUM_id }
-                              to={ match.url +"/"+ elem_prod.NUM_id } 
-                              className={"my_storeImageLink " + isAvailClass }
-                              
+                              to={ "/product/"+ elem_prod.NUM_id } 
+                              className={"my_storeImageLink " + isAvailClass }                              
                             >
 
                               <Img

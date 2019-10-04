@@ -35,7 +35,9 @@ class Contact extends Component {
           <Row> 
 
             <Col sm={12} lg={6}>
-              <ContactCard className="my_contactCard" /> 
+              <ContactCard 
+                card_page="contact"
+              /> 
             </Col>  
 
             <Col className="my_contactMapCol" sm={12} lg={6}>

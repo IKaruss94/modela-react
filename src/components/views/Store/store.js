@@ -15,6 +15,7 @@
 // [] structure and style components
   import { Helmet } from 'react-helmet'
   import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap' 
+  import { LinkContainer } from "react-router-bootstrap"
 // [] my components
   import PageLoading from '../../Errors/pageLoading'
   import StoreProductCat from './store_ProductCategories'
@@ -40,6 +41,7 @@ class Store extends Component {
   render(){      
     //console.log('store props', this.props);
     const { match, firestore_uniqueProds, prop_categories, prop_lang } = this.props; 
+    const scale_id = this.props.match.params.scale_id; 
 
     // []
       if ( !isLoaded(firestore_uniqueProds) || !isLoaded(prop_categories) ) { 
@@ -70,20 +72,22 @@ class Store extends Component {
               aria-label="Model scales"
               className="myStore_btnGroup"
               name="model_scales"
-              defaultValue={ this.state.activeScale }
+              defaultValue={ scale_id }
             >
             {
               sortedProdScales.map( elem => {
                 return(
-                  <ToggleButton 
-                    key={ elem }
-                    className="myStore_btnScaleToggle"
-                    variant="secondary"                    
-                    value= { elem }
-                    onChange={ () => this.handleScaleChange(elem) }
-                  > 
-                  { "1/" + elem }
-                  </ToggleButton >
+                  
+                  <LinkContainer to={"/store/"+ elem}>
+                    <ToggleButton 
+                      key={ elem }
+                      className="myStore_btnScaleToggle"
+                      variant="secondary"                    
+                      value= { elem }
+                    > 
+                    { "1/" + elem }
+                    </ToggleButton >
+                  </LinkContainer>
                 )
               })
             }
@@ -92,10 +96,9 @@ class Store extends Component {
 
              
             <StoreProductCat 
-              pass_scale={"1/"+ this.state.activeScale}
+              pass_scale={"1/"+ scale_id}
               pass_products={firestore_uniqueProds} 
               pass_categories={prop_categories} 
-              match={match} 
               prop_lang={prop_lang} 
             />
 

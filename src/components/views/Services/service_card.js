@@ -62,7 +62,7 @@ const ServiceCard = ( {prop_isMobile, pass_title, pass_text, pass_image, pass_la
 }
 ServiceCard.propTypes = {  
   prop_isMobile: PropTypes.any,
-  pass_title: PropTypes.string,
+  pass_title: PropTypes.any,
   pass_text: PropTypes.any,
   pass_image: PropTypes.any,
   pass_lang: PropTypes.string,  

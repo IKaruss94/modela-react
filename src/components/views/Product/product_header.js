@@ -70,7 +70,7 @@
                 }
                 
                 <ButtonToolbar className="my_prod_headerButtons">
-                    <LinkContainer to="/store" activeClassName="">
+                    <LinkContainer to={"/store/"+ product.NUM_id.substring(0,2) } activeClassName="">
                         <Button 
                             type="button"
                             className="my_prodHead_btnStore" 

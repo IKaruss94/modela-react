@@ -2,7 +2,7 @@
 [
     {
         "order_value": 1,
-        "Name":"store",
+        "Name":"store/32",
         "Parent":"0",
         "ENG":"Store",
         "LAT":"Veikals",

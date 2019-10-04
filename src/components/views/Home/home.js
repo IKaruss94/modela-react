@@ -65,7 +65,10 @@ class Home extends Component {
                   { home_about }
                 </Col>  
                 <Col className="my_home_contact" md={6} lg={4}>
-                  <ContactCard className="my_contactCard" /> 
+                  <ContactCard 
+                    card_page="home"
+                    ref_history = { this.history }
+                  /> 
                 </Col> 
               </Row>
 
