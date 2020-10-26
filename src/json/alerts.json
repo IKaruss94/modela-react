@@ -1,0 +1,32 @@
+
+
+[
+    {
+        "ForPage": "cart",
+        "WhatsTheProblem": "clear_cart",
+        "ENG": "Are you sure you want to empty the cart? | Yes | No ",
+        "LAT": "Vai esat parliecināti ka gribat iztukšot grozu? | Jā | Nē ",
+        "RUS": "Вы уверены, что хотите опустошить корзину? | Да | Нет"
+    },
+    {
+        "ForPage": "submit",
+        "WhatsTheProblem": "submit_processing",
+        "ENG": "Submitting your order",
+        "LAT": "Iesniedz pasūtījumu",
+        "RUS": "Отправляем ваш заказ"
+    },
+    {
+        "ForPage": "submit",
+        "WhatsTheProblem": "submit_ok",
+        "ENG": "Your order was submitted.",
+        "LAT": "Jūsu pasūtījums tika iesniegts.",
+        "RUS": "Ваш заказ был отправлен."
+    },
+    {
+        "ForPage": "submit",
+        "WhatsTheProblem": "submit_nope",
+        "ENG": "Something went wrong. Wait a bit and try again.",
+        "LAT": "Kaut kas nogāja greizi. Nedaudz pagaidiet un mēģiniet vēlreiz.",
+        "RUS": "Что-то пошло не так. Подождите немного и попробуйте снова."
+    }
+]

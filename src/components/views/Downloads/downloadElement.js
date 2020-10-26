@@ -27,7 +27,7 @@ const downloadElement = ({ download, image, prop_lang }) => {
                 <div className="my_dl_noImage">No image [{download.Image}]</div>
             }
         />    
-        <h3 className="span my_dl_text">{ download[prop_lang.toUpperCase()] }</h3>
+        <h3 className="span my_dl_text">{ download[prop_lang] }</h3>
         <a
           href="../../../../download-files/"
           download={download.Filename}

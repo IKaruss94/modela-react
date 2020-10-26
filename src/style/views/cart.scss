@@ -19,3 +19,23 @@
 .my_btnRemove {
     padding: 11px 10px 6px;
 }
+
+
+.myCart_table {
+    margin-top: 50px;
+
+    background-color: $tile-background-color;
+    padding: 5px;
+
+    thead{
+      background-color: #fff
+    }
+}
+
+.myCart_numLink {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

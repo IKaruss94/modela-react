@@ -1,22 +1,9 @@
-/*
-import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  UPDATE_CART,
-  RESET_CART
-} from '../actions/actionCart';
-
-const GET_CART = "GET_CART";
-const ADD_TO_CART = "ADD_TO_CART";
-const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-const UPDATE_CART = "UPDATE_CART";
-const RESET_CART = "RESET_CART";
-*/
 
 
 
 const initialState = {
     redu_cartItems: [], //{ id:'', number:'', quantity:'', priec_eu:'', preice_export:'' }
+    //[] structure is defined in [views/Products/product_tableRow.js], by [className="my_prod_cartAdd"]
 };
 
 const cartReducer = ( state = initialState, action) => {
@@ -27,7 +14,7 @@ const cartReducer = ( state = initialState, action) => {
           return item.id !== action.newItem.id
         })
 
-        if( newCart.length === 0 )
+        if( newCart.length === 0 ) //
         {
           return {
             ...state,

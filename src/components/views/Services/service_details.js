@@ -26,13 +26,11 @@ const ServiceDetails = ({ text, lang }) => {
   let var_imageNames = []; // needed for lightbox
   let arr_Carousel = text.Images.split('; ');
 
-  console.log('state : ', imageIndex, imageName);
-
   return(
     <Card className="my_serviceCardText">       
       <Card.Body>
         <div>
-          { ReactHtmlParser( text[lang.toUpperCase()] ) }
+          { ReactHtmlParser( text[lang] ) }
         </div>
 
         <div>           

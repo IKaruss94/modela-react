@@ -2,6 +2,9 @@
 
 /* [] BOOTSTRAP */
   //    
+    .container{
+      margin-top: 15px;
+    }
     .btn {
       font-size: 1.6rem;
     }
@@ -34,3 +37,55 @@
     z-index: 999 !important;
   }
 /**/
+
+.swal2-popup {
+  font-size: 1.6rem;
+}
+
+
+/* Collapsable */
+  .Collapsible {  
+    margin: 30px 20px;
+    min-width: 80%;
+    
+    .Collapsible__trigger{ 
+      cursor: pointer;
+
+      display: block;
+      padding: 10px;
+      position: relative;
+      background-color: $nav_color;
+
+      border: 1px solid #333;
+
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 2rem;
+
+      transition-duration: 360ms;
+
+      &:hover { background-color: #efc90bb4 }
+    }
+
+    .Collapsible__trigger:after {
+        font-family: "Material Icons";
+        content: "\e5c7"; // \e5c5 for the filped one
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: block;
+        transition: transform 360ms; 
+      }
+
+      .Collapsible__trigger.is-open:after {
+        transform: rotateZ(180deg); 
+      }
+    
+
+    .Collapsible__contentInner
+    {
+      padding: 20px;
+    }
+  }
+/**/
+

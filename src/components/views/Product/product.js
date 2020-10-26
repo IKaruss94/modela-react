@@ -7,204 +7,257 @@
 
 // [] fundemental components
   import React, { Component } from 'react'
+  import { compose } from 'redux'
   import { connect } from 'react-redux'
   import PropTypes from 'prop-types'
+  import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 // [] structure and style components
-  import { Container, Row, Table } from 'react-bootstrap'
   import { Helmet } from 'react-helmet'
+  import { Container, Row, Table } from 'react-bootstrap'
 // [] my components
-  import PageLoading from '../Errors/pageLoading'
-  import PageError from '../Errors/pageError'
-  import { fetchSingleProduct } from '../../../redux_store/actions/getProduct'
-  import GetLable from '../../functions/process_lable'
+  import PageLoading from '../../Errors/pageLoading'
+  import GetLabel from '../../functions/process_label'
 
   import Product_Header from './product_header'
   import Product_Carusel from './product_imageCarousel'
   import Product_TableRow from './product_tableRow'
+  import Product_KitImages from './product_kitImages'
+
 // [] my images
+  //import LoadingGif from '../../../../images/icons/modela_loading.gif'
 
 // -------------------------------------------------------------------------------
 
-class Product extends Component {  
+class Product extends Component { 
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedOption: null
+    }
 
-  componentDidMount() {   
-      this.props.getProduct( this.props.match.params.prod_id );  
+    this.handleOptionSelect.bind(this);
+    this.handleChangeProduct.bind(this);
+  }
+
+  handleOptionSelect( e ){    
+    this.setState({ selectedOption: e });
+  }
+  handleChangeProduct( new_prod_num ){
+    this.handleOptionSelect(null);
+    this.props.history.push( '/store/'+ new_prod_num );
   }
 
   render(){         
-    //console.log('product props', this.props);  
+    //console.log('product props', this.props); 
+    // [] setting props / destruturing
+      const { 
+        prop_lang, prop_cart, 
+        firestore_products, firestore_uniqueProds, 
+        actionAddToCart, RemoveFromCart 
+      } = this.props;       
+     
 
-    // [] setting props
-      const { prop_errorView, prop_loadingView, prop_products, prop_store, prop_cart, prop_lables, prop_lang } = this.props; 
+    //[] if firestore data is not loaded
+      if( 
+        !isLoaded( firestore_products ) || 
+        !isLoaded( firestore_uniqueProds )
+      ) { return <PageLoading /> }
+    //[] else it is loaded
+      else {   
+        const prod_id = this.props.match.params.prod_id; 
+        const tableColOrder = [ 'era', 'user', 'reg_num', 'number', 'name', 'price_vat', 'price_noVat', 'qunatity', 'cart' ];  
+              
+        // [] separate base product info (number == 00) and the veriants
+          let variant_list = [];
+          let product_zero = [];
+          firestore_products && firestore_products.map(elem_prod => {
+            if( elem_prod.NUM_variant === '00')
+              product_zero = elem_prod;
+            else if( elem_prod.Visable )
+              variant_list.push( elem_prod );       
+          })  
+        //   
 
-    // [] separate base product info (number == 00) and the veriants
-      let product_list = [];
-      let product_zero = [];
-      prop_products && prop_products.map(prod => {
-        if( prod.Number === '00')
-          product_zero = prod;
-        else
-          product_list.push( prod );       
-      })  
-    //
-    // [] getting the IDs of the 'previous' & 'next' products
-      let prod_id = this.props.match.params.prod_id;   
-      let arr_length = prop_store.length;
-      let prod_PervNext = [];
-      prop_store && prop_store.map( (prod, id) => {
-        if( prod.Prod_number === prod_id) {
 
-          if( id === 0 ) {            
-            prod_PervNext.push( '00000' );
-            prod_PervNext.push( prop_store[id+1].Prod_number );
-          }
-          else if( id === arr_length-1 ) {
-            prod_PervNext.push( prop_store[id-1].Prod_number );
-            prod_PervNext.push( '00000' );
-          }
-          else {
-            prod_PervNext.push( prop_store[id-1].Prod_number );
-            prod_PervNext.push( prop_store[id+1].Prod_number );
-          }
 
-        }
+        // [] getting the IDs of the 'previous' & 'next' products
+          let prod_PervNext = [];
 
-      })  
-    //
+          firestore_uniqueProds && firestore_uniqueProds.map( (elem_prod, index) => {
+            if( elem_prod.NUM_id === prod_id ) {
 
-    // [] what to return / render
-      if (prop_errorView) { return PageError(prop_errorView.message) }
-      if (prop_loadingView) { return PageLoading() }
-    // [] some variables for table
-      let regNum_options = [];  
-      let regNum_posibleDupes = [];  
-      const tableColOrder = [ 'era', 'user', 'reg_num', 'number', 'name', 'price_vat', 'price_noVat', 'qunatity', 'cart' ];
-                    
-    //
+              //[] if first in array
+              if( index === 0 ) {          
+                prod_PervNext.push( '00000' );
+                prod_PervNext.push( firestore_uniqueProds[index+1].NUM_id );
+              }
+              //[] if last in array
+              else if( index === firestore_uniqueProds.length - 1 ) {   
+                prod_PervNext.push( firestore_uniqueProds[index-1].NUM_id );
+                prod_PervNext.push( '00000' );
+              }              
+              //[] not first & not last
+              else {     
+                prod_PervNext.push( firestore_uniqueProds[index-1].NUM_id );
+                prod_PervNext.push( firestore_uniqueProds[index+1].NUM_id );
+              }
 
-      return (
-        <Container> 
-          <Helmet><title>{'#'+ product_zero.ID }</title></Helmet>
-          <Row>
-            <Product_Header 
-              product={ product_zero } 
-              prod_PervNext = { prod_PervNext }
-              props = { this.props }
-              prop_lang = { prop_lang }
-              prop_lables = { prop_lables }
-            />  
-          </Row>   
+            }
 
-          <Row id="prodCarousel">
-              <Product_Carusel 
-                products={prop_products} 
+          })  
+        //  
+  
+        // [] some variables for table
+          let regNum_options = [];  
+          let regNum_posibleDupes = [];  
+        //
+
+        return (
+          <Container> 
+            <Helmet><title>{'#'+ product_zero.NUM_id }</title></Helmet>
+
+            <Row id = "prodHeader">
+              <Product_Header 
+                product={ product_zero } 
+                prod_PervNext = { prod_PervNext }
+                prop_lang = { prop_lang }
+                prop_ChangeProd = { (e) => this.handleChangeProduct(e) }
               />
-          </Row> 
+            </Row>
 
-          <Row id="prodTable">
-              <Table responsive striped variant="light" className="my_ProductTable">
-                <thead>
-                  <tr>
-                  {
-                    tableColOrder.map( (elem, index) => {
+            <Row id = "prodCarousel">
+              <Product_Carusel 
+                products={firestore_products} 
+              />
+            </Row>
 
-                      let temp = prop_lables.find( (obj) => {
-                        if( obj.Type === 'table' && obj.Name === elem ) 
-                          return obj
-                      })
-                      
-                      if( temp !== undefined ) {
-                        return (                            
-                          <th key={ index } className="align-middle">{ temp[ prop_lang.toUpperCase() ] }</th>
-                        ) 
+            {
+              variant_list.length === 0 ? (
+                console.log( prod_id ,' - has no active prods' )
+              ) : (            
+                <Row id = "prodTable" >
+                  <Table responsive striped variant="light" className="myProd_table">
+                    <thead>
+                      <tr>
+                      {
+                        tableColOrder.map( (elem, index) => {
+                          return (                            
+                            <th key={ index } className="align-middle">
+                              { GetLabel( prop_lang, 'table', elem.toString() ) }
+                            </th>
+                          ) 
+                        })
                       }
-                    })
-                  }
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    product_list.map( (prod) => {
-                      /* Prepering registration number select, for (model kit) row */
-                        // [] adding values to list of [regNum_noDupes]
-                          if( prod.Regist_num !== '' )                        
-                            regNum_posibleDupes.push( prod.Regist_num ); 
-                        // [] remove duplicates                                                         
-                          // eslint-disable-next-line        
-                          const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
-                        // []
-                          if ( prod.Number === '99' ){
-                            regNum_noDupes.forEach( elem => {
-                              regNum_options.push({ 
-                                value: elem, 
-                                label: elem.toString() 
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {
+                      variant_list.map( (prod) => {
+                        /* Prepering registration number select, for (model kit) row */
+                          // [] adding values to list of [regNum_noDupes]
+                            if( prod.Regist_num !== '' )                        
+                              regNum_posibleDupes.push( prod.Regist_num ); 
+                          // [] remove duplicates                                                         
+                            // eslint-disable-next-line        
+                            const regNum_noDupes = [ ... new Set(regNum_posibleDupes) ];       
+                          // []
+                            if ( prod.NUM_variant === '99' ){
+                              regNum_noDupes.forEach( elem => {
+                                regNum_options.push({ 
+                                  value: elem, 
+                                  label: elem.toString() 
+                                });
+                                // [] input format is necesery for use in [react-select]
                               });
-                              // [] input format is necesery for use in [react-select]
-                            });
-                          }      
-                      /** */
-
-                      return(
-                        <Product_TableRow 
-                          key={prod.Number}
-                          prod= { prod } 
-                          cartItems = { prop_cart }
-                          regNum_options = { regNum_options }
-                          actionAddToCart = { this.props.actionAddToCart }
-                          actionRemoveFromCart = { this.props.RemoveFromCart }
-                          text_addToCart = { GetLable( prop_lang, prop_lables, 'table', 'btn_addCart') }
-                          text_kitRegInfo = { GetLable( prop_lang, prop_lables, 'text', 'kit_reg_info') }
-                          // [] in the last 2 passed values - the ones as string, point to specific entrys in [prop_lables]
-                        />
-                      ); 
-
-                    })    
-                  }
-                </tbody>
-              </Table>
-          </Row>   
- 
-      </Container>
-      )       
+                            }      
+                        /** */
+    
+                        return(
+                          <Product_TableRow 
+                            key={prod.NUM_variant}
+                            prod= { prod } 
+                            cartItems = { prop_cart }
+                            regNum_options = { regNum_options }
+    
+                            prop_selectedOption = { this.state.selectedOption }
+                            prop_optionChange = { (e) => { this.handleOptionSelect(e) } }
+    
+                            actionAddToCart = { actionAddToCart }
+                            actionRemoveFromCart = { RemoveFromCart }
+                            text_addToCart = { GetLabel( prop_lang, 'table', 'btn_addCart') }
+                            text_kitRegInfo = { GetLabel( prop_lang, 'text', 'kit_reg_info') }
+                          />
+                        ); 
+    
+                      })    
+                    }
+                    </tbody>
+                  </Table>  
+                </Row>
+              )
+            }
+              
+            <Row id = "prodKits">
+              <Product_KitImages 
+                num_id={ product_zero.NUM_id }
+                kitImages={ product_zero.Images.split('; ') }
+              />
+            </Row>
+            
+  
+        </Container>
+        )       
+      } // [] end of [else]
     //
-  }
+  } // [] end of [render]
 }
 
-const mapStateToProps = (state) => ({
-  prop_lang: state.rootLang.lang,
-  prop_lables: state.rootStatic.lable_data,
+const mapStateToProps = (state) => {
+  return {
+    prop_lang: state.rootLang.lang,
+    prop_cart: state.rootCart.redu_cartItems,
 
-  prop_products: state.rootProduct.product,
-  prop_loadingView: state.rootProduct.loading,
-  prop_errorView: state.rootProduct.error,
-
-  //prop_loadingApp: state.rootStatic.loading,
-  //prop_errorApp: state.rootStatic.error,
-
-  prop_cart: state.rootCart.redu_cartItems,
-  prop_store: state.rootStatic.store_production
-})
+    firestore_products: state.rootFirestore.ordered.products,
+    firestore_uniqueProds: state.rootFirestore.ordered.uniqueProds,
+  }
+}
 const mapDispatchToProps = (dispatch) => {
   return{
-    getProduct: (product_id) => { dispatch( fetchSingleProduct(product_id) ) },
-    actionAddToCart: (newCartItem) => { console.log('cart?', newCartItem); dispatch({ type:'ADD_TO_CART', newItem: newCartItem }) },
+    actionAddToCart: (newCartItem) => { dispatch({ type:'ADD_TO_CART', newItem: newCartItem }) },
     RemoveFromCart: (id) => { dispatch({ type:'REMOVE_FROM_CART', itemID: id }) },
   }
 }
 Product.propTypes = {  
+  history: PropTypes.any,
   match: PropTypes.any,
-  prop_errorView: PropTypes.any,
-  prop_loadingView: PropTypes.any,
+  location: PropTypes.any,
 
-  prop_products: PropTypes.any,
-  prop_store: PropTypes.any,
-  prop_lables: PropTypes.any,
   prop_lang: PropTypes.any,
-
   prop_cart: PropTypes.any,
 
-  getProduct: PropTypes.func,
+  firestore_products: PropTypes.any,
+  firestore_uniqueProds: PropTypes.any,
+
   actionAddToCart: PropTypes.func,
   RemoveFromCart: PropTypes.func,
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Product)
+
+export default compose(
+  connect( mapStateToProps, mapDispatchToProps ),
+  firestoreConnect( (props) => {
+    return [
+      { 
+        collection: 'products',
+        where: [
+          ['NUM_id','==', props.match.params.prod_id]
+        ]
+      },
+      { 
+        collection: 'uniqueProds', 
+        where: [
+          ['Visable', '==', true]
+        ] 
+      }
+    ]
+  })
+)(Product)

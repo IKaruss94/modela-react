@@ -2,23 +2,26 @@
 
 .navbar 
 {
-  height: 65px;
   padding: 0px;
+  height: 80px;
   background-color: $nav_color;
-  z-index: 900; //if above 1000, intefiers with 'lightbox' which has a z-index of 1000
+  z-index: 500 !important; //if above 1000, intefiers with 'lightbox' which has a z-index of 1000
 }
 
 
 
 .navbar-brand {
+  cursor: default;
   height: 65px;
-  padding: 13px;
+  padding: 7px 30px 7px 50px;
 
   #img_logo {    
-    height: 40px;
-  }
-  #img_logo:hover {    
-    background-color: #ffd81b;
+    cursor: pointer;
+    height: 50px;
+  
+    &:hover, &:focus {    
+      background-color: #ffd81b;
+    }
   }
 }
 
@@ -26,47 +29,74 @@
 .my_navbar_collapse {
   background-color: $nav_color;
 }
-.my_navbar_secound {
-  position: absolute;
-  right: 100px;
 
-  display: block;
-  margin: 0px auto;
-  
-  border-top: 1px solid rgba(150, 150, 150, 0.5);
+
+@media only screen and (min-width: 990px){ 
+  /*[] if screen width is over */
+  .my_navbar_secound { padding: 0 50px; }
+}
+@media only screen and (max-width: 990px){ 
+  /*[] if screen width is under */
+  .my_navbar_secound {
+    display: block;  
+    width: 250px;
+    margin: 0 auto;
+  }
 }
 
 .my_navbar_elem, .my_navbar_drop
 {  
+  display: inline-block;
   height: 65px;
-  padding: 16px 26px;
-  margin: 0px 16px;
+  padding: 16px 20px;
+  margin: 0px 20px;
 
   text-align: center;
   font-weight: bold;
   font-size: 2rem;
 
-  transition: 100ms;
+  border-radius: 20px;
+
+  z-index: 900;
+
+  transition: 256ms;
+
+  &:hover, &:focus{
+    color: #000;
+    font-weight: 800;
+    font-size: 2.6rem;
+    letter-spacing: 2px;
+  }
 }
-.my_navbar_elem:hover, .my_navbar_drop:hover {
-  background-color: #ffd81b;
+
+.my_navbar_drop .dropdown-menu { 
+  top: 80%;
+  transition-duration: 500ms;
 }
+@keyframes NavDropdownAnimation {
+  0%    { height: 0%; }
+  100%  { height: 100%; }
+
+}
+
 
 .my_navbar_drop { padding: 11px 0px; }
 .my_navbar_dropElem {
   font-size: 1.6rem;
   padding: 10px;
-}
-.my_navbar_dropElem:hover {
-  background-color: lightgray;
+
+  &:hover, &:focus{
+    background-color: lightgray;
+  }
 }
 
 // language SELECT
   .my_nav_select {      
     display: inline-block;
+    z-index: 999;
 
     width: 180px;
-    padding: 13px;    
+    padding: 20px 13px;    
     
     background: $nav_color;
     text-align: center;
@@ -75,10 +105,27 @@
 // cart
   .my_navCart { 
     display: inline-block;
-    margin: 2px auto;
-    padding: 13px;    
-   }
-  .my_cartCount {
-    font-size: 2rem;
+    padding: 12px 1rem;
+    
+    .my_cartInside { 
+      display: inline-block;
+      padding: 5px 10px 0;      
+      height: 56px;
+      width: 56px;
+
+      background-color: orange;
+      border-radius: 25%;
+      transition-duration: 500ms;
+
+      &:hover, &:focus {
+        background-color: yellow;
+        border-radius: 50%;
+      }
+
+      .my_cartIcon { font-size: 3rem; }
+      .my_cartCount { font-size: 2rem; }
+
+
+    }    
   }
 //

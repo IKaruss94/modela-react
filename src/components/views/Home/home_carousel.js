@@ -13,34 +13,36 @@
   import Carousel from 'react-bootstrap/Carousel'
 // [] my components
 // [] my images
+  import { storeThumbnails } from '../../functions/import_images';
 
 // -------------------------------------------------------------------------------
 
-import { storeThumbnails } from '../../functions/import_images';
 
-const HomeCarousel = ( {store_data, prop_history} ) => {
+const HomeCarousel = ( {isMobile, store_data, prop_history} ) => {
   return(
-    <Carousel className="my_carousel my_home">
+    <Carousel className={ isMobile ? ("my_carousel my_home my_mobile") : ("my_carousel my_home") } >
     {
-      store_data && store_data.map( (data) => {
+      store_data && store_data.map( (elem) => {
+        
         return(                 
           <Carousel.Item 
-            key={data.Prod_number}
+            key={elem.NUM_id}
             className="my_carousel_item my_home" 
-            onClick={ () => { prop_history.push( '/store/'+ data.Prod_number ) } }
+            onClick={ () => { prop_history.push( '/store/'+ elem.NUM_id ) } }
           >
             
             <Img className="my_carousel_image my_home img-rounded img-responsive"
                 src={[
-                  storeThumbnails[ data.Img_thumbnail ]
+                  storeThumbnails[ elem.IMG_thumbnail ]
                 ]}
                 unloader={
-                    <div className="my_carousel_noImage my_home">No thumbnail for #{data.Prod_number}</div>
+                    <div className="my_carousel_noImage my_home">No thumbnail for #{elem.NUM_id}</div>
                 }
             />
 
           </Carousel.Item>
-        )
+        ) // [] end of [return]
+
       }) // [] end of [map]
     }
     </Carousel>       
@@ -48,6 +50,7 @@ const HomeCarousel = ( {store_data, prop_history} ) => {
 }
 
 HomeCarousel.propTypes = {
+  isMobile: PropTypes.any,
   store_data: PropTypes.any,
   prop_history: PropTypes.any,  
 };

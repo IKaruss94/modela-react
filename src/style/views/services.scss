@@ -1,3 +1,5 @@
+$animation-duration: 600ms;
+
 
 
 // --- main style for service card (including image)
@@ -20,18 +22,19 @@
       top: 0px;
       right: 0px;
       
-      transition: 400ms;
+      transition-duration: $animation-duration;
     }
-  }
-  .my_service_card:hover {
+
+    &:hover {
       border: 1px solid gold;
       background-color: lightblue;  
+
 
       .my_service_cardImage
       {
         max-width: 50%;
 
-        transition: 400ms;
+        transition-duration: $animation-duration;
         transform: scale(1.5);
         right: 50px;
       }
@@ -39,10 +42,12 @@
       .my_service_cardBody {
         max-width: 50%;  
       }
-  }
-  .my_service_card:active {
+    }/*[] end of hover */
+
+    &:active {
       border: 1px solid green;
       background-color: cyan;  
+    }
   }
 //
 
@@ -54,18 +59,8 @@
   }
   .my_transi_service-appear.my_transi_service-appear-active {   
     max-height: 1024px;
-    transition: max-height 400ms ease-in;
+    transition: max-height 600ms ease-in;
   }
-/*
-  .my_transi_service-leave {
-    max-height: 1024px;
-  }  
-  .my_transi_service-leave.my_transi_service-leave-active {
-    max-height: 0;
-    transition: max-height 400ms ease-out;
-  }
-*/
-//
 
 // --- Carousel in exrta service info
   $carousel_bg: #ddd;

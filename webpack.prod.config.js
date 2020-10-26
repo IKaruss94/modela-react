@@ -71,9 +71,9 @@ module.exports = {
           test: /\.(jpg|png|gif|svg|pdf|ico)$/,
           use: [{
             loader: 'file-loader',
-            /*options: {
+            options: {
                 name: '[path][name]-[hash:8].[ext]'
-            }*/
+            }
           }]
         }
       //

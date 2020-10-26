@@ -18,6 +18,7 @@ export const prodLargeImages = importAll(require.context( '../../../images/prod_
 export const prodCarouselImages = importAll(require.context( '../../../images/prod_schematics', false, /\.(gif|png|jpe?g|svg)$/) );
 export const prodTableEra = importAll(require.context( '../../../images/prod_eraEmblems', false, /\.(gif|png|jpe?g|svg)$/) );
 export const prodTableUser = importAll(require.context( '../../../images/prod_userEmblems', false, /\.(gif|png|jpe?g|svg)$/) );
+export const prodKitImages = importAll(require.context( '../../../images/kits/', false, /\.(gif|png|jpe?g|svg)$/) );
 
 export const DownloadImages = importAll(require.context( '../../../images/downloads', false, /\.(gif|png|jpe?g|svg)$/) );
 export const ServiceImages = importAll(require.context( '../../../images/services', false, /\.(gif|png|jpe?g|svg)$/) );

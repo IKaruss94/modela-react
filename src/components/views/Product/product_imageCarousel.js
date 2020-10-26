@@ -14,46 +14,51 @@
     import Carousel from 'react-bootstrap/Carousel'
 // [] my components
 // [] my images
+    import LoadingGif from '../../../../images/icons/modela_loading.gif'
     import { prodCarouselImages } from '../../functions/import_images'
 
 // -------------------------------------------------------------------------------
 const ProductImageCarousel = ( {products} ) => {
+
     const [isOpen, setIsOpen] = useState(false);
-    const [imageIndex, setImageIndex] = useState(0);
-    
+    const [imageIndex, setImageIndex] = useState(0);    
     const [prodNames, setProdNames] = useState(0);
+    
     let arr_imageNames = [];    
     
     //console.log('state : ', prodID, imageIndex, prodNames);
 
     return(   
-        <Carousel className="my_carousel my_prod my_prodCarousel">
+        <Carousel className="my_carousel my_prod myProd_Carousel">
             {
                 products && products.map( (product, index) => {
-                    arr_imageNames.push( product.ID+"-"+product.Number+".gif" );
+                    arr_imageNames.push( product.NUM_id+"-"+product.NUM_variant+".gif" );
 
-                    if( product.Number != '00' && 
-                        product.Number < '90' && 
-                        prodCarouselImages[product.ID+"-"+product.Number+".gif"] !== '' 
+                    if( product.NUM_variant != '00' && 
+                        product.NUM_variant < '90' && 
+                        prodCarouselImages[product.NUM_id+"-"+product.NUM_variant+".gif"] !== '' 
                     ){
                         return(                            
                             <Carousel.Item 
                                 className="my_carousel_item my_prod" 
-                                key={product.Number}
+                                key={product.NUM_variant}
                                 onClick={ () => { setIsOpen(true); setImageIndex(index); setProdNames( arr_imageNames ); } }
                             >
                                 <Img className="my_carousel_image my_prod img-rounded img-responsive"
                                     src={[
-                                        prodCarouselImages[product.ID+"-"+product.Number+".gif"] 
-                                    ]}
+                                        prodCarouselImages[product.NUM_id+"-"+product.NUM_variant+".gif"] 
+                                    ]} 
+                                    loader={ 
+                                        <img src={LoadingGif} className="myImg_loading" alt="loading" height="100" />
+                                    }
                                     unloader={
-                                        <div className="my_carousel_noImage my_prod">No image for #{product.ID+"-"+product.Number}</div>
+                                        <div className="my_carousel_noImage my_prod">No image for #{product.NUM_id+"-"+product.NUM_variant}</div>
                                     }
                                 />
                         
 
                                 <Carousel.Caption className="my_carousel_caption my_prod">
-                                    <h4>{product.ID}-{product.Number} - {product.Name}</h4>
+                                    <h4>{product.NUM_id}-{product.NUM_variant} - {product.Name}</h4>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         )
@@ -63,7 +68,7 @@ const ProductImageCarousel = ( {products} ) => {
 
             {isOpen && (         
                 <Lightbox  
-                    imageCaption={ prodNames[ imageIndex ] }
+                    imageCaption={ prodNames[ imageIndex ].split('.gif')[0] }
 
                     mainSrc={ prodCarouselImages[ prodNames[ imageIndex ] ] }
                     nextSrc={ prodCarouselImages[ prodNames[ (imageIndex + 1) % prodNames.length ] ] }
@@ -88,12 +93,3 @@ ProductImageCarousel.propTypes = {
     products: PropTypes.any
 };  
 export default (ProductImageCarousel);
-
-/*
-    
-    <img
-        className="my_ProdCarouselImage d-block w-100"
-        src={ prodCarouselImages[product.ID+"-"+product.Number+".gif"] }
-        alt={ product.ID+"-"+product.Number }
-    />
- */

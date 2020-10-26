@@ -1,64 +1,51 @@
 
 /** [] Imported @ 
- * src/views-bootstrap/Card/card.js
+ * src/views/Card/card.js
  * 
- * manualy updated 28/05/2019
+ * manualy updated 10/09/2019
 */ 
 
 // [] fundemental components
-    import React from "react"
+    import React, { Component } from "react"
+    import PropTypes from 'prop-types'
 // [] structure and style components
-    import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
-// [] my components
-// [] my images
+    import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 
 // -------------------------------------------------------------------------------
-/**
- * The reason this dosent work is = gooogl map api => billing
- * 
- * https://console.cloud.google.com/apis/dashboard?authuser=1&project=modela-react&supportedpurview=project
- * 
- * posible answer
- * https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
- */
 
-const mapAPIkey = ''; // [] insert map key here
+//Maps JavaScript API = Google Cloud Platform = might requier payments ( billing )
 
-const ContactMap = () => {
-    return (
-        <LoadScript
-          id = "script-loader"
-          googleMapsApiKey = {mapAPIkey}
-        >
-            <GoogleMap
+class ContactMap extends Component {
+
+    render(){
+        const markerLocation = {
+            lat: 56.5238000, 
+            lng: 21.0052000
+        }
+
+        return (
+            <Map
                 id='contact_map'
-                className="my_contactMap"
-                mapContainerStyle={{
-                    height: "512px",
-                    width: "100%"
-                }}                
+                className="my_contactMap"                
+                google={this.props.google}         
                 zoom={15}
-                center={{
-                    lat: 56.5238241,
-                    lng: 21.0047136
-                }}
+                initialCenter={ markerLocation }
             >
 
                 <Marker
-                    onLoad={marker => {
-                        console.log('marker: ', marker)
-                    }}
-                    position={{
-                        lat: 56.5238241,                            
-                        lng: 21.0053644
-                    }}
+                    position={ markerLocation }
                 />
 
-            </GoogleMap>            
-        </LoadScript>
-    )
+            </Map>      
+        )
+    }
 }
 
-export default ContactMap
 
+ContactMap.propTypes = {  
+    google: PropTypes.any,
+}
 
+export default GoogleApiWrapper({
+    apiKey: '' //[] api key here
+  })(ContactMap);

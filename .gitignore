@@ -8,24 +8,34 @@
 # testing
 /coverage
 /build_dev
-/build_public
 
 # production
 /build
 /build_public
 /public
 
+#firebase
+/dist
+/functions
+/.firebase
+
+.firebaserc
+firebase.json
+firestore.rules
+firestore-debug.log
+
 #my misc stuff
 /ZZZzzzZZZzzzZZZzzzZZZzzzZZZzzz
-/src/component/zzz
-_errorCodes.txt
-_NOTES.txt
-_TODOS.txt
+/src/components/order_submission
+/config
+/populate-firestore
+/notes&stuff
 credentials.json
 
 # misc
 /.vscode
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local

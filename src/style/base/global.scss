@@ -17,13 +17,27 @@ body {
 }
 
 
+/** BUTTONS */
+  .myBTN_big {
+    line-height: 2;
+    font-size: 2.4rem;
+    font-weight: bold;
+    letter-spacing: 3px; 
+  }
+/** */
+
+
+.myImg_loading {
+  background-size: cover;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  width: 100%;
+  margin: auto;
+}
+
 
 .my_noHover {  
   pointer-events:none;
-}
-
-.my_customLink {
-  cursor: pointer;
 }
 
 
@@ -46,6 +60,15 @@ body {
 
     }
     
+//
+
+
+// [] some random golbals
+  .my_centered {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+  }
 //
 
 // helps to verticaly center image

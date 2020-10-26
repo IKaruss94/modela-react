@@ -1,0 +1,50 @@
+{
+    "order-collection":{        
+        "Compleated": "-1",
+        "Completed_on": "",
+        "Cust_address": "kalpaka105 18",
+        "Cust_city": "liepaja",
+        "Cust_country": "latvija",
+        "Cust_email": "ivars.knets@gmail.com",
+        "Cust_fax": "",
+        "Cust_fullName": "",
+        "Cust_lastname": "knets",
+        "Cust_name": "ivars",
+        "Cust_phone": "+37126601445",
+        "Cust_state": "",
+        "Cust_zip": "3405",
+        "Dest_address": "Flotes 12",
+        "Dest_city": "Liepaja",
+        "Dest_country": "Latvija",
+        "Dest_name": "Ivars Knets",
+        "Dest_phone": "",
+        "Dest_state" : "",
+        "Dest_zip": "3405",
+        "ID_order" :"16",
+        "Ordered_items": "87001-11=1; 87002-01=1; 87002-02=1; 87002-11=1; 87002-12=1; 87003-01=1; 87003-02=1; 87003-11=1; ",
+        "Pay_method": "paypal",
+        "Started_on": "2017-11-25 10:58:41" 
+    },
+
+    "whats_submitted": {
+        "address": "dave st 213"​,
+        "city": "daveton",        ​
+        "country": "us of dave",     ​
+        "del_address": ""    ,   ​
+        "del_check": false        ​,
+        "del_city": ""        ​,
+        "del_country": ""        ​,
+        "del_fullName": ""        ​,
+        "del_phone": ""        ​,
+        "del_state": ""        ​,
+        "del_zip": ""        ​,
+        "email": "dave@dave.dave"      ,  ​
+        "fullName": "dave davidson"      ,  ​
+        "payment_method": "paypal"     ,   ​
+        "phone": "1235678"        ​,
+        "state": "davecota"       , ​
+        "zip": "151",
+        "order": "order data"
+
+    }
+}

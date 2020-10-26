@@ -1,0 +1,186 @@
+[
+    {   
+        "Name":"number",
+        "Type":"table",
+        "ENG":"Number",
+        "LAT":"Numurs",
+        "RUS":"Номер"
+    },
+    { 
+        "Name":"qunatity",
+        "Type":"table",
+        "ENG":"Quantity",
+        "LAT":"Daudzums",
+        "RUS":"Количество"
+    },
+    { 
+        "Name":"total_price_vat",
+        "Type":"table", 
+        "ENG":"Total Price (with VAT)",
+        "LAT":"Kopējā summa (ar PVN)",
+        "RUS":"Полная сумма (вклучая НДС)"
+    },
+    { 
+        "Name":"total_price_noVat",
+        "Type":"table",
+        "ENG":"Total Price (without VAT)",
+        "LAT":"Kopējā summa (bez PVN)",
+        "RUS":"Полная сумма (без НДС)"
+    },
+    { 
+        "Name":"remove",
+        "Type":"table",
+        "ENG":"Remove",
+        "LAT":"Izņemt",
+        "RUS":"Убрать"
+    },
+    { 
+        "Name":"era",
+        "Type":"table",
+        "ENG":"Era",
+        "LAT":"Ēra",
+        "RUS":"Эра"
+    },
+    { 
+        "Name":"user",
+        "Type":"table",
+        "ENG":"User",
+        "LAT":"Lietotāji",
+        "RUS":"Пользаватиле"
+    },
+    { 
+        "Name":"reg_num",
+        "Type":"table",
+        "ENG":"Registration number",
+        "LAT":"Reģistrācijas numurs",
+        "RUS":"Регистрационий номер"
+    },
+    { 
+        "Name":"name",
+        "Type":"table",
+        "ENG":"Name",
+        "LAT":"Nosaukums",
+        "RUS":"Название"
+    },
+    { 
+        "Name":"price_vat",
+        "Type":"table",
+        "ENG":"Price (with VAT)",
+        "LAT":"Cena (ar PVN)",
+        "RUS":"Цена (с НДС)"
+    },
+    { 
+        "Name":"price_noVat",
+        "Type":"table",
+        "ENG":"Price (without VAT)",
+        "LAT":"Cena (bez PVN)",
+        "RUS":"Цена (без НДС)"
+    },
+    { 
+        "Name":"Producer",
+        "Type":"prod_header",
+        "ENG":"Producer",
+        "LAT":"Ražotājs",
+        "RUS":"Производитель"
+    },
+    { 
+        "Name":"Dimensions",
+        "Type":"prod_header",
+        "ENG":"Dimensions",
+        "LAT":"Izmēri",
+        "RUS":"Размеры"
+    },
+    { 
+        "Name":"Years",
+        "Type":"prod_header",
+        "ENG":"Years",
+        "LAT":"Gadi",
+        "RUS":"Года"
+    },
+    { 
+        "Name":"cart",
+        "Type":"table",
+        "ENG":"Cart",
+        "LAT":"Grozs",
+        "RUS":"Корзина"
+    },
+    { 
+        "Name":"btn_addCart",
+        "Type":"table",
+        "ENG":"Add to cart",
+        "LAT":"Pievientot grozam",
+        "RUS":"Добавить"
+    },
+    { 
+        "Name":"to_checkout_ok",
+        "Type":"button",
+        "ENG":"Proceed",
+        "LAT":"Turpināt",
+        "RUS":"Продолжить"
+    },
+    { 
+        "Name":"to_checkout_no",
+        "Type":"button",
+        "ENG":"Cart is empty. Go to store.",
+        "LAT":"Grozs ir tukšs. Pāriet uz veikalu.",
+        "RUS":"Корзина пуста. Перейти в магазин."
+    },
+    { 
+        "Name":"submit",
+        "Type":"button",
+        "ENG":"Submit order",
+        "LAT":"Iesniegt pasūtījumu",
+        "RUS":"Подтвердить заказ"
+    },
+    { 
+        "Name":"checkout_nope",
+        "Type":"button",
+        "ENG":"Fill in the required data, shown by \"*\"",
+        "LAT":"Aizpildiet nepieciešamos datus, kas atzīmēti ar \"*\"",
+        "RUS":"Заполните необходимые данные, обозначенные \"*\""
+    },
+    { 
+        "Name":"kit_reg_info",
+        "Type":"text",
+        "ENG":"Selected registration numbers will be sent if available.",
+        "LAT":"Atlasītie reģistrācijas numuri tiks nosūtīti, ja tie būs pieejam",
+        "RUS":"Выбранные регистрационные номера будут отправлены при наличии."
+    },
+    { 
+        "Name":"prod_backToStore",
+        "Type":"button",
+        "ENG":"Return to store",
+        "LAT":"Atgriezties veikalā",
+        "RUS":"Вернутся в магазин"
+    },
+    { 
+        "Name":"prod_priceInfo",
+        "Type":"button",
+        "ENG":"Price information",
+        "LAT":"Cenu informācija",
+        "RUS":"Информация о ценах"
+    },
+    { 
+        "Name":"clear_cart",
+        "Type":"button",
+        "ENG":"Clear cart",
+        "LAT":"Iztukšot grozu",
+        "RUS":"Очистить корзину"
+    },
+    {        
+        "Name": "btn_backToCart",
+        "Type": "button",
+        "ENG": "Back to cart",
+        "LAT": "Atpakaļ uz grozu",
+        "RUS": "Вернутся к корзине"
+    },
+    {        
+        "Name": "btn_contactToTade",
+        "Type": "button",
+        "ENG": "Pricing & Trade rules",
+        "LAT": "Cenu un tirgošanas nosacījumi",
+        "RUS": "Условия цен и Правила торговли"
+    }
+
+    
+]

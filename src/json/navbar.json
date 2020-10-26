@@ -1,0 +1,59 @@
+
+[
+    {
+        "order_value": 1,
+        "Name":"store/32",
+        "Parent":"0",
+        "ENG":"Store",
+        "LAT":"Veikals",
+        "RUS":"Магазин"
+    },
+    {
+        "order_value": 2,
+        "Name":"services",
+        "Parent":"0",
+        "ENG":"Services",
+        "LAT":"Pakalpojumi",
+        "RUS":"Услуги"
+    },
+    {
+        "order_value": 3,
+        "Name":"contact",
+        "Parent":"0",
+        "ENG":"Contact",
+        "LAT":"Kontakti",
+        "RUS":"Контакты"
+    },
+    {
+        "order_value": 4,
+        "Name":"info",
+        "Parent":"1",
+        "ENG":"Information",
+        "LAT":"Informācija",
+        "RUS":"Информация"
+    },
+    {
+        "order_value": 0,
+        "Name":"downloads",
+        "Parent":"info",
+        "ENG":"Downloadable files",
+        "LAT":"Lejuplādējamie faili",
+        "RUS":"Скачиваеме фаилы"
+    },
+    {
+        "order_value": 0,
+        "Name":"special",
+        "Parent":"info",
+        "ENG":"Special train cars (RUS)",
+        "LAT":"Īpašie vagoni (RUS)",
+        "RUS":"Особие вагоны"
+    },
+    {
+        "order_value": 0,
+        "Name":"trade",
+        "Parent":"info",
+        "ENG":"Trade rules and priceing",
+        "LAT":"Tirgošanas un cenu noteikumi",
+        "RUS":"Правила торговли и цен"
+    }
+]

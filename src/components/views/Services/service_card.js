@@ -8,6 +8,7 @@
 // [] fundemental components
   import React, { useState } from 'react'
   import PropTypes from 'prop-types'
+  import withSizes from 'react-sizes'
 // [] structure and style components
   import { CSSTransitionGroup } from 'react-transition-group'
   import Card from 'react-bootstrap/Card'
@@ -17,10 +18,10 @@
 
 // -------------------------------------------------------------------------------
 
-const ServiceCard = ( {pass_title, pass_text, pass_image, pass_lang} ) => {
+const ServiceCard = ( {prop_isMobile, pass_title, pass_text, pass_image, pass_lang} ) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const shortText = pass_title[pass_lang.toUpperCase()].split('---');
+  const shortText = pass_title[pass_lang].split('---');
 
   return(
     <div className="my_services">
@@ -29,11 +30,15 @@ const ServiceCard = ( {pass_title, pass_text, pass_image, pass_lang} ) => {
         className="my_service_card" 
         onClick={ () => setIsOpen(!isOpen) } 
       > 
-        <Card.Img className="my_service_cardImage" variant="top" src={ pass_image[pass_title.Images] } />        
-          <Card.Body className="my_service_cardBody">
-            <Card.Title className="my_service_title">{ shortText[0] }</Card.Title>
-            <Card.Text>{ shortText[1] }</Card.Text>
-          </Card.Body>
+        {
+          !prop_isMobile ? (
+            <Card.Img className="my_service_cardImage" variant="top" src={ pass_image[pass_title.Images] } />
+          ) : (null)
+        }   
+        <Card.Body className="my_service_cardBody">
+          <Card.Title className="my_service_title">{ shortText[0] }</Card.Title>
+          <Card.Text>{ shortText[1] }</Card.Text>
+        </Card.Body>
       </Card>
 
       <div className="my_serviceText">
@@ -55,14 +60,18 @@ const ServiceCard = ( {pass_title, pass_text, pass_image, pass_lang} ) => {
     </div>
   );
 }
-
 ServiceCard.propTypes = {  
+  prop_isMobile: PropTypes.any,
   pass_title: PropTypes.any,
   pass_text: PropTypes.any,
   pass_image: PropTypes.any,
-  pass_lang: PropTypes.any,  
+  pass_lang: PropTypes.string,  
 }
-export default (ServiceCard);
+
+const mapSizesToProps = ({ width }) => ({
+  prop_isMobile: width < 974+18,
+})
+export default withSizes( mapSizesToProps )(ServiceCard);
 
 /*
 {pass_title.Name}

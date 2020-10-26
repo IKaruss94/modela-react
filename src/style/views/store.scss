@@ -1,28 +1,51 @@
 
 
-$text-color: #333;
 $tile-background-color: #fff;
 
-#store
-{
+#store {
   background-color: $body_color;
   height: 100%;
 }
 
-.my_storeImageLink 
-{
 
-  .my_noStoreImage
-  {    
-    margin: 6px;
-    height: 160px;
-    width: 210px;
-    object-fit: contain;
-    border: 4px solid #eee;
-    border-radius: 18px; 
-    background-color: $tile-background-color;   
-    color: $text-color;
+.myStore_btnGroup {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
 
+  .myStore_btnScaleToggle {
+    width: 100%;
+    padding: 16px;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+.my_store_collapsedContetn {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.my_storeImageLink {   
+  margin: 6px;
+  height: 160px;
+  width: 210px;
+  object-fit: contain;
+  border: 4px solid #eee;
+  border-radius: 2px; 
+  background-color: $tile-background-color;   
+
+  transition-duration: 256ms;
+  &:hover { border: 4px solid black; }
+  &:active { border: 4px solid lime; }
+
+  .my_noStoreImage {  
+    color: $text-color;  
     line-height: 145px;
     font-weight: bold;
     font-size: 2.4rem;
@@ -30,69 +53,39 @@ $tile-background-color: #fff;
     text-decoration: none;
   }
 
-  img
-  {    
+  img { 
+    object-fit: contain;
+    height: 150px;
+    width: 200px;
+    /*   
     margin: 6px;
     object-fit: contain;
     border: 4px solid #eee;
-    border-radius: 18px; 
+    border-radius: 2px; 
     background-color: $tile-background-color;   
 
     height: 160px;
     width: 210px;
+    */
   }
 
-  :hover
-  {        
-      border: 4px solid black;
-  }
-  :active
-  {        
-      border: 4px solid lime;
-  }
 }
 
-
-
-.Collapsible 
-{  
-  background-color: $body_color;
-  margin-top: 30px;
-  margin: 16px;
-
-  
-  .Collapsible__trigger{ 
-    cursor: pointer;
-
-    display: block;
-    padding: 10px;
-    position: relative;
-
-    border: 1px solid #333;
-    background: $nav_color;
-
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 2rem;
+// symbolyizing that a product is not available at the moment, but still viewable
+  //.myStore_prodAvail{}
+  .myStore_prodNotAvail {
+    border-color: red;
+    img{
+      opacity: .6;
+    }
   }
 
-  .Collapsible__trigger:after {
-      font-family: "Material Icons";
-      content: "\e5c7"; // \e5c5 for the filped one
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      display: block;
-      transition: transform 300ms; 
-    }
 
-    .Collapsible__trigger.is-open:after {
-      transform: rotateZ(180deg); 
-    }
-  
+/* [] for the rest of [.Collapsible] styles see [utilities/modefid_package_stylings.scss] */
+.my_store_collapsible {  
+  background-color: $body_color;
 
-  .Collapsible__contentInner
-  {
-    padding: 20px;
+  .Collapsible__trigger{ 
+    background-color: $nav_color;
   }
 }

@@ -2,6 +2,7 @@
 
 .my_contactCard {
   margin-top: 20px;
+  padding: 16px;
   
   height: 400px;
   width: 100%;
@@ -20,6 +21,7 @@
 .my_CardText.my_withIcon {
   position: relative;
   padding: 0px 0px 0px 45px;
+  font-size: 1.8rem;
 
   i {
     position: absolute;
@@ -33,12 +35,12 @@
 .my_contactIcons {
   color: $body_color;
   padding: 10px;
-  font-size: 2rem;
+  font-size: 2.4rem;
 }
 
 .my_contactMapCol {  
-  //height: 512px;
-  //width: 512px;
+  height: 512px;
+  //width: 100%;
   margin-top: 20px;
 
   .my_contactMap {
@@ -46,13 +48,26 @@
   }
 }
 
-.my_contactFacbook {
-  position: absolute;
-  bottom: 20px;
+/* ICONS */
+  $icon_size: 48px; 
 
-  img {
-    $FBsize: 48px; 
-    width: $FBsize;
-    height: $FBsize;
+  .my_contatct_icons {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 12px;
+
+    img {
+      width: $icon_size;
+      height: $icon_size;
+      margin: 10px;
+    }
   }
+/**/
+
+.myContact_tradeBtn {
+  padding: 8px;
+  margin: 20px auto 0px;
+  font-size: 2.2rem;
+  font-weight: bold;
 }
